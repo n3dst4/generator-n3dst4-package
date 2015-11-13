@@ -1,0 +1,22 @@
+{
+  "name": "generator-n3dst4-package",
+  "version": "1.0.0",
+  "description": "Yeoman generator for npm packages the way I likes 'em",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/n3dst4/generator-n3dst4-package.git"
+  },
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "author": "Neil de Carteret <npm@lumphammer.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/n3dst4/generator-n3dst4-package/issues"
+  },
+  "homepage": "https://github.com/n3dst4/generator-n3dst4-package#readme"
+}
