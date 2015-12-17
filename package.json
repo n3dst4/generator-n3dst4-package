@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/n3dst4/generator-n3dst4-package/issues"
   },
-  "homepage": "https://github.com/n3dst4/generator-n3dst4-package#readme"
+  "homepage": "https://github.com/n3dst4/generator-n3dst4-package#readme",
+  "files": [
+    "generators/app"
+  ]
 }
