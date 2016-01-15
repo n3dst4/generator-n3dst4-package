@@ -1,0 +1,48 @@
+{
+  "name": "",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/ssln-scaffold.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublish": "babel src --out-dir __build"
+  },
+  "author": "Neil de Carteret <npm@lumphammer.com>",
+  "license": "ISC",
+  "keywords": [],
+  "dependencies": {
+  },
+  "eslintConfig": {
+    "rules": {
+        "indent": [
+            2,
+            2
+        ],
+        "quotes": [
+            0,
+            "double"
+        ],
+        "linebreak-style": [
+            2,
+            "windows"
+        ],
+        "comma-dangle": 0,
+        "no-unused-vars": [2, {"vars": "all", "args": "after-used"}]
+    },
+    "env": {
+        "browser": true
+    },
+    "extends": "eslint:recommended",
+    "globals": {
+        "require": false,
+        "define": false
+    }
+  },
+  "devDependencies": {
+    "babel": "^5.8.23",
+    "@sportingsolutions/eslint-config-shared": "^1.1.0",
+    "babel-eslint": "^4.0.10",
+    "eslint": "^1.2.1",
+    "eslint-plugin-react": "^3.2.3"
+  }
+}

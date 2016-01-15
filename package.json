@@ -21,5 +21,10 @@
   "homepage": "https://github.com/n3dst4/generator-n3dst4-package#readme",
   "files": [
     "generators/app"
-  ]
+  ],
+  "dependencies": {
+    "git-user-email": "^0.2.1",
+    "git-user-name": "^1.1.2",
+    "yeoman-generator": "^0.22.3"
+  }
 }
