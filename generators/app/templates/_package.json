@@ -40,9 +40,9 @@
   },
   "devDependencies": {
     "babel": "^5.8.23",
-    "@sportingsolutions/eslint-config-shared": "^1.1.0",
-    "babel-eslint": "^4.0.10",
-    "eslint": "^1.2.1",
-    "eslint-plugin-react": "^3.2.3"
+    "@n3dst4/eslint-config-n3dst4": "^1.4.0",
+    "babel-eslint": "^4.1.6",
+    "eslint": "^1.10.3",
+    "eslint-plugin-babel": "^3.0.0"
   }
 }

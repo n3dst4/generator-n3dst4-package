@@ -20,22 +20,27 @@ module.exports = generators.Base.extend({
         message: "Package name",
         default: this.appname
       },
-      // {
-      //   type: "input",
-      //   name: "email",
-      //   message: "Your email address",
-      //   default: gitEmail(),
-      //   store: true,
-      // },
-      // {
-      //   type: "input",
-      //   name: "username",
-      //   message: "Your name",
-      //   default: gitUsername(),
-      //   store: true,
-      // },
+      {
+          type: "input",
+          name: "description",
+          message: "Description",
+          default: "No description provided"
+      },
+      {
+        type: "input",
+        name: "email",
+        message: "Your email address",
+        default: gitEmail(),
+        store: true,
+      },
+      {
+        type: "input",
+        name: "username",
+        message: "Your name",
+        default: gitUsername(),
+        store: true,
+      },
     ], function (answers) {
-      this.log("name: "+ answers.name)
       this.answers = answers;
       done()
     }.bind(this));
@@ -50,10 +55,28 @@ module.exports = generators.Base.extend({
   },
 
   writing: function () {
-    var package = this.fs.readJSON("package.json");
+    var package = this.fs.readJSON(this.templatePath("_package.json"));
     package.name = this.answers.name;
-    package.main = "src/" + name + ".js"
-    this.fs.writeJSON("package.json", package)
+    package.main = "src/" + this.answers.name + ".js"
+    this.fs.writeJSON(this.destinationPath("package.json"), package)
+
+    this.fs.copyTpl(
+      this.templatePath("src/main.js"),
+      this.destinationPath(package.main),
+      this.answers
+    );
+
+    ["README.markdown", ".travis.yml", ".npmignore", ".gitignore"]
+      .forEach(function (filename) {
+        console.log(filename)
+        this.fs.copyTpl(
+          this.templatePath(filename),
+          this.destinationPath(filename),
+          this.answers
+        )
+      }.bind(this))
+
+
   },
 
   conflicts: function () {

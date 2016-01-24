@@ -26,5 +26,18 @@
     "git-user-email": "^0.2.1",
     "git-user-name": "^1.1.2",
     "yeoman-generator": "^0.22.3"
+  },
+  "devDependencies": {
+    "eslint": "^1.10.3"
+  },
+  "eslintConfig": {
+    "extends": "eslint:recommended",
+    "env": {
+      "browser": true,
+      "node": true
+    },
+    "rules": {
+      "comma-dangle": 0
+    }
   }
 }
