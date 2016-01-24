@@ -5,11 +5,11 @@ var gitUsername = require("git-user-name");
 module.exports = generators.Base.extend({
   constructor: function () {
     generators.Base.apply(this, arguments);
-    //this.argument("name", {type: "string", required: true})
+    this.log("app constructor")
   },
 
   initializing: function () {
-
+    this.log("app initializing")
   },
 
   prompting: function () {
@@ -40,6 +40,13 @@ module.exports = generators.Base.extend({
         default: gitUsername(),
         store: true,
       },
+      {
+        type: "confirm",
+        name: "bin",
+        message: "Do you want an executable bin script?",
+        default: false,
+        store: true,
+      },
     ], function (answers) {
       this.answers = answers;
       done()
@@ -47,11 +54,13 @@ module.exports = generators.Base.extend({
   },
 
   configuring: function () {
-
+    if (this.answers.bin) {
+      this.composeWith("n3dst4-package:bin", {},
+      {local: require.resolve("../bin")})
+    }
   },
 
   default: function () {
-
   },
 
   writing: function () {
@@ -68,29 +77,21 @@ module.exports = generators.Base.extend({
 
     ["README.markdown", ".travis.yml", ".npmignore", ".gitignore"]
       .forEach(function (filename) {
-        console.log(filename)
         this.fs.copyTpl(
           this.templatePath(filename),
           this.destinationPath(filename),
           this.answers
         )
       }.bind(this))
-
-
   },
 
   conflicts: function () {
-
   },
 
   install: function () {
-
   },
 
   end: function () {
-
   },
-
-
 
 });
