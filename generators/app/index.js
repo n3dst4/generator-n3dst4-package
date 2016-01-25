@@ -5,7 +5,8 @@ var gitUsername = require("git-user-name");
 module.exports = generators.Base.extend({
   constructor: function () {
     generators.Base.apply(this, arguments);
-    this.log("app constructor")
+    this.option("name", {type: "string"})
+    this.option("bin")
   },
 
   initializing: function () {
@@ -18,7 +19,8 @@ module.exports = generators.Base.extend({
         type: "input",
         name: "name",
         message: "Package name",
-        default: this.appname
+        default: this.appname,
+        when: !(this.options.name)
       },
       {
           type: "input",
@@ -46,17 +48,24 @@ module.exports = generators.Base.extend({
         message: "Do you want an executable bin script?",
         default: false,
         store: true,
+        when: !this.options.bin
       },
     ], function (answers) {
-      this.answers = answers;
+      // this.answers becomes a smoosh of inquirer results + options
+      answers.name = answers.name || this.options.name
+      answers.bin = answers.bin || this.options.bin
+      this.answers = answers
       done()
     }.bind(this));
   },
 
   configuring: function () {
+    // compose with the bin generator if need be
     if (this.answers.bin) {
-      this.composeWith("n3dst4-package:bin", {},
-      {local: require.resolve("../bin")})
+      this.composeWith("n3dst4-package:bin",
+        { options: {name: this.answers.name} },
+        { local: require.resolve("../bin")}
+      )
     }
   },
 

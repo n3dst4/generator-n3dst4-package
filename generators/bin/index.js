@@ -1,8 +1,11 @@
 var generators = require('yeoman-generator');
+var _ = require("lodash");
 
 module.exports = generators.Base.extend({
   constructor: function () {
     generators.Base.apply(this, arguments);
+    this.option("name", {type: "string"})
+
   },
 
   initializing: function () {
@@ -13,17 +16,19 @@ module.exports = generators.Base.extend({
     var done = this.async();
     this.prompt([{
         type: "input",
-        name: "potato",
-        message: "What potato",
-        default: "roast"
+        name: "name",
+        message: "Executable script name (without extension)",
+        default: this.options.name || this.appname
       },
     ], function (answers) {
-      this.answers = answers;
+      answers.name = answers.name || this.options.name
+      this.answers = answers            
       done()
     }.bind(this));
   },
 
   configuring: function () {
+    this.answers.camelCaseName = _.camelCase(this.answers.name)
   },
 
   default: function () {
@@ -31,8 +36,20 @@ module.exports = generators.Base.extend({
   },
 
   writing: function () {
-    // TODO: add shebang line
-    // TODO: add bin and preferGlobal to package.json
+    // shebang script
+    this.fs.copyTpl(
+      this.templatePath("src/bin/bin.js"),
+      this.destinationPath("src/bin/" + this.answers.name + ".js"),
+      this.answers
+    );
+
+    // add bin and preferGlobal to package.json
+    var package = this.fs.readJSON(this.destinationPath("package.json"));
+    package.bin = package.bin || {};
+    package.bin[this.answers.name] = "__build/bin/" + this.answers.name + ".js";
+    package.preferGlobal = true;
+    this.fs.writeJSON(this.destinationPath("package.json"), package)
+
   },
 
   conflicts: function () {
