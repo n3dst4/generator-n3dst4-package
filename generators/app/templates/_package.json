@@ -1,42 +1,19 @@
 {
-  "name": "",
+  "name": "this will be overwritten by generator",
   "version": "1.0.0",
-  "description": "",
-  "main": "src/ssln-scaffold.js",
+  "description": "this will be overwritten by generator",
+  "main": "this will be overwritten by generator",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepublish": "babel src --out-dir __build"
   },
-  "author": "Neil de Carteret <npm@lumphammer.com>",
+  "author": "this will be overwritten by generator",
   "license": "ISC",
   "keywords": [],
   "dependencies": {
   },
   "eslintConfig": {
-    "rules": {
-        "indent": [
-            2,
-            2
-        ],
-        "quotes": [
-            0,
-            "double"
-        ],
-        "linebreak-style": [
-            2,
-            "windows"
-        ],
-        "comma-dangle": 0,
-        "no-unused-vars": [2, {"vars": "all", "args": "after-used"}]
-    },
-    "env": {
-        "browser": true
-    },
-    "extends": "eslint:recommended",
-    "globals": {
-        "require": false,
-        "define": false
-    }
+    "extends": "n3dst4"
   },
   "devDependencies": {
     "babel": "^5.8.23",

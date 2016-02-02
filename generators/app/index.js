@@ -75,7 +75,8 @@ module.exports = generators.Base.extend({
   writing: function () {
     var package = this.fs.readJSON(this.templatePath("_package.json"));
     package.name = this.answers.name;
-    package.main = "src/" + this.answers.name + ".js"
+    package.main = "__build/" + this.answers.name + ".js"
+    package.author = this.answers.username + "<" + this.answers.email + ">"
     this.fs.writeJSON(this.destinationPath("package.json"), package)
 
     this.fs.copyTpl(
