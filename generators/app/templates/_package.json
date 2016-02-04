@@ -4,8 +4,7 @@
   "description": "this will be overwritten by generator",
   "main": "this will be overwritten by generator",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "prepublish": "babel src --out-dir __build"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "this will be overwritten by generator",
   "license": "ISC",
@@ -16,7 +15,6 @@
     "extends": "n3dst4"
   },
   "devDependencies": {
-    "babel": "^5.8.23",
     "@n3dst4/eslint-config-n3dst4": "^1.4.0",
     "babel-eslint": "^4.1.6",
     "eslint": "^1.10.3",

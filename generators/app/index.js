@@ -23,10 +23,10 @@ module.exports = generators.Base.extend({
         when: !(this.options.name)
       },
       {
-          type: "input",
-          name: "description",
-          message: "Description",
-          default: "No description provided"
+        type: "input",
+        name: "description",
+        message: "Description",
+        default: "No description provided"
       },
       {
         type: "input",
@@ -49,6 +49,27 @@ module.exports = generators.Base.extend({
         default: false,
         store: true,
         when: !this.options.bin
+      },
+      {
+        type: "confirm",
+        name: "babel",
+        message: "Do you want to run everything through babel?",
+        default: false,
+        store: true
+      },
+      {
+        type: "confirm",
+        name: "browser",
+        message: "Do you want this project to be browser-compatible?",
+        default: true,
+        store: true
+      },
+      {
+        type: "confirm",
+        name: "install",
+        message: "Do you want to run npm install at the end?",
+        default: false,
+        store: true
       },
     ], function (answers) {
       // this.answers becomes a smoosh of inquirer results + options
@@ -77,6 +98,14 @@ module.exports = generators.Base.extend({
     package.name = this.answers.name;
     package.main = "__build/" + this.answers.name + ".js"
     package.author = this.answers.username + "<" + this.answers.email + ">"
+    if (this.answers.babel) {
+      package.scripts.prepublish = "babel src --out-dir __build"
+      package.devdependenmcies.babel = "^5.8.23"
+      if (this.answers.browser) {
+        package.dependencies.babelify = "^7.2.0"
+        package.browserify = { transform: [ "babelify" ] }
+      }
+    }
     this.fs.writeJSON(this.destinationPath("package.json"), package)
 
     this.fs.copyTpl(
@@ -99,6 +128,10 @@ module.exports = generators.Base.extend({
   },
 
   install: function () {
+    if (this.answers.install) {
+      this.log("Installing dependencies...")
+      this.npmInstall()
+    }
   },
 
   end: function () {
