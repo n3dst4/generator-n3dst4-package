@@ -56,5 +56,13 @@ describe("app", function () {
     it("should create a travis config", function () {
       assert.file(path.join(this.dir, ".travis.yml"))
     });
+
+    it("should create a .npmignore", function () {
+      assert.file(path.join(this.dir, ".npmignore"))
+    });
+
+    it("should create a .gitignore", function () {
+      assert.file(path.join(this.dir, ".gitignore"))
+    });
   });
 })
