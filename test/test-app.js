@@ -7,20 +7,46 @@ describe("app", function () {
 
   describe("default everything, empty folder", function () {
     before(function (done) {
+      var self = this;
       helpers.run(path.join( __dirname, '../generators/app'))
         //.withOptions({ foo: 'bar' })
         //.withArguments(['name-x'])
-        .withPrompts({ coffee: false })
+        //.withPrompts({ coffee: false })
         //.on('ready', function (generator) { })
         .inTmpDir(function (dir) {
-          this.dir = dir
+          self.dir = dir
+          self.name = path.basename(dir)
         }.bind(this))
         .on('end', done);
     })
 
-    it("should set package name to directory name", function () {
-      var name = path.basename(this.dir)
-      assert.JSONFileContent(path.join(this.dir, "package.json"), {name: name})
+    it("should set valid defaults in package.json", function () {
+      assert.JSONFileContent(path.join(this.dir, "package.json"), {
+        name: this.name,
+        version: "1.0.0",
+        description: "",
+        main: "src/" + this.name + ".js",
+        "scripts": {
+          "test": "echo \"Error: no test specified\" && exit 1"
+        },
+        "license": "ISC",
+        "keywords": [],
+        "dependencies": {
+        },
+        "eslintConfig": {
+          "extends": "n3dst4"
+        },
+        "devDependencies": {
+          "@n3dst4/eslint-config-n3dst4": "^1.4.0",
+          "babel-eslint": "^4.1.6",
+          "eslint": "^1.10.3",
+          "eslint-plugin-babel": "^3.0.0"
+        }
+      })
+    });
+
+    it("should create a src folder and main file", function () {
+      assert.file(path.join(this.dir, "src", this.name + ".js"))
     });
   });
 })

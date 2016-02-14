@@ -26,7 +26,7 @@ module.exports = generators.Base.extend({
         type: "input",
         name: "description",
         message: "Description",
-        default: "No description provided"
+        default: ""
       },
       {
         type: "input",
@@ -96,9 +96,11 @@ module.exports = generators.Base.extend({
   writing: function () {
     var package = this.fs.readJSON(this.templatePath("_package.json"));
     package.name = this.answers.name;
-    package.main = "__build/" + this.answers.name + ".js"
+    package.main = "src/" + this.answers.name + ".js"
     package.author = this.answers.username + "<" + this.answers.email + ">"
+    package.description = this.answers.description
     if (this.answers.babel) {
+      package.main = "__build/" + this.answers.name + ".js"
       package.scripts.prepublish = "babel src --out-dir __build"
       package.devdependenmcies.babel = "^5.8.23"
       if (this.answers.browser) {
