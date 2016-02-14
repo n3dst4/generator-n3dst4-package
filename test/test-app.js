@@ -48,5 +48,13 @@ describe("app", function () {
     it("should create a src folder and main file", function () {
       assert.file(path.join(this.dir, "src", this.name + ".js"))
     });
+
+    it("should create a README", function () {
+      assert.file(path.join(this.dir, "README.markdown"))
+    });
+
+    it("should create a travis config", function () {
+      assert.file(path.join(this.dir, ".travis.yml"))
+    });
   });
 })

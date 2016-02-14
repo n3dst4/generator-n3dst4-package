@@ -88,6 +88,12 @@ module.exports = generators.Base.extend({
         { local: require.resolve("../bin")}
       )
     }
+    if (this.answers.browser) {
+      this.composeWith("n3dst4-package:browser",
+        { options: {name: this.answers.name} },
+        { local: require.resolve("../browser")}
+      )
+    }
   },
 
   default: function () {
@@ -103,11 +109,8 @@ module.exports = generators.Base.extend({
       package.main = "__build/" + this.answers.name + ".js"
       package.scripts.prepublish = "babel src --out-dir __build"
       package.devdependenmcies.babel = "^5.8.23"
-      if (this.answers.browser) {
-        package.dependencies.babelify = "^7.2.0"
-        package.browserify = { transform: [ "babelify" ] }
-      }
     }
+
     this.fs.writeJSON(this.destinationPath("package.json"), package)
 
     this.fs.copyTpl(
