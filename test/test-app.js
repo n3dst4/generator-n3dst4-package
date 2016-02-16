@@ -84,7 +84,7 @@ describe("app", function () {
         main: "src/booplesnoot.js"
       })
     })
-    it("should create a src folder and main file", function () {
+    it("should name the main file acordingly", function () {
       assert.file(path.join(this.dir, "src", "booplesnoot.js"))
     })
   })
