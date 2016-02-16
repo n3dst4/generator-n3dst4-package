@@ -43,26 +43,52 @@ describe("app", function () {
           "eslint-plugin-babel": "^3.0.0"
         }
       })
-    });
+    })
 
     it("should create a src folder and main file", function () {
       assert.file(path.join(this.dir, "src", this.name + ".js"))
-    });
+    })
 
     it("should create a README", function () {
       assert.file(path.join(this.dir, "README.markdown"))
-    });
+    })
 
     it("should create a travis config", function () {
       assert.file(path.join(this.dir, ".travis.yml"))
-    });
+    })
 
     it("should create a .npmignore", function () {
       assert.file(path.join(this.dir, ".npmignore"))
-    });
+    })
 
     it("should create a .gitignore", function () {
       assert.file(path.join(this.dir, ".gitignore"))
-    });
-  });
+    })
+  })
+
+
+  describe("name option", function () {
+    before(function (done) {
+      var self = this;
+      helpers.run(path.join( __dirname, '../generators/app')).
+        withOptions({ name: 'booplesnoot' })
+        .inTmpDir(function (dir) {
+          self.dir = dir
+          self.name = path.basename(dir)
+        }.bind(this))
+        .on('end', done);
+    })
+    it("should set the project name in the package.json", function () {
+      assert.JSONFileContent(path.join(this.dir, "package.json"), {
+        name: "booplesnoot",
+        main: "src/booplesnoot.js"
+      })
+    })
+    it("should create a src folder and main file", function () {
+      assert.file(path.join(this.dir, "src", "booplesnoot.js"))
+    })
+  })
+
+
+
 })
