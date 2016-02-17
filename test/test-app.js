@@ -25,7 +25,6 @@ function runGenerator (opts, args, prompts) {
 }
 
 describe("app generator", function () {
-
   describe("default everything, empty folder", function () {
     before(runGenerator())
 
@@ -50,6 +49,14 @@ describe("app generator", function () {
           "babel-eslint": "^4.1.6",
           "eslint": "^1.10.3",
           "eslint-plugin-babel": "^3.0.0"
+        }
+      })
+    })
+
+    it("should set .yo-rc.json with name", function () {
+      assert.JSONFileContent(path.join(this.dir, ".yo-rc.json"), {
+        "generator-n3dst4-package": {
+          "name": this.name
         }
       })
     })
@@ -85,6 +92,13 @@ describe("app generator", function () {
     })
     it("should name the main file acordingly", function () {
       assert.file(path.join(this.dir, "src", `${name}.js`))
+    })
+    it("should set .yo-rc.json with name", function () {
+      assert.JSONFileContent(path.join(this.dir, ".yo-rc.json"), {
+        "generator-n3dst4-package": {
+          "name": name
+        }
+      })
     })
   }
 
@@ -150,6 +164,15 @@ describe("app generator", function () {
         }
       })
     })
+
+    it("should set .yo-rc.json with babel", function () {
+      assert.JSONFileContent(path.join(this.dir, ".yo-rc.json"), {
+        "generator-n3dst4-package": {
+          "babel": true,
+        }
+      })
+    })
+
   })
 
   describe("babel + bin prompts", function () {
@@ -197,7 +220,6 @@ describe("app generator", function () {
           transform: [ "babelify" ]
         }
       })
-
     })
   })
 })

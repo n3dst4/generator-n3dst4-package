@@ -58,7 +58,7 @@ module.exports = generators.Base.extend({
         type: "confirm",
         name: "browser",
         message: "Do you want this project to be browser-compatible?",
-        default: true,
+        default: false,
       },
       {
         type: "confirm",
@@ -77,7 +77,6 @@ module.exports = generators.Base.extend({
 
   configuring: function () {
     this.config.set({
-      babel: this.answers.babel,
       name: this.answers.name,
     })
     // compose with the bin generator if need be
@@ -93,6 +92,12 @@ module.exports = generators.Base.extend({
         { local: require.resolve("../bin")}
       )
     }
+    if (this.answers.babel) {
+      this.composeWith("n3dst4-package:babel",
+        {},
+        { local: require.resolve("../babel")}
+      )
+    }
   },
 
   default: function () {
@@ -104,12 +109,6 @@ module.exports = generators.Base.extend({
     package.main = "src/" + this.answers.name + ".js"
     package.author = this.answers.username + " <" + this.answers.email + ">"
     package.description = this.answers.description
-
-    if (this.answers.babel) {
-      package.main = "__build/" + this.answers.name + ".js"
-      package.scripts.prepublish = "babel src --out-dir __build"
-      package.devDependencies.babel = "^5.8.23"
-    }
 
     this.fs.writeJSON(this.destinationPath("package.json"), package)
 
