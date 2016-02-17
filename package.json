@@ -33,6 +33,7 @@
     "babel-preset-es2015": "^6.3.13",
     "eslint": "^1.10.3",
     "mocha": "^2.4.5",
+    "uuid": "^2.0.1",
     "yeoman-assert": "^2.1.1",
     "yeoman-test": "^1.0.0"
   },

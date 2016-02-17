@@ -2,6 +2,7 @@
 var helpers = require('yeoman-test')
 var assert = require('yeoman-assert');
 var path = require("path")
+var uuid = require("uuid").v4
 
 function runGenerator (opts, args, prompts) {
   return function (done) {
@@ -71,23 +72,25 @@ describe("app", function () {
   })
 
 
-  describe("name option", function () {
-    before(runGenerator({ name: 'booplesnoot' }))
-
+  function testName (name) {
     it("should set the project name in the package.json", function () {
       assert.JSONFileContent(path.join(this.dir, "package.json"), {
-        name: "booplesnoot",
-        main: "src/booplesnoot.js"
+        name: name,
+        main: `src/${name}.js`
       })
     })
     it("should name the main file acordingly", function () {
-      assert.file(path.join(this.dir, "src", "booplesnoot.js"))
+      assert.file(path.join(this.dir, "src", `${name}.js`))
     })
+  }
+
+  describe("name option", function () {
+    var name = uuid()
+    before(runGenerator({ name }))
+    testName(name)
   })
 
-  describe("bin option", function () {
-    before(runGenerator({ bin: true }))
-
+  function testBin () {
     it("should create a bin entry in package.json", function () {
       assert.JSONFileContent(path.join(this.dir, "package.json"), {
         bin: { [this.name]: `src/bin/${this.name}.js`},
@@ -96,6 +99,28 @@ describe("app", function () {
     })
     it("should create the bin file", function () {
       assert.file(path.join(this.dir, "src", "bin", `${this.name}.js`))
+    })
+  }
+
+  describe("bin option", function () {
+    before(runGenerator({ bin: true }))
+    testBin()
+  })
+
+  describe("name prompt", function () {
+    var name = uuid()
+    before(runGenerator({}, [], {name}))
+    testName(name)
+  })
+
+  describe("description prompt", function () {
+    var description = uuid()
+    before(runGenerator({}, [], {description}))
+
+    it("should set the description in package.json", function () {
+      assert.JSONFileContent(path.join(this.dir, "package.json"), {
+        description
+      })
     })
   })
 
