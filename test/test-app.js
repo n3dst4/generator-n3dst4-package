@@ -1,8 +1,10 @@
 /*eslint-env node, mocha, es6 */
 var helpers = require('yeoman-test')
-var assert = require('yeoman-assert');
+var assert = require('yeoman-assert')
 var path = require("path")
 var uuid = require("uuid").v4
+var fs = require("fs")
+var yaml = require('js-yaml');
 
 function runGenerator (opts, args, prompts) {
   return function (done) {
@@ -21,14 +23,6 @@ function runGenerator (opts, args, prompts) {
       .on('end', done);
   }
 }
-
-before(function () {
-  process.env.YEOMAN_TEST_MODE = "THIS IS TRUTHY TO PREVENT CONFIG BEING SAVED"
-})
-
-after(function () {
-  process.env.YEOMAN_TEST_MODE = ""
-})
 
 describe("app generator", function () {
 
@@ -168,5 +162,42 @@ describe("app generator", function () {
     })
   })
 
-  // browser + babel
+  describe("browser prompt", function () {
+    before(runGenerator({}, [], {browser: true}))
+
+    it("should not add babelify yet", function () {
+      var package = JSON.parse(fs.readFileSync(path.join(this.dir, "package.json"), 'utf8'));
+      assert(!(package.dependencies && package.dependencies.babelify),
+        "babelify dependency should not be set")
+      assert ((!package.browserify) || (!package.browserify.transform) || package.browserify.transform.indexOf("babelify") == -1,
+        "babelify transform should bot be set up")
+    });
+
+    it("should add xvfb magic to travis config", function () {
+      var travisConfigText = fs.readFileSync(path.join(this.dir, ".travis.yml"), "utf-8")
+      var travisConfig = yaml.safeLoad(travisConfigText);
+      assert.objectContent(travisConfig, {
+        before_script: [
+          "export DISPLAY=:99.0",
+          "sh -e /etc/init.d/xvfb start"
+        ]
+      })
+    })
+  })
+
+  describe("browser + babel prompts", function () {
+    before(runGenerator({}, [], {browser: true, babel: true}))
+
+    it("should set up package.json install and use babelify", function () {
+      assert.JSONFileContent(path.join(this.dir, "package.json"), {
+        dependencies: {
+          babelify: "^7.2.0"
+        },
+        browserify: {
+          transform: [ "babelify" ]
+        }
+      })
+
+    })
+  })
 })

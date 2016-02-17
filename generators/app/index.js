@@ -15,7 +15,6 @@ module.exports = generators.Base.extend({
 
   prompting: function () {
     var done = this.async();
-    var storePrompts = !process.env.YEOMAN_TEST_MODE
 
     this.prompt([{
         type: "input",
@@ -35,21 +34,18 @@ module.exports = generators.Base.extend({
         name: "email",
         message: "Your email address",
         default: gitEmail(),
-        store: storePrompts,
       },
       {
         type: "input",
         name: "username",
         message: "Your name",
         default: gitUsername(),
-        store: storePrompts,
       },
       {
         type: "confirm",
         name: "bin",
         message: "Do you want an executable bin script?",
         default: false,
-        store: storePrompts,
         when: !this.options.bin
       },
       {
@@ -57,21 +53,18 @@ module.exports = generators.Base.extend({
         name: "babel",
         message: "Do you want to run everything through babel?",
         default: false,
-        store: storePrompts
       },
       {
         type: "confirm",
         name: "browser",
         message: "Do you want this project to be browser-compatible?",
         default: true,
-        store: storePrompts
       },
       {
         type: "confirm",
         name: "install",
         message: "Do you want to run npm install at the end?",
         default: false,
-        store: storePrompts
       },
     ], function (answers) {
       // this.answers becomes a smoosh of inquirer results + options
@@ -83,17 +76,21 @@ module.exports = generators.Base.extend({
   },
 
   configuring: function () {
+    this.config.set({
+      babel: this.answers.babel,
+      name: this.answers.name,
+    })
     // compose with the bin generator if need be
-    if (this.answers.bin) {
-      this.composeWith("n3dst4-package:bin",
-        { options: {name: this.answers.name, babel: this.answers.babel} },
-        { local: require.resolve("../bin")}
-      )
-    }
     if (this.answers.browser) {
       this.composeWith("n3dst4-package:browser",
-        { options: {name: this.answers.name} },
+        {},
         { local: require.resolve("../browser")}
+      )
+    }
+    if (this.answers.bin) {
+      this.composeWith("n3dst4-package:bin",
+        {},
+        { local: require.resolve("../bin")}
       )
     }
   },

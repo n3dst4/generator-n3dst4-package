@@ -4,8 +4,7 @@ var _ = require("lodash");
 module.exports = generators.Base.extend({
   constructor: function () {
     generators.Base.apply(this, arguments);
-    this.option("name", {type: "string"})
-    this.option("babel")
+    this.config.set("browser", true)
   },
 
   initializing: function () {
@@ -14,15 +13,15 @@ module.exports = generators.Base.extend({
 
   prompting: function () {
     var done = this.async();
+    var config = this.config.getAll()
     this.prompt([{
         type: "input",
         name: "name",
         message: "Executable script name (without extension)",
-        default: this.options.name || this.appname
+        default: config.name || this.appname
       },
     ], function (answers) {
-      answers.name = answers.name || this.options.name
-      answers.babel = answers.babel || this.options.babel
+      answers.babel = config.babel
       this.answers = answers
       done()
     }.bind(this));
