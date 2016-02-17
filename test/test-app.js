@@ -119,7 +119,7 @@ describe("app", function () {
     var username = uuid()
     before(runGenerator({}, [], {description, email, username}))
 
-    it("should set the description in package.json", function () {
+    it("should set the description, email, and username in package.json", function () {
       assert.JSONFileContent(path.join(this.dir, "package.json"), {
         description,
         author: `${username} <${email}>`
