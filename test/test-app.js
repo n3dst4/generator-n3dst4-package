@@ -107,6 +107,11 @@ describe("app", function () {
     testBin()
   })
 
+  describe("bin prompt", function () {
+    before(runGenerator({}, [], { bin: true }))
+    testBin()
+  })
+
   describe("name prompt", function () {
     var name = uuid()
     before(runGenerator({}, [], {name}))
