@@ -42,3 +42,8 @@ Remember:
 * The main generator (what you get when you just call `yo n3dst4-package`) is in `generators/app` (`app` is the Yeoman's default name).
 * Within each generator, the files that copied over are in `templates/`
 * The main generator in this case is written to ask you which subgenerators you want, and will run them automatically if needed. You can also run them on their own afterwards, e.g. `yo n3dst4-package:karma-tests` to add Karma to an existing project.
+
+## TODO
+
+* store config and re-use it in subgenerators instead of passing options around
+* turn babel stuff into its own subgenerator

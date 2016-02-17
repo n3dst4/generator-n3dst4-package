@@ -11,7 +11,9 @@ function runGenerator (opts, args, prompts) {
       .withOptions(opts || {})
       .withArguments(args || [])
       .withPrompts(prompts || {})
-      //.on('ready', function (generator) { })
+      .withLocalConfig({})
+      // .on('ready', function (generator) {
+      // })
       .inTmpDir(function (dir) {
         self.dir = dir
         self.name = path.basename(dir)
@@ -19,6 +21,14 @@ function runGenerator (opts, args, prompts) {
       .on('end', done);
   }
 }
+
+before(function () {
+  process.env.YEOMAN_TEST_MODE = "THIS IS TRUTHY TO PREVENT CONFIG BEING SAVED"
+})
+
+after(function () {
+  process.env.YEOMAN_TEST_MODE = ""
+})
 
 describe("app generator", function () {
 
@@ -158,6 +168,5 @@ describe("app generator", function () {
     })
   })
 
-  // bin + babel
   // browser + babel
 })

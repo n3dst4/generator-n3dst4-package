@@ -15,6 +15,8 @@ module.exports = generators.Base.extend({
 
   prompting: function () {
     var done = this.async();
+    var storePrompts = !process.env.YEOMAN_TEST_MODE
+
     this.prompt([{
         type: "input",
         name: "name",
@@ -33,21 +35,21 @@ module.exports = generators.Base.extend({
         name: "email",
         message: "Your email address",
         default: gitEmail(),
-        store: true,
+        store: storePrompts,
       },
       {
         type: "input",
         name: "username",
         message: "Your name",
         default: gitUsername(),
-        store: true,
+        store: storePrompts,
       },
       {
         type: "confirm",
         name: "bin",
         message: "Do you want an executable bin script?",
         default: false,
-        store: true,
+        store: storePrompts,
         when: !this.options.bin
       },
       {
@@ -55,21 +57,21 @@ module.exports = generators.Base.extend({
         name: "babel",
         message: "Do you want to run everything through babel?",
         default: false,
-        store: true
+        store: storePrompts
       },
       {
         type: "confirm",
         name: "browser",
         message: "Do you want this project to be browser-compatible?",
         default: true,
-        store: true
+        store: storePrompts
       },
       {
         type: "confirm",
         name: "install",
         message: "Do you want to run npm install at the end?",
         default: false,
-        store: true
+        store: storePrompts
       },
     ], function (answers) {
       // this.answers becomes a smoosh of inquirer results + options
@@ -105,6 +107,7 @@ module.exports = generators.Base.extend({
     package.main = "src/" + this.answers.name + ".js"
     package.author = this.answers.username + " <" + this.answers.email + ">"
     package.description = this.answers.description
+
     if (this.answers.babel) {
       package.main = "__build/" + this.answers.name + ".js"
       package.scripts.prepublish = "babel src --out-dir __build"
