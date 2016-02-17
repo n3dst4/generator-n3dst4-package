@@ -113,17 +113,19 @@ describe("app", function () {
     testName(name)
   })
 
-  describe("description prompt", function () {
+  describe("description, email, and username prompts", function () {
     var description = uuid()
-    before(runGenerator({}, [], {description}))
+    var email = uuid()
+    var username = uuid()
+    before(runGenerator({}, [], {description, email, username}))
 
     it("should set the description in package.json", function () {
       assert.JSONFileContent(path.join(this.dir, "package.json"), {
-        description
+        description,
+        author: `${username} <${email}>`
       })
     })
   })
-
 
 
 })
