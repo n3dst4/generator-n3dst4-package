@@ -84,7 +84,7 @@ module.exports = generators.Base.extend({
     // compose with the bin generator if need be
     if (this.answers.bin) {
       this.composeWith("n3dst4-package:bin",
-        { options: {name: this.answers.name} },
+        { options: {name: this.answers.name, babel: this.answers.babel} },
         { local: require.resolve("../bin")}
       )
     }

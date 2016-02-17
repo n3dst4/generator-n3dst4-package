@@ -5,7 +5,7 @@ module.exports = generators.Base.extend({
   constructor: function () {
     generators.Base.apply(this, arguments);
     this.option("name", {type: "string"})
-
+    this.option("babel")
   },
 
   initializing: function () {
@@ -22,7 +22,7 @@ module.exports = generators.Base.extend({
       },
     ], function (answers) {
       answers.name = answers.name || this.options.name
-      this.answers = answers            
+      this.answers = answers
       done()
     }.bind(this));
   },
@@ -46,7 +46,8 @@ module.exports = generators.Base.extend({
     // add bin and preferGlobal to package.json
     var package = this.fs.readJSON(this.destinationPath("package.json"));
     package.bin = package.bin || {};
-    package.bin[this.answers.name] = "__build/bin/" + this.answers.name + ".js";
+    var rootPath = this.answers.babel ? "__build" : "src";
+    package.bin[this.answers.name] = `${rootPath}/bin/${this.answers.name}.js`;
     package.preferGlobal = true;
     this.fs.writeJSON(this.destinationPath("package.json"), package)
 
