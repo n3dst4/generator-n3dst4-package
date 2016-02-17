@@ -3,22 +3,26 @@ var helpers = require('yeoman-test')
 var assert = require('yeoman-assert');
 var path = require("path")
 
+function runGenerator (opts, args, prompts) {
+  return function (done) {
+    var self = this;
+    helpers.run(path.join( __dirname, '../generators/app'))
+      .withOptions(opts || {})
+      .withArguments(args || [])
+      .withPrompts(prompts || {})
+      //.on('ready', function (generator) { })
+      .inTmpDir(function (dir) {
+        self.dir = dir
+        self.name = path.basename(dir)
+      }.bind(this))
+      .on('end', done);
+  }
+}
+
 describe("app", function () {
 
   describe("default everything, empty folder", function () {
-    before(function (done) {
-      var self = this;
-      helpers.run(path.join( __dirname, '../generators/app'))
-        //.withOptions({ foo: 'bar' })
-        //.withArguments(['name-x'])
-        //.withPrompts({ coffee: false })
-        //.on('ready', function (generator) { })
-        .inTmpDir(function (dir) {
-          self.dir = dir
-          self.name = path.basename(dir)
-        }.bind(this))
-        .on('end', done);
-    })
+    before(runGenerator())
 
     it("should set valid defaults in package.json", function () {
       assert.JSONFileContent(path.join(this.dir, "package.json"), {
@@ -68,16 +72,8 @@ describe("app", function () {
 
 
   describe("name option", function () {
-    before(function (done) {
-      var self = this;
-      helpers.run(path.join( __dirname, '../generators/app')).
-        withOptions({ name: 'booplesnoot' })
-        .inTmpDir(function (dir) {
-          self.dir = dir
-          self.name = path.basename(dir)
-        }.bind(this))
-        .on('end', done);
-    })
+    before(runGenerator({ name: 'booplesnoot' }))
+
     it("should set the project name in the package.json", function () {
       assert.JSONFileContent(path.join(this.dir, "package.json"), {
         name: "booplesnoot",
