@@ -45,5 +45,5 @@ Remember:
 
 ## TODO
 
-* store config and re-use it in subgenerators instead of passing options around
+* ~~store config and re-use it in subgenerators instead of passing options~~ around
 * turn babel stuff into its own subgenerator
