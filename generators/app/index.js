@@ -108,7 +108,7 @@ module.exports = generators.Base.extend({
     if (this.answers.babel) {
       package.main = "__build/" + this.answers.name + ".js"
       package.scripts.prepublish = "babel src --out-dir __build"
-      package.devdependenmcies.babel = "^5.8.23"
+      package.devDependencies.babel = "^5.8.23"
     }
 
     this.fs.writeJSON(this.destinationPath("package.json"), package)

@@ -22,6 +22,7 @@ module.exports = generators.Base.extend({
       },
     ], function (answers) {
       answers.name = answers.name || this.options.name
+      answers.babel = answers.babel || this.options.babel
       this.answers = answers
       done()
     }.bind(this));

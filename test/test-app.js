@@ -20,7 +20,7 @@ function runGenerator (opts, args, prompts) {
   }
 }
 
-describe("app", function () {
+describe("app generator", function () {
 
   describe("default everything, empty folder", function () {
     before(runGenerator())
@@ -132,5 +132,32 @@ describe("app", function () {
     })
   })
 
+  describe("babel prompt", function () {
+    before(runGenerator({}, [], {babel: true}))
 
+    it("should set up package.json for babelification", function () {
+      assert.JSONFileContent(path.join(this.dir, "package.json"), {
+        main: `__build/${this.name}.js`,
+        scripts: {
+          prepublish: "babel src --out-dir __build"
+        },
+        devDependencies: {
+          babel: "^5.8.23"
+        }
+      })
+    })
+  })
+
+  describe("babel + bin prompts", function () {
+    before(runGenerator({}, [], {babel: true, bin: true}))
+
+    it("should point bin into __build", function () {
+      assert.JSONFileContent(path.join(this.dir, "package.json"), {
+        bin: { [this.name]: `__build/bin/${this.name}.js`},
+      })
+    })
+  })
+
+  // bin + babel
+  // browser + babel
 })
