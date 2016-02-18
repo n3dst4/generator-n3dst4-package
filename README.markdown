@@ -1,5 +1,7 @@
 # generator-n3dst4-package
 
+![Travis Status](https://travis-ci.org/n3dst4/generator-n3dst4-package.svg)
+
 Generates npm packages the way I likes 'em.
 
 ## Installation
