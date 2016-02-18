@@ -28,7 +28,7 @@ module.exports = generators.Base.extend({
   writing: function () {
     // add babelify to package.json
     var package = this.fs.readJSON(this.destinationPath("package.json"));
-    package.browser = `src/${this.answers.name}.js`
+    package.browser = `src/${this.config.get("name")}.js`
     if (this.config.get("babel")) {
       package.dependencies.babelify = "^7.2.0"
       _.merge(package, {browserify: { transform: [ "babelify" ] }})

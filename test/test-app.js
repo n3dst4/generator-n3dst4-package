@@ -169,8 +169,14 @@ describe("app generator", function () {
       var package = JSON.parse(fs.readFileSync(path.join(this.dir, "package.json"), 'utf8'));
       assert(!(package.dependencies && package.dependencies.babelify),
         "babelify dependency should not be set")
-      assert ((!package.browserify) || (!package.browserify.transform) || package.browserify.transform.indexOf("babelify") == -1,
+      assert((!package.browserify) || (!package.browserify.transform) || package.browserify.transform.indexOf("babelify") == -1,
         "babelify transform should bot be set up")
+    });
+
+    it("should set the browser field in package.json", function () {
+      assert.JSONFileContent(path.join(this.dir, "package.json"), {
+        browser: `src/${this.name}.js`
+      })
     });
 
     it("should add xvfb magic to travis config", function () {
