@@ -197,7 +197,6 @@ describe("app generator", function () {
           transform: [ "babelify" ]
         }
       })
-
     })
   })
 
@@ -229,4 +228,37 @@ describe("app generator", function () {
       })
     });
   })
+
+  describe("karma prompt", function () {
+    before(runGenerator({}, [], {mocha: true, karma: true}))
+
+    it("should create karma conf", function () {
+      assert.file(path.join(this.dir, "karma.conf.js"))
+    });
+
+    it("should add various devDependencies", function () {
+      assert.JSONFileContent(path.join(this.dir, "package.json"), {
+        devDependencies: {
+          "browserify": "^13.0.0",
+          "karma": "^0.13.21",
+          "karma-browserify": "^5.0.1",
+          "karma-firefox-launcher": "^0.1.7",
+          "karma-mocha": "^0.2.2",
+          "karma-notify-reporter": "^0.1.1",
+          "karma-teamcity-reporter": "^0.2.1",
+          "watchify": "^3.7.0",
+        }
+      })
+    });
+
+    it("should change the test command", function () {
+      assert.JSONFileContent(path.join(this.dir, "package.json"), {
+        scripts: {
+          test: "karma start",
+        }
+      })
+    });
+  })
+
+
 })

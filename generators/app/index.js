@@ -68,6 +68,13 @@ module.exports = generators.Base.extend({
       },
       {
         type: "confirm",
+        name: "karma",
+        message: "Do you want the test suite to run in a browser?",
+        when: answers => answers.mocha,
+        default: false,
+      },
+      {
+        type: "confirm",
         name: "install",
         message: "Do you want to run npm install at the end?",
         default: false,
@@ -103,6 +110,12 @@ module.exports = generators.Base.extend({
       this.composeWith("n3dst4-package:mocha",
         {},
         { local: require.resolve("../mocha")}
+      )
+    }
+    if (this.answers.karma) {
+      this.composeWith("n3dst4-package:karma",
+        {},
+        { local: require.resolve("../karma")}
       )
     }
   },
