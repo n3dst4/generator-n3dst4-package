@@ -129,11 +129,12 @@ module.exports = generators.Base.extend({
       this.answers
     );
 
-    ["README.markdown", ".travis.yml", ".npmignore", ".gitignore"]
+    ["README.markdown", ".travis.yml", ".npmignore", "_.gitignore"]
       .forEach(function (filename) {
         this.fs.copyTpl(
           this.templatePath(filename),
-          this.destinationPath(filename),
+          //this.destinationPath(filename),
+          this.destinationPath(filename.replace(/^_/, "")),
           this.answers
         )
       }.bind(this))
