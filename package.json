@@ -20,7 +20,11 @@
   },
   "homepage": "https://github.com/n3dst4/generator-n3dst4-package#readme",
   "files": [
-    "generators/app"
+    "generators/app",
+    "generators/browser",
+    "generators/bin",
+    "generators/mocha",
+    "generators/karma"
   ],
   "dependencies": {
     "git-user-email": "^0.2.1",
