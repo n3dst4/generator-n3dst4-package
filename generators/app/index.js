@@ -93,7 +93,7 @@ module.exports = generators.Base.extend({
     this.config.set({
       babel: this.answers.babel,
       name: this.answers.name,
-    })
+    });
     // compose with subgenerators if need be
     ["browser", "bin", "mocha", "karma"].forEach(name => {
       if (this.answers[name]) {
