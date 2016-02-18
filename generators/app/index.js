@@ -16,7 +16,8 @@ module.exports = generators.Base.extend({
   prompting: function () {
     var done = this.async();
 
-    this.prompt([{
+    this.prompt([
+      {
         type: "input",
         name: "name",
         message: "Package name",
@@ -93,31 +94,15 @@ module.exports = generators.Base.extend({
       babel: this.answers.babel,
       name: this.answers.name,
     })
-    // compose with the bin generator if need be
-    if (this.answers.browser) {
-      this.composeWith("n3dst4-package:browser",
-        {},
-        { local: require.resolve("../browser")}
-      )
-    }
-    if (this.answers.bin) {
-      this.composeWith("n3dst4-package:bin",
-        {},
-        { local: require.resolve("../bin")}
-      )
-    }
-    if (this.answers.mocha) {
-      this.composeWith("n3dst4-package:mocha",
-        {},
-        { local: require.resolve("../mocha")}
-      )
-    }
-    if (this.answers.karma) {
-      this.composeWith("n3dst4-package:karma",
-        {},
-        { local: require.resolve("../karma")}
-      )
-    }
+    // compose with subgenerators if need be
+    ["browser", "bin", "mocha", "karma"].forEach(name => {
+      if (this.answers[name]) {
+        this.composeWith(`n3dst4-package:${name}`,
+          {},
+          { local: require.resolve(`../${name}`)}
+        )
+      }
+    })
   },
 
   default: function () {
