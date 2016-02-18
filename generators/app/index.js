@@ -58,7 +58,13 @@ module.exports = generators.Base.extend({
         type: "confirm",
         name: "browser",
         message: "Do you want this project to be browser-compatible?",
-        default: true,
+        default: false,
+      },
+      {
+        type: "confirm",
+        name: "mocha",
+        message: "Do you want a test suite?",
+        default: false,
       },
       {
         type: "confirm",
@@ -91,6 +97,12 @@ module.exports = generators.Base.extend({
       this.composeWith("n3dst4-package:bin",
         {},
         { local: require.resolve("../bin")}
+      )
+    }
+    if (this.answers.mocha) {
+      this.composeWith("n3dst4-package:mocha",
+        {},
+        { local: require.resolve("../mocha")}
       )
     }
   },

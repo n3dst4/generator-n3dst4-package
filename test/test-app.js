@@ -200,4 +200,33 @@ describe("app generator", function () {
 
     })
   })
+
+  describe("mocha prompt", function () {
+    before(runGenerator({}, [], {mocha: true}))
+
+    it("should create mocha.opts", function () {
+      assert.file(path.join(this.dir, "test", "mocha.opts"))
+    });
+
+    it("should create a test suite", function () {
+      assert.file(path.join(this.dir, "test", `test-${this.name}.js`))
+    });
+
+    it("should add chai and mocha devDependencies", function () {
+      assert.JSONFileContent(path.join(this.dir, "package.json"), {
+        devDependencies: {
+          chai: "^3.5.0",
+          mocha: "^2.4.5"
+        }
+      })
+    });
+
+    it("should add test command", function () {
+      assert.JSONFileContent(path.join(this.dir, "package.json"), {
+        scripts: {
+          test: "mocha",
+        }
+      })
+    });
+  })
 })
