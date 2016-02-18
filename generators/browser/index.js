@@ -27,12 +27,13 @@ module.exports = generators.Base.extend({
 
   writing: function () {
     // add babelify to package.json
+    var package = this.fs.readJSON(this.destinationPath("package.json"));
+    package.browser = `src/${this.answers.name}.js`
     if (this.config.get("babel")) {
-      var package = this.fs.readJSON(this.destinationPath("package.json"));
       package.dependencies.babelify = "^7.2.0"
       _.merge(package, {browserify: { transform: [ "babelify" ] }})
-      this.fs.writeJSON(this.destinationPath("package.json"), package)
     }
+    this.fs.writeJSON(this.destinationPath("package.json"), package)
 
     // add xvfb magic to Travis config to allow Karma to run Firefox, if needed
     var travisPath = this.destinationPath(".travis.yml")
