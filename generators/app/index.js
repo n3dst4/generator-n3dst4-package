@@ -129,7 +129,7 @@ module.exports = generators.Base.extend({
       this.answers
     );
 
-    ["README.markdown", ".travis.yml", ".npmignore", "_.gitignore"]
+    ["_README.markdown", "_.travis.yml", "_.npmignore", "_.gitignore"]
       .forEach(function (filename) {
         this.fs.copyTpl(
           this.templatePath(filename),
