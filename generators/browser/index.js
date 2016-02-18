@@ -37,6 +37,8 @@ module.exports = generators.Base.extend({
     // add xvfb magic to Travis config to allow Karma to run Firefox, if needed
     var travisPath = this.destinationPath(".travis.yml")
     if (this.fs.exists(travisPath)) {
+      // STRICTLY SPEAKING, we don't need to do this unless we're also going to
+      // use karma or some other browser-based test runner.
       var travisConfig = yaml.safeLoad(this.fs.read(travisPath));
       travisConfig.before_script = _.concat(travisConfig.before_script || [],
         [

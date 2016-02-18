@@ -4,7 +4,7 @@ Generates npm packages the way I likes 'em.
 
 ## Installation
 
-If you don't already have yo (the Yeoman runner) installed:
+If you don't already have [yo][yo] (the [Yeoman][yeoman] runner) installed:
 ```sh
 npm install -g yo
 ```
@@ -20,16 +20,36 @@ npm install generator-n3dst4-package -g
 yo n3dst4-package
 ```
 
-Options you can pass:
-
-* `--name <whatever>` to presupply the package name
-* `--bin` to automatically run the bin script subgenerator (without this options it'll ask whether you wants it.)
-
 ## Generators
 
 ### `n3dst4-package`
 
-This builds a minimal package, with optional babel transpilation.
+This builds a minimal package, with the following features:
+* `.gitignore` and `.npmignore`set up with sensible defaults
+* `package.json` set up as if you'd run `npm init`
+* Linting configured using [ESLint][eslint] and my [personal eslint config][eslint-config]
+* Optional [babel][babel] transpilation. If selected, an `npm prepublish` step will be set up to precompile your package.
+
+### `n3dst4-package:bin`
+
+Adds a `src/bin/` folder with a script set up for command-line execution.
+
+### `n3dst4-package:browser`
+
+Although a lot of packages will "just work" in a browserify/webpack context, this generator will do two extra things for you:
+
+1. If you elected to use [Babel][babel] in the main generator, it will add the
+necessary config to use [Babelify][babelify] when consumed by another project.
+2. Update `.travis.yml`, the config file used by [Travis-CI][travis], to set it
+up for running a browser instance.
+
+### `n3dst4-package:mocha`
+
+This will add a basic [mocha][mocha] test suite with one failing test to your app, which can be run using `npm test`, or just `mocha`.
+
+### `n3dst4-package:karma`
+
+This will upgrade your [Mocha][mocha]-based test suite to run inside [Karma][karma]
 
 ## Developer notes!
 
@@ -43,7 +63,12 @@ Remember:
 * Within each generator, any files that might get copied over are in `templates/`
 * The main generator in this case is written to ask you which subgenerators you want, and will run them automatically if needed. You can also run them on their own afterwards, e.g. `yo n3dst4-package:karma` to add Karma to an existing project.
 
-## TODO
-
-* ~~store config and re-use it in subgenerators instead of passing options~~ around
-* turn babel stuff into its own subgenerator
+[babel]: https://babeljs.io/
+[babelify]: https://github.com/babel/babelify
+[mocha]: https://mochajs.org/
+[travis]: https://travis-ci.org/
+[yo]: https://www.npmjs.com/package/yo
+[yeoman]: http://yeoman.io/
+[karma]: https://karma-runner.github.io/0.13/index.html
+[eslint]: http://eslint.org/
+[eslint-config]: https://www.npmjs.com/package/@sportingsolutions/eslint-config-shared
