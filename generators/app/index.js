@@ -111,12 +111,12 @@ module.exports = generators.Base.extend({
   writing: function () {
     var package = this.fs.readJSON(this.templatePath("_package.json"));
     package.name = this.answers.name;
-    package.main = "src/" + this.answers.name + ".js"
-    package.author = this.answers.username + " <" + this.answers.email + ">"
+    package.main = `src/${this.answers.name}.js`
+    package.author = `${this.answers.username} <${this.answers.email}>`
     package.description = this.answers.description
 
     if (this.answers.babel) {
-      package.main = "__build/" + this.answers.name + ".js"
+      package.main = `__build/${this.answers.name}.js`
       package.scripts.prepublish = "babel src --out-dir __build"
       package.devDependencies.babel = "^5.8.23"
     }
