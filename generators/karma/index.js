@@ -25,6 +25,7 @@ module.exports = generators.Base.extend({
     var package = this.fs.readJSON(this.destinationPath("package.json"));
     package.devDependencies = package.devDependencies || {}
     package.devDependencies["browserify"] = "^13.0.0";
+    package.devDependencies["envify"] = "^3.4.0";
     package.devDependencies["karma"] = "^0.13.21";
     package.devDependencies["karma-browserify"] = "^5.0.1";
     package.devDependencies["karma-firefox-launcher"] = "^0.1.7";
