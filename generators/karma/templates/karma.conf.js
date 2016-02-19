@@ -32,7 +32,7 @@ module.exports = function(config) {
 
     browserify: {
       debug: true,
-      transform: useBabelify? ["babelify", "envify"] : ["envify"]]
+      transform: useBabelify? ["babelify", "envify"] : ["envify"]
     },
 
     // list of files / patterns to load in the browser
