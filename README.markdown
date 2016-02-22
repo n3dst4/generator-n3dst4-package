@@ -65,6 +65,10 @@ Remember:
 * Within each generator, any files that might get copied over are in `templates/`
 * The main generator in this case is written to ask you which subgenerators you want, and will run them automatically if needed. You can also run them on their own afterwards, e.g. `yo n3dst4-package:karma` to add Karma to an existing project.
 
+## Caveats / TODOs
+
+
+
 [babel]: https://babeljs.io/
 [babelify]: https://github.com/babel/babelify
 [mocha]: https://mochajs.org/

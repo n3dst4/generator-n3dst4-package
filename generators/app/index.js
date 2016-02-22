@@ -131,8 +131,6 @@ module.exports = generators.Base.extend({
 
     var filesToCopy = ["_README.markdown", "_.travis.yml", "_.gitignore"];
 
-    if (this.answers.babel) { filesToCopy.push("_.npmignore"); }
-
     filesToCopy.forEach(function (filename) {
       this.fs.copyTpl(
         this.templatePath(filename),

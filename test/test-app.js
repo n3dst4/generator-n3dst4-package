@@ -66,7 +66,7 @@ describe("app generator", function () {
       assert.file(path.join(this.dir, ".travis.yml"))
     })
 
-    it("should not create a .npmignore", function () {
+    it("should NOT create a .npmignore", function () {
       assert.noFile(path.join(this.dir, ".npmignore"))
     })
 
@@ -149,10 +149,6 @@ describe("app generator", function () {
           babel: "^5.8.23"
         }
       })
-    })
-
-    it("should create a .npmignore", function () {
-      assert.file(path.join(this.dir, ".npmignore"))
     })
 
   })
