@@ -19,4 +19,6 @@ coverage
 # node-waf configuration
 .lock-wscript
 
+# the main reason we have this .npmignore is to exclude the /src folder when
+# publishing babel-transpiled stuff
 /src

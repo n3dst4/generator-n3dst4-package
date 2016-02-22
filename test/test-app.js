@@ -66,8 +66,8 @@ describe("app generator", function () {
       assert.file(path.join(this.dir, ".travis.yml"))
     })
 
-    it("should create a .npmignore", function () {
-      assert.file(path.join(this.dir, ".npmignore"))
+    it("should not create a .npmignore", function () {
+      assert.noFile(path.join(this.dir, ".npmignore"))
     })
 
     it("should create a .gitignore", function () {
@@ -150,6 +150,11 @@ describe("app generator", function () {
         }
       })
     })
+
+    it("should create a .npmignore", function () {
+      assert.file(path.join(this.dir, ".npmignore"))
+    })
+
   })
 
   describe("babel + bin prompts", function () {

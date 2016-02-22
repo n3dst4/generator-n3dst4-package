@@ -129,15 +129,17 @@ module.exports = generators.Base.extend({
       this.answers
     );
 
-    ["_README.markdown", "_.travis.yml", "_.npmignore", "_.gitignore"]
-      .forEach(function (filename) {
-        this.fs.copyTpl(
-          this.templatePath(filename),
-          //this.destinationPath(filename),
-          this.destinationPath(filename.replace(/^_/, "")),
-          this.answers
-        )
-      }.bind(this))
+    var filesToCopy = ["_README.markdown", "_.travis.yml", "_.gitignore"];
+
+    if (this.answers.babel) { filesToCopy.push("_.npmignore"); }
+
+    filesToCopy.forEach(function (filename) {
+      this.fs.copyTpl(
+        this.templatePath(filename),
+        this.destinationPath(filename.replace(/^_/, "")),
+        this.answers
+      )
+    }.bind(this))
   },
 
   conflicts: function () {
