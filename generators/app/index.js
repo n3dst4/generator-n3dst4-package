@@ -125,7 +125,7 @@ module.exports = generators.Base.extend({
 
     this.fs.copyTpl(
       this.templatePath("src/main.js"),
-      this.destinationPath(package.main),
+      this.destinationPath(`src/${this.answers.name}.js`),
       this.answers
     );
 
