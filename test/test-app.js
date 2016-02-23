@@ -8,6 +8,9 @@ var yaml = require('js-yaml')
 var crypto = require("crypto")
 var os = require("os")
 
+var studlyName = "FtangFtangOle.BiscuitBarrel"
+var kebabName = "ftang-ftang-ole-biscuit-barrel"
+
 function runGenerator (opts, args, prompts) {
   return function (done) {
     var self = this;
@@ -127,9 +130,8 @@ describe("app generator", function () {
   // test for invalid name??
 
   describe("kebab-case folder name", function () {
-    var name = "ftang-ftang-ole-biscuit-barrel"
     before(function (done) {
-      var tmpDir = path.join(os.tmpdir(), crypto.randomBytes(20).toString('hex'), name)
+      var tmpDir = path.join(os.tmpdir(), crypto.randomBytes(20).toString('hex'), kebabName)
       var self = this;
       helpers.run(path.join( __dirname, '../generators/app'))
         .inDir(tmpDir, function (dir) {
@@ -137,13 +139,12 @@ describe("app generator", function () {
         }.bind(this))
         .on('end', done);
     })
-    testName(name)
+    testName(kebabName)
   });
 
   describe("StudlyCaps folder name", function () {
-    var name = "FtangFtangOle.BiscuitBarrel"
     before(function (done) {
-      var tmpDir = path.join(os.tmpdir(), crypto.randomBytes(20).toString('hex'), name)
+      var tmpDir = path.join(os.tmpdir(), crypto.randomBytes(20).toString('hex'), studlyName)
       var self = this;
       helpers.run(path.join( __dirname, '../generators/app'))
         .inDir(tmpDir, function (dir) {
@@ -151,7 +152,7 @@ describe("app generator", function () {
         }.bind(this))
         .on('end', done);
     })
-    testName("ftang-ftang-ole-biscuit-barrel")
+    testName(kebabName)
   });
 
   describe("description, email, and username prompts", function () {
