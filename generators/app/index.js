@@ -1,6 +1,7 @@
 var generators = require('yeoman-generator');
 var gitEmail = require("git-user-email");
 var gitUsername = require("git-user-name");
+var dashify = require("dashify")
 
 module.exports = generators.Base.extend({
   constructor: function () {
@@ -21,7 +22,7 @@ module.exports = generators.Base.extend({
         type: "input",
         name: "name",
         message: "Package name",
-        default: this.appname,
+        default: dashify(this.appname),
         when: !(this.options.name)
       },
       {

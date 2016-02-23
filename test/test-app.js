@@ -4,7 +4,9 @@ var assert = require('yeoman-assert')
 var path = require("path")
 var uuid = require("uuid").v4
 var fs = require("fs")
-var yaml = require('js-yaml');
+var yaml = require('js-yaml')
+var crypto = require("crypto")
+var os = require("os")
 
 function runGenerator (opts, args, prompts) {
   return function (done) {
@@ -94,6 +96,12 @@ describe("app generator", function () {
     testName(name)
   })
 
+  describe("name prompt", function () {
+    var name = uuid()
+    before(runGenerator({}, [], {name}))
+    testName(name)
+  })
+
   function testBin () {
     it("should create a bin entry in package.json", function () {
       assert.JSONFileContent(path.join(this.dir, "package.json"), {
@@ -116,11 +124,35 @@ describe("app generator", function () {
     testBin()
   })
 
-  describe("name prompt", function () {
-    var name = uuid()
-    before(runGenerator({}, [], {name}))
+  // test for invalid name??
+
+  describe("kebab-case folder name", function () {
+    var name = "ftang-ftang-ole-biscuit-barrel"
+    before(function (done) {
+      var tmpDir = path.join(os.tmpdir(), crypto.randomBytes(20).toString('hex'), name)
+      var self = this;
+      helpers.run(path.join( __dirname, '../generators/app'))
+        .inDir(tmpDir, function (dir) {
+          self.dir = dir
+        }.bind(this))
+        .on('end', done);
+    })
     testName(name)
-  })
+  });
+
+  describe("StudlyCaps folder name", function () {
+    var name = "FtangFtangOle.BiscuitBarrel"
+    before(function (done) {
+      var tmpDir = path.join(os.tmpdir(), crypto.randomBytes(20).toString('hex'), name)
+      var self = this;
+      helpers.run(path.join( __dirname, '../generators/app'))
+        .inDir(tmpDir, function (dir) {
+          self.dir = dir
+        }.bind(this))
+        .on('end', done);
+    })
+    testName("ftang-ftang-ole-biscuit-barrel")
+  });
 
   describe("description, email, and username prompts", function () {
     var description = uuid()
@@ -148,7 +180,7 @@ describe("app generator", function () {
         devDependencies: {
           "babel-cli": "^6.5.1",
           "babel-preset-es2015": "^6.5.0",
-          "babel-preset-react": "^6.5.0"          
+          "babel-preset-react": "^6.5.0"
         }
       })
     })
