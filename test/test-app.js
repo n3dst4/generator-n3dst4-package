@@ -146,11 +146,18 @@ describe("app generator", function () {
           prepublish: "babel src --out-dir __build"
         },
         devDependencies: {
-          babel: "^5.8.23"
+          "babel-cli": "^6.5.1",
+          "babel-preset-es2015": "^6.5.0",
+          "babel-preset-react": "^6.5.0"          
         }
       })
     })
 
+    it("should create a babelrc", function () {
+      assert.JSONFileContent(path.join(this.dir, ".babelrc"), {
+        "presets": ["es2015", "react"]
+      })
+    })
   })
 
   describe("babel + bin prompts", function () {

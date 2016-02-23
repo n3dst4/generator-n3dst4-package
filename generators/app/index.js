@@ -118,7 +118,9 @@ module.exports = generators.Base.extend({
     if (this.answers.babel) {
       package.main = `__build/${this.answers.name}.js`
       package.scripts.prepublish = "babel src --out-dir __build"
-      package.devDependencies.babel = "^5.8.23"
+      package.devDependencies["babel-cli"] = "^6.5.1"
+      package.devDependencies["babel-preset-es2015"] = "^6.5.0"
+      package.devDependencies["babel-preset-react"] = "^6.5.0"
     }
 
     this.fs.writeJSON(this.destinationPath("package.json"), package)
@@ -130,6 +132,8 @@ module.exports = generators.Base.extend({
     );
 
     var filesToCopy = ["_README.markdown", "_.travis.yml", "_.gitignore"];
+
+    if (this.answers.babel) { filesToCopy.push("_.babelrc") }
 
     filesToCopy.forEach(function (filename) {
       this.fs.copyTpl(
