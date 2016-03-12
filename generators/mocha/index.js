@@ -28,7 +28,7 @@ module.exports = generators.Base.extend({
       this.destinationPath("test/mocha.opts"))
 
     this.fs.copyTpl(
-      this.templatePath("test/test-.js"),
+      this.templatePath(`test/test-${this.config.get("babel")? "babel":"normal"}.js`),
       this.destinationPath(`test/test-${this.config.get("name")}.js`),
       {
         name: this.config.get("name"),

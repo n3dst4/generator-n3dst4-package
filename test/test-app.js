@@ -263,7 +263,7 @@ describe("app generator", function () {
     it("should import the module under the right name", function () {
       assert.fileContent(
         path.join(this.dir, "test", `test-${this.name}.js`),
-        new RegExp('import ' + camelName + ' from "\\.\\./src/' + this.name + '"')
+        new RegExp('var ' + camelName + ' = require\\("\\.\\./src/' + this.name + '"\\);')
       )
     });
 
@@ -282,6 +282,28 @@ describe("app generator", function () {
           test: "mocha",
         }
       })
+    });
+  })
+
+  describe("mocha prompt with babel", function () {
+    before(runGenerator({}, [], {mocha: true, babel: true}))
+
+    it("should create mocha.opts", function () {
+      assert.fileContent(
+        path.join(this.dir, "test", "mocha.opts"),
+        /--compilers js:babel-register/
+      )
+    });
+
+    it("should create a test suite", function () {
+      assert.file(path.join(this.dir, "test", `test-${this.name}.js`))
+    });
+
+    it("should import the module under the right name", function () {
+      assert.fileContent(
+        path.join(this.dir, "test", `test-${this.name}.js`),
+        new RegExp('import ' + camelName + ' from "\\.\\./src/' + this.name + '"')
+      )
     });
   })
 
