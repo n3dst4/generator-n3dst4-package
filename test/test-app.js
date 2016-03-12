@@ -10,10 +10,12 @@ var os = require("os")
 
 var studlyName = "FtangFtangOle.BiscuitBarrel"
 var kebabName = "ftang-ftang-ole-biscuit-barrel"
+var camelName = "ftangFtangOleBiscuitBarrel"
 
 function runGenerator (opts, args, prompts) {
   return function (done) {
     var self = this;
+    var tmpDir = path.join(os.tmpdir(), crypto.randomBytes(20).toString('hex'), kebabName)
     helpers.run(path.join( __dirname, '../generators/app'))
       .withOptions(opts || {})
       .withArguments(args || [])
@@ -21,7 +23,7 @@ function runGenerator (opts, args, prompts) {
       .withLocalConfig({})
       // .on('ready', function (generator) {
       // })
-      .inTmpDir(function (dir) {
+      .inDir(tmpDir, function (dir) {
         self.dir = dir
         self.name = path.basename(dir)
       }.bind(this))
@@ -256,6 +258,13 @@ describe("app generator", function () {
 
     it("should create a test suite", function () {
       assert.file(path.join(this.dir, "test", `test-${this.name}.js`))
+    });
+
+    it("should import the module under the right name", function () {
+      assert.fileContent(
+        path.join(this.dir, "test", `test-${this.name}.js`),
+        new RegExp('import ' + camelName + ' from "\\.\\./src/' + this.name + '"')
+      )
     });
 
     it("should add chai and mocha devDependencies", function () {

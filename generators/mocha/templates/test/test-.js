@@ -1,7 +1,7 @@
 /*global describe, it*/
 
 import chai from "chai";
-import <%= name %> from "../src/<%= name %>";
+import <%= camelName %> from "../src/<%= name %>";
 
 const expect = chai.expect;
 
