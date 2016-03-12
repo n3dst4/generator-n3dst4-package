@@ -39,6 +39,9 @@ module.exports = generators.Base.extend({
     package.devDependencies = package.devDependencies || {}
     package.devDependencies.chai = "^3.5.0"
     package.devDependencies.mocha = "^2.4.5"
+    if (this.config.get("babel")) {
+      package.devDependencies["babel-register"] = "^6.7.2"
+    }
     package.scripts = package.scripts || {}
     package.scripts.test = "mocha"
     this.fs.writeJSON(this.destinationPath("package.json"), package)
