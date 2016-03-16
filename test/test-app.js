@@ -53,7 +53,7 @@ describe("app generator", function () {
           "extends": "@n3dst4/eslint-config-n3dst4"
         },
         "devDependencies": {
-          "@n3dst4/eslint-config-n3dst4": "^1.5.1",
+          "@n3dst4/eslint-config-n3dst4": "^1.6.0",
           "babel-eslint": "^4.1.6",
           "eslint": "^1.10.3",
           "eslint-plugin-babel": "^3.0.0"
