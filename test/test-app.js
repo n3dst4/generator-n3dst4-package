@@ -61,7 +61,7 @@ describe("default everything, empty folder", function () {
   })
 
   it("should create a src folder and main file", function () {
-    assert.file(path.join(this.dir, "src", this.name + ".js"))
+    assert.fileContent(path.join(this.dir, "src", this.name + ".js"), /^module\.exports = {}$/m)
   })
 
   it("should create a README", function () {
@@ -185,6 +185,10 @@ describe("babel prompt", function () {
         "babel-preset-react": "^6.5.0"
       }
     })
+  })
+
+  it("should create a src folder and main file with es6+ content", function () {
+    assert.fileContent(path.join(this.dir, "src", this.name + ".js"), /^export default {}$/m)
   })
 
   it("should create a babelrc", function () {
