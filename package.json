@@ -38,9 +38,7 @@
   "eslintConfig": {
     "extends": "eslint:recommended",
     "env": {
-      "browser": true,
-      "node": true,
-      "es6": true
+      "node": true
     },
     "rules": {
       "comma-dangle": 0,

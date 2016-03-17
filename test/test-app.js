@@ -1,36 +1,17 @@
-/*eslint-env node, mocha, es6 */
+/*eslint-env node, mocha */
 var helpers = require('yeoman-test')
 var assert = require('yeoman-assert')
 var path = require("path")
 var uuid = require("uuid").v4
 var fs = require("fs")
 var yaml = require('js-yaml')
-var crypto = require("crypto")
 var os = require("os")
+var crypto = require("crypto")
 
-var studlyName = "FtangFtangOle.BiscuitBarrel"
-var kebabName = "ftang-ftang-ole-biscuit-barrel"
-var camelName = "ftangFtangOleBiscuitBarrel"
-
-function runGenerator (opts, args, prompts) {
-  return function (done) {
-    var self = this;
-    var tmpDir = path.join(os.tmpdir(), crypto.randomBytes(20).toString('hex'), kebabName)
-    helpers.run(path.join( __dirname, '../generators/app'))
-      .withOptions(opts || {})
-      .withArguments(args || [])
-      .withPrompts(prompts || {})
-      .withLocalConfig({})
-      // .on('ready', function (generator) {
-      // })
-      .inDir(tmpDir, function (dir) {
-        self.dir = dir
-        self.name = path.basename(dir)
-      }.bind(this))
-      .on('end', done);
-  }
-}
-
+var runGenerator = require("./run-generator")
+var kebabName = runGenerator.kebabName
+var studlyName = runGenerator.studlyName
+var camelName = runGenerator.camelName
 
 describe("default everything, empty folder", function () {
   before(runGenerator())
