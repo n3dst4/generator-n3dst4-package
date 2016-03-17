@@ -36,15 +36,6 @@ This builds a minimal package, with the following features:
 
 Adds a `src/bin/` folder with a script set up for command-line execution.
 
-### `n3dst4-package:browser`
-
-Although a lot of packages will "just work" in a browserify/webpack context, this generator will do two extra things for you:
-
-1. If you elected to use [Babel][babel] in the main generator, it will add the
-necessary config to use [Babelify][babelify] when consumed by another project.
-2. Update `.travis.yml`, the config file used by [Travis-CI][travis], to set it
-up for running a browser instance.
-
 ### `n3dst4-package:mocha`
 
 This will add a basic [mocha][mocha] test suite with one failing test to your app, which can be run using `npm test`, or just `mocha`.
