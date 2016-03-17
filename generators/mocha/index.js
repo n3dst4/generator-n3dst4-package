@@ -27,6 +27,7 @@ module.exports = generators.Base.extend({
     }
     package.scripts = package.scripts || {}
     package.scripts.test = "mocha"
+    package.scripts.watch = "mocha --watch"
     this.fs.writeJSON(this.destinationPath("package.json"), package)
   },
 });

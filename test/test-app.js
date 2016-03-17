@@ -208,39 +208,6 @@ describe("babel + bin prompts", function () {
   })
 })
 
-// describe("browser prompt", function () {
-//   before(runGenerator({}, [], {browser: true}))
-//
-//   it("should not add babelify yet", function () {
-//     var package = JSON.parse(fs.readFileSync(path.join(this.dir, "package.json"), 'utf8'));
-//     assert(!(package.dependencies && package.dependencies.babelify),
-//       "babelify dependency should not be set")
-//     assert((!package.browserify) || (!package.browserify.transform) || package.browserify.transform.indexOf("babelify") == -1,
-//       "babelify transform should bot be set up")
-//   });
-//
-//   it("should set the browser field in package.json", function () {
-//     assert.JSONFileContent(path.join(this.dir, "package.json"), {
-//       browser: `src/${this.name}.js`
-//     })
-//   });
-// })
-
-// describe("browser + babel prompts", function () {
-//   before(runGenerator({}, [], {browser: true, babel: true}))
-//
-//   it("should set up package.json install and use babelify", function () {
-//     assert.JSONFileContent(path.join(this.dir, "package.json"), {
-//       dependencies: {
-//         babelify: "^7.2.0"
-//       },
-//       browserify: {
-//         transform: [ "babelify" ]
-//       }
-//     })
-//   })
-// })
-
 describe("mocha prompt", function () {
   before(runGenerator({}, [], {mocha: true}))
 
@@ -268,10 +235,11 @@ describe("mocha prompt", function () {
     })
   });
 
-  it("should add test command", function () {
+  it("should add test and watch command", function () {
     assert.JSONFileContent(path.join(this.dir, "package.json"), {
       scripts: {
         test: "mocha",
+        watch: "mocha --watch"
       }
     })
   });
@@ -324,7 +292,8 @@ describe("karma prompt", function () {
   it("should change the test command", function () {
     assert.JSONFileContent(path.join(this.dir, "package.json"), {
       scripts: {
-        test: "karma start",
+        test: "karma start --single-run",
+        watch: "karma start"
       }
     })
   });

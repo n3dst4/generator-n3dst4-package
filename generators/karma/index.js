@@ -23,7 +23,8 @@ module.exports = generators.Base.extend({
       package.devDependencies["babelify"] = "^7.2.0"
     }
     package.scripts = package.scripts || {}
-    package.scripts.test = "karma start"
+    package.scripts.test = "karma start --single-run"
+    package.scripts.watch = "karma start"
     this.fs.writeJSON(this.destinationPath("package.json"), package)
 
     // add xvfb magic to Travis config to allow Karma to run Firefox, if needed
