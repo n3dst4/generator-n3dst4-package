@@ -193,6 +193,10 @@ describe("app generator", function () {
         "presets": ["es2015", "react"]
       })
     })
+
+    it("should create an npmignore that excludes src", function () {
+      assert.fileContent(path.join(this.dir, ".npmignore"), /^src$/m)
+    })
   })
 
   describe("babel + bin prompts", function () {
