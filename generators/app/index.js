@@ -58,12 +58,6 @@ module.exports = generators.Base.extend({
       },
       {
         type: "confirm",
-        name: "browser",
-        message: "Do you want this project to be browser-compatible?",
-        default: false,
-      },
-      {
-        type: "confirm",
         name: "mocha",
         message: "Do you want a test suite?",
         default: false,
@@ -96,7 +90,7 @@ module.exports = generators.Base.extend({
       name: this.answers.name,
     });
     // compose with subgenerators if need be
-    ["browser", "bin", "mocha", "karma"].forEach(name => {
+    ["bin", "mocha", "karma"].forEach(name => {
       if (this.answers[name]) {
         this.composeWith(`n3dst4-package:${name}`,
           {},

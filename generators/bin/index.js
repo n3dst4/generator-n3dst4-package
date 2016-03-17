@@ -4,7 +4,6 @@ var _ = require("lodash");
 module.exports = generators.Base.extend({
   constructor: function () {
     generators.Base.apply(this, arguments);
-    this.config.set("browser", true)
   },
 
   initializing: function () {
