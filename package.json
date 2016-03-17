@@ -1,6 +1,6 @@
 {
   "name": "generator-n3dst4-package",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Yeoman generator for npm packages the way I likes 'em",
   "main": "index.js",
   "scripts": {
