@@ -53,26 +53,26 @@ module.exports = generators.Base.extend({
       {
         type: "confirm",
         name: "babel",
-        message: "Do you want to run everything through babel?",
+        message: "Do you want your code compiled with Babel?",
         default: false,
       },
       {
         type: "confirm",
         name: "mocha",
-        message: "Do you want a test suite?",
+        message: "Do you want a Mocha test suite?",
         default: false,
       },
       {
         type: "confirm",
         name: "karma",
-        message: "Do you want the test suite to run in a browser?",
+        message: "Do you want the test suite to run in a browser (through Karma)?",
         when: answers => answers.mocha,
         default: false,
       },
       {
         type: "confirm",
         name: "install",
-        message: "Do you want to run npm install at the end?",
+        message: "Do you want to run \"npm install\" at the end?",
         default: false,
       },
     ], function (answers) {
