@@ -7,22 +7,6 @@ module.exports = generators.Base.extend({
     generators.Base.apply(this, arguments)
   },
 
-  initializing: function () {
-
-  },
-
-  prompting: function () {
-
-  },
-
-  configuring: function () {
-
-  },
-
-  default: function () {
-
-  },
-
   writing: function () {
     var package = this.fs.readJSON(this.destinationPath("package.json"));
     package.devDependencies = package.devDependencies || {}
@@ -62,18 +46,6 @@ module.exports = generators.Base.extend({
       this.templatePath("karma.conf.js"),
       this.destinationPath("karma.conf.js"),
       {babel: this.config.get("babel")})
-
-  },
-
-  conflicts: function () {
-
-  },
-
-  install: function () {
-
-  },
-
-  end: function () {
 
   },
 });

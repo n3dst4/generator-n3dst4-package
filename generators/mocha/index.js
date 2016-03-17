@@ -5,23 +5,6 @@ module.exports = generators.Base.extend({
   constructor: function () {
     generators.Base.apply(this, arguments)
   },
-
-  initializing: function () {
-
-  },
-
-  prompting: function () {
-
-  },
-
-  configuring: function () {
-
-  },
-
-  default: function () {
-
-  },
-
   writing: function () {
     this.fs.copy(
       this.templatePath(`test/mocha-${this.config.get("babel")? "babel":"normal"}.opts`),
@@ -45,17 +28,5 @@ module.exports = generators.Base.extend({
     package.scripts = package.scripts || {}
     package.scripts.test = "mocha"
     this.fs.writeJSON(this.destinationPath("package.json"), package)
-  },
-
-  conflicts: function () {
-
-  },
-
-  install: function () {
-
-  },
-
-  end: function () {
-
   },
 });

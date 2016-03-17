@@ -10,10 +10,6 @@ module.exports = generators.Base.extend({
     this.option("bin")
   },
 
-  initializing: function () {
-    this.log("app initializing")
-  },
-
   prompting: function () {
     var done = this.async();
 
@@ -142,17 +138,10 @@ module.exports = generators.Base.extend({
     }.bind(this))
   },
 
-  conflicts: function () {
-  },
-
   install: function () {
     if (this.answers.install) {
       this.log("Installing dependencies...")
       this.npmInstall()
     }
   },
-
-  end: function () {
-  },
-
 });

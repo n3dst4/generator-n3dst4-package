@@ -6,10 +6,6 @@ module.exports = generators.Base.extend({
     generators.Base.apply(this, arguments);
   },
 
-  initializing: function () {
-
-  },
-
   prompting: function () {
     var done = this.async();
     var config = this.config.getAll()
@@ -30,10 +26,6 @@ module.exports = generators.Base.extend({
     this.answers.camelCaseName = _.camelCase(this.answers.name)
   },
 
-  default: function () {
-
-  },
-
   writing: function () {
     // shebang script
     this.fs.copyTpl(
@@ -51,19 +43,4 @@ module.exports = generators.Base.extend({
     this.fs.writeJSON(this.destinationPath("package.json"), package)
 
   },
-
-  conflicts: function () {
-
-  },
-
-  install: function () {
-
-  },
-
-  end: function () {
-
-  },
-
-
-
 });
