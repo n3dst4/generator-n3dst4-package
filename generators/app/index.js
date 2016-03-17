@@ -112,7 +112,7 @@ module.exports = generators.Base.extend({
 
     if (this.answers.babel) {
       package.main = `__build/${this.answers.name}.js`
-      package.scripts.prepublish = "babel src --out-dir __build"
+      package.scripts.prepublish = "babel src --out-dir __build --source-maps inline"
       package.devDependencies["babel-cli"] = "^6.5.1"
       package.devDependencies["babel-preset-es2015"] = "^6.5.0"
       package.devDependencies["babel-preset-react"] = "^6.5.0"
