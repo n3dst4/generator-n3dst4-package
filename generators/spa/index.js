@@ -26,10 +26,10 @@ module.exports = generators.Base.extend({
     //   this.templatePath(`test/mocha-${this.config.get("babel")? "babel":"normal"}.opts`),
     //   this.destinationPath("test/mocha.opts"))
     //
-    // this.fs.copyTpl(
-    //   this.templatePath("test/test-.js"),
-    //   this.destinationPath(`test/test-${this.config.get("name")}.js`),
-    //   {name: this.config.get("name")})
+    this.fs.copyTpl(
+      this.templatePath("html/index.html"),
+      this.destinationPath("index.html"),
+      {name: this.config.get("name")})
     //
     // var package = this.fs.readJSON(this.destinationPath("package.json"));
     // package.devDependencies = package.devDependencies || {}
