@@ -17,7 +17,7 @@ describe("default everything, empty folder", function () {
   before(runGenerator())
 
   it("should set valid defaults in package.json", function () {
-    assert.JSONFileContent(path.join(this.dir, "package.json"), {
+    assert.jsonFileContent(path.join(this.dir, "package.json"), {
       name: this.name,
       version: "1.0.0",
       description: "",
@@ -65,7 +65,7 @@ describe("default everything, empty folder", function () {
 
 function testName (name) {
   it("should set the project name in the package.json", function () {
-    assert.JSONFileContent(path.join(this.dir, "package.json"), {
+    assert.jsonFileContent(path.join(this.dir, "package.json"), {
       name: name,
       main: `src/${name}.js`
     })
@@ -89,7 +89,7 @@ describe("name prompt", function () {
 
 function testBin () {
   it("should create a bin entry in package.json", function () {
-    assert.JSONFileContent(path.join(this.dir, "package.json"), {
+    assert.jsonFileContent(path.join(this.dir, "package.json"), {
       bin: { [this.name]: `src/bin/${this.name}.js`},
       preferGlobal: true
     })
@@ -144,7 +144,7 @@ describe("description, email, and username prompts", function () {
   before(runGenerator({}, [], {description, email, username}))
 
   it("should set the description, email, and username in package.json", function () {
-    assert.JSONFileContent(path.join(this.dir, "package.json"), {
+    assert.jsonFileContent(path.join(this.dir, "package.json"), {
       description,
       author: `${username} <${email}>`
     })
@@ -155,7 +155,7 @@ describe("babel prompt", function () {
   before(runGenerator({}, [], {babel: true}))
 
   it("should set up package.json for babelification", function () {
-    assert.JSONFileContent(path.join(this.dir, "package.json"), {
+    assert.jsonFileContent(path.join(this.dir, "package.json"), {
       main: `__build/${this.name}.js`,
       scripts: {
         prepublish: "babel src --out-dir __build --source-maps inline"
@@ -173,7 +173,7 @@ describe("babel prompt", function () {
   })
 
   it("should create a babelrc", function () {
-    assert.JSONFileContent(path.join(this.dir, ".babelrc"), {
+    assert.jsonFileContent(path.join(this.dir, ".babelrc"), {
       "presets": ["es2015", "react"]
     })
   })
@@ -187,7 +187,7 @@ describe("babel + bin prompts", function () {
   before(runGenerator({}, [], {babel: true, bin: true}))
 
   it("should point bin into __build", function () {
-    assert.JSONFileContent(path.join(this.dir, "package.json"), {
+    assert.jsonFileContent(path.join(this.dir, "package.json"), {
       bin: { [this.name]: `__build/bin/${this.name}.js`},
     })
   })
@@ -212,7 +212,7 @@ describe("mocha prompt", function () {
   });
 
   it("should add chai and mocha devDependencies", function () {
-    assert.JSONFileContent(path.join(this.dir, "package.json"), {
+    assert.jsonFileContent(path.join(this.dir, "package.json"), {
       devDependencies: {
         chai: "^3.5.0",
         mocha: "^2.4.5"
@@ -221,7 +221,7 @@ describe("mocha prompt", function () {
   });
 
   it("should add test and watch command", function () {
-    assert.JSONFileContent(path.join(this.dir, "package.json"), {
+    assert.jsonFileContent(path.join(this.dir, "package.json"), {
       scripts: {
         test: "mocha",
         watch: "mocha --watch"
@@ -260,7 +260,7 @@ describe("karma prompt", function () {
   });
 
   it("should add various devDependencies", function () {
-    assert.JSONFileContent(path.join(this.dir, "package.json"), {
+    assert.jsonFileContent(path.join(this.dir, "package.json"), {
       devDependencies: {
         "browserify": "^13.0.0",
         "karma": "^0.13.21",
@@ -275,7 +275,7 @@ describe("karma prompt", function () {
   });
 
   it("should change the test command", function () {
-    assert.JSONFileContent(path.join(this.dir, "package.json"), {
+    assert.jsonFileContent(path.join(this.dir, "package.json"), {
       scripts: {
         test: "karma start --single-run",
         watch: "karma start"
