@@ -23,6 +23,10 @@ module.exports = generators.Base.extend({
       this.templatePath("gulpfile.babel.js"),
       this.destinationPath("gulpfile.babel.js"),
       {name: this.config.get("name")})
+    this.fs.copyTpl(
+      this.templatePath("config.json"),
+      this.destinationPath("config.json"),
+      {name: this.config.get("name")})
   },
 
 });
