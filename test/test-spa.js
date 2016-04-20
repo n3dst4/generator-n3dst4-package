@@ -31,14 +31,28 @@ describe("spa generator", function () {
   it.skip("should have an npm start command to run in browser", function () {
   });
 
+  it("should add dependencies to package.json", function () {
+    assert.jsonFileContent(path.join(this.dir, "package.json"), {
+      "devDependencies": {
+        "browser-sync": "^2.12.3",
+        "gulp-csso": "^2.0.0",
+        "gulp-if": "^2.0.0",
+        "gulp-less": "^3.0.5",
+        "gulp-plumber": "^1.1.0",
+        "gulp-rework": "^1.2.0",
+        "rework-assets": "^1.1.1",
+      }
+    })
+  })
+
   // gulp
   describe ("gulpfile", function () {
 
     // this is kind of a slow operation so, we'll only trigger it once
     before(function () {
-      runGulp.bind(this, gulpTimeout)()
       fs.writeFileSync(path.join(this.dir, "stylesheets", "main.less"),
-        "foo { &.bar { color: red } }")
+      "foo { &.bar { color: red } }")
+      runGulp.bind(this, gulpTimeout)()
     })
 
     it("should execute \"default\" task without error", function () {
@@ -55,10 +69,10 @@ describe("spa generator", function () {
     })
 
     // build stylesheets
-    it.skip("should build LESS into output folder", function () {
+    it("should build LESS into output folder", function () {
       assert.fileContent(
         path.join(this.dir, "__generated", "css", "main.css"),
-        /foo\.bar.*color: red/)
+        /foo\.bar.[\s\S]*?color: red/)
     })
 
     // build browserified scripts

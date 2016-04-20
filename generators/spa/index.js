@@ -29,6 +29,18 @@ module.exports = generators.Base.extend({
       this.templatePath("config.json"),
       this.destinationPath("config.json"),
       {name: this.config.get("name")})
+
+    var package = this.fs.readJSON(this.destinationPath("package.json"));
+    package.devDependencies = package.devDependencies || {}
+    package.devDependencies["browser-sync"] = "^2.12.3"
+    package.devDependencies["gulp-csso"] = "^2.0.0"
+    package.devDependencies["gulp-if"] = "^2.0.0"
+    package.devDependencies["gulp-less"] = "^3.0.5"
+    package.devDependencies["gulp-plumber"] = "^1.1.0"
+    package.devDependencies["gulp-rework"] = "^1.2.0"
+    package.devDependencies["rework-assets"] = "^1.1.1"
+    this.fs.writeJSON(this.destinationPath("package.json"), package)
+
   },
 
 });
