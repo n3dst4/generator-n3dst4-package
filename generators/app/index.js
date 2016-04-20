@@ -67,6 +67,19 @@ module.exports = generators.Base.extend({
       },
       {
         type: "confirm",
+        name: "spa",
+        message: "Do you want to create a SPA (single-page web app)?",
+        default: false,
+      },
+      {
+        type: "confirm",
+        name: "react",
+        message: "Do you want your SPA to use React, Radium, & Redux?",
+        when: answers => answers.spa,
+        default: false,
+      },
+      {
+        type: "confirm",
         name: "install",
         message: "Do you want to run \"npm install\" at the end?",
         default: false,
@@ -86,7 +99,7 @@ module.exports = generators.Base.extend({
       name: this.answers.name,
     });
     // compose with subgenerators if need be
-    ["bin", "mocha", "karma"].forEach(name => {
+    ["bin", "mocha", "karma", "spa"].forEach(name => {
       if (this.answers[name]) {
         this.composeWith(`n3dst4-package:${name}`,
           {},
@@ -106,7 +119,7 @@ module.exports = generators.Base.extend({
     package.author = `${this.answers.username} <${this.answers.email}>`
     package.description = this.answers.description
 
-    if (this.answers.babel) {
+    if (this.config.get("babel")) {
       package.main = `__build/${this.answers.name}.js`
       package.scripts.prepublish = "babel src --out-dir __build --source-maps inline"
       package.devDependencies["babel-cli"] = "^6.5.1"
@@ -124,7 +137,7 @@ module.exports = generators.Base.extend({
 
     var filesToCopy = ["_README.markdown", "_.travis.yml", "_.gitignore"];
 
-    if (this.answers.babel) {
+    if (this.config.get("babel")) {
       filesToCopy = filesToCopy.concat(["_.babelrc", "_.npmignore"])
     }
 

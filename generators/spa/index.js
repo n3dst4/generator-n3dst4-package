@@ -5,50 +5,24 @@ module.exports = generators.Base.extend({
     generators.Base.apply(this, arguments)
   },
 
-  initializing: function () {
-
-  },
-
-  prompting: function () {
-
-  },
-
   configuring: function () {
-
-  },
-
-  default: function () {
-
+    this.config.set("babel", true)
+    console.log(this.destinationPath())
   },
 
   writing: function () {
-    // this.fs.copy(
-    //   this.templatePath(`test/mocha-${this.config.get("babel")? "babel":"normal"}.opts`),
-    //   this.destinationPath("test/mocha.opts"))
-    //
     this.fs.copyTpl(
-      this.templatePath("html/index.html"),
-      this.destinationPath("index.html"),
+      this.templatePath("pages/index.html"),
+      this.destinationPath("pages/index.html"),
+      {name: this.config.get("name")});
+    this.fs.copyTpl(
+      this.templatePath("stylesheets/main.less"),
+      this.destinationPath("stylesheets/main.less"),
+      {name: this.config.get("name")});
+    this.fs.copyTpl(
+      this.templatePath("gulpfile.babel.js"),
+      this.destinationPath("gulpfile.babel.js"),
       {name: this.config.get("name")})
-    //
-    // var package = this.fs.readJSON(this.destinationPath("package.json"));
-    // package.devDependencies = package.devDependencies || {}
-    // package.devDependencies.chai = "^3.5.0"
-    // package.devDependencies.mocha = "^2.4.5"
-    // package.scripts = package.scripts || {}
-    // package.scripts.test = "mocha"
-    // this.fs.writeJSON(this.destinationPath("package.json"), package)
   },
 
-  conflicts: function () {
-
-  },
-
-  install: function () {
-
-  },
-
-  end: function () {
-
-  },
 });
