@@ -1,9 +1,10 @@
 /*eslint-env node, mocha */
-var runGenerator = require("./run-generator")
-var assert = require('yeoman-assert')
 var path = require("path")
-var execSync = require("child_process").execSync
+var os = require("os")
 var symlinkSync = require("fs").symlinkSync
+var execSync = require("child_process").execSync
+var assert = require('yeoman-assert')
+var runGenerator = require("./run-generator")
 
 var gulpTimeout = 10000
 
@@ -36,7 +37,7 @@ describe("spa generator", function () {
   // gulp
   // this is kind of a slow suite so, we'll only trigger it once
   describe ("gulpfile", function () {
-    before(runGenerator({}, [], { spa: true }))
+    //before(runGenerator({}, [], { spa: true }))
 
     before(function () {
       this.timeout(gulpTimeout)
@@ -62,7 +63,8 @@ describe("spa generator", function () {
 
       // run gulp!
       try {
-        execSync(path.join(__dirname, "..", "node_modules", ".bin", "gulp.cmd"), {
+        var scriptName = os.platform() === "win32" ? "gulp.cmd" : "gulp"
+        execSync(path.join(__dirname, "..", "node_modules", ".bin", scriptName), {
           cwd: this.dir,
           timeout: gulpTimeout
         })
