@@ -35,14 +35,15 @@ module.exports = generators.Base.extend({
       {name: this.config.get("name")})
 
     var package = this.fs.readJSON(this.destinationPath("package.json"));
-    package.devDependencies = package.devDependencies || {}
-    package.devDependencies["browser-sync"] = "^2.12.3"
-    package.devDependencies["gulp-csso"] = "^2.0.0"
-    package.devDependencies["gulp-if"] = "^2.0.0"
-    package.devDependencies["gulp-less"] = "^3.0.5"
-    package.devDependencies["gulp-plumber"] = "^1.1.0"
-    package.devDependencies["gulp-rework"] = "^1.2.0"
-    package.devDependencies["rework-assets"] = "^1.1.1"
+    package.dependencies = package.dependencies || {}
+    package.dependencies["browser-sync"] = "^2.12.3"
+    package.dependencies["gulp-csso"] = "^2.0.0"
+    package.dependencies["gulp-if"] = "^2.0.0"
+    package.dependencies["gulp-less"] = "^3.0.5"
+    package.dependencies["gulp-plumber"] = "^1.1.0"
+    package.dependencies["gulp-rework"] = "^1.2.0"
+    package.dependencies["rework-assets"] = "^1.1.1"
+    package.dependencies["@n3dst4/browser-bundle"] = "^1.0.4"
     this.fs.writeJSON(this.destinationPath("package.json"), package)
 
   },

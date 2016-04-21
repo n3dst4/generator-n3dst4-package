@@ -4,6 +4,7 @@ var path = require("path")
 var assert = require('yeoman-assert')
 var runGenerator = require("./run-generator")
 var runGulp = require("./run-gulp")
+var vm = require("vm")
 
 var gulpTimeout = 10000
 
@@ -33,7 +34,8 @@ describe("spa generator", function () {
 
   it("should add dependencies to package.json", function () {
     assert.jsonFileContent(path.join(this.dir, "package.json"), {
-      "devDependencies": {
+      "dependencies": {
+        "@n3dst4/browser-bundle": "^1.0.4",
         "browser-sync": "^2.12.3",
         "gulp-csso": "^2.0.0",
         "gulp-if": "^2.0.0",
@@ -51,7 +53,11 @@ describe("spa generator", function () {
     // this is kind of a slow operation so, we'll only trigger it once
     before(function () {
       fs.writeFileSync(path.join(this.dir, "stylesheets", "main.less"),
-      "foo { &.bar { color: red } }")
+        "foo { &.bar { color: red } }")
+      fs.writeFileSync(path.join(this.dir, "src", "lib.js"),
+        "export default () => global.done()")
+      fs.writeFileSync(path.join(this.dir, "src", "main.js"),
+        "import lib from 'lib'; lib()")
       runGulp.bind(this, gulpTimeout)()
     })
 
@@ -76,7 +82,11 @@ describe("spa generator", function () {
     })
 
     // build browserified scripts
-    it.skip("should build scripts into output folder", function () {
+    it("should build scripts into output folder", function (done) {
+      fs.readFile(path.join(this.dir, "__generated", "js", "main.js"),
+        function (err, code) {
+          vm.runInNewContext(code, {done: done})
+        })
     })
 
     // * watch mode
