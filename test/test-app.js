@@ -75,19 +75,14 @@ function testName (name) {
   })
 }
 
-describe("name option", function () {
-  var name = uuid()
-  before(runGenerator({ name }))
-  testName(name)
-})
-
 describe("name prompt", function () {
   var name = uuid()
   before(runGenerator({}, [], {name}))
   testName(name)
 })
 
-function testBin () {
+describe("bin prompt", function () {
+  before(runGenerator({}, [], { bin: true }))
   it("should create a bin entry in package.json", function () {
     assert.jsonFileContent(path.join(this.dir, "package.json"), {
       bin: { [this.name]: `src/bin/${this.name}.js`},
@@ -97,16 +92,6 @@ function testBin () {
   it("should create the bin file", function () {
     assert.file(path.join(this.dir, "src", "bin", `${this.name}.js`))
   })
-}
-
-describe("bin option", function () {
-  before(runGenerator({ bin: true }))
-  testBin()
-})
-
-describe("bin prompt", function () {
-  before(runGenerator({}, [], { bin: true }))
-  testBin()
 })
 
 // test for invalid name??

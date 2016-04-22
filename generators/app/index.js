@@ -6,8 +6,6 @@ var dashify = require("dashify")
 module.exports = generators.Base.extend({
   constructor: function () {
     generators.Base.apply(this, arguments);
-    this.option("name", {type: "string"})
-    this.option("bin")
   },
 
   prompting: function () {
@@ -22,78 +20,83 @@ module.exports = generators.Base.extend({
         when: !(this.options.name)
       },
       {
-        type: "input",
         name: "description",
         message: "Description",
+        type: "input",
         default: ""
       },
       {
-        type: "input",
         name: "email",
         message: "Your email address",
+        type: "input",
         default: gitEmail(),
       },
       {
-        type: "input",
         name: "username",
         message: "Your name",
+        type: "input",
         default: gitUsername(),
       },
       {
+        name: "spa",
+        message: "Do you want to create a SPA (single-page web app)?",
         type: "confirm",
+        default: false,
+      },
+      {
         name: "bin",
         message: "Do you want an executable bin script?",
+        type: "confirm",
         default: false,
-        when: !this.options.bin
+        when: answers => !(answers.spa)
       },
       {
-        type: "confirm",
         name: "babel",
         message: "Do you want your code compiled with Babel?",
+        type: "confirm",
         default: false,
+        when: answers => !(answers.spa)
       },
       {
-        type: "confirm",
         name: "mocha",
         message: "Do you want a Mocha test suite?",
+        type: "confirm",
         default: false,
+        when: answers => !(answers.spa)
       },
       {
-        type: "confirm",
         name: "karma",
         message: "Do you want the test suite to run in a browser (through Karma)?",
+        type: "confirm",
         when: answers => answers.mocha,
         default: false,
       },
       {
-        type: "confirm",
-        name: "spa",
-        message: "Do you want to create a SPA (single-page web app)?",
-        default: false,
-      },
-      {
-        type: "confirm",
         name: "react",
         message: "Do you want your SPA to use React, Radium, & Redux?",
+        type: "confirm",
         when: answers => answers.spa,
         default: false,
       },
       {
-        type: "confirm",
         name: "install",
         message: "Do you want to run \"npm install\" at the end?",
+        type: "confirm",
         default: false,
       },
     ], function (answers) {
-      // this.answers becomes a smoosh of inquirer results + options
-      answers.name = answers.name || this.options.name
-      answers.bin = answers.bin || this.options.bin
       this.answers = answers
       done()
     }.bind(this));
   },
 
   configuring: function () {
+    if (this.answers.spa) {
+      this.answers.babel = true
+      this.answers.mocha = true
+      this.answers.karma = true
+      this.answers.bin = false
+    }
     this.config.set({
       babel: this.answers.babel,
       name: this.answers.name,
@@ -110,6 +113,7 @@ module.exports = generators.Base.extend({
   },
 
   default: function () {
+    console.log("BABEL: " + this.answers.babel)
   },
 
   writing: function () {
