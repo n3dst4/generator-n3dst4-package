@@ -35,10 +35,9 @@ module.exports = function (timeout) {
     })
   }
   catch (err) {
-    global["console"].error("vvv ERROR  vvv")
-    global["console"].error(err.stdout? err.stdout.toString(): err)
-    global["console"].error("^^^ ERROR  ^^^")
-    throw err
+    return err.stdout? err.stdout.toString(): err
   }
+
+  return null
 
 }

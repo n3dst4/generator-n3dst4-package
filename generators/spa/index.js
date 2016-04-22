@@ -7,9 +7,6 @@ module.exports = generators.Base.extend({
 
   configuring: function () {
     this.config.set("babel", true)
-    if (!(process.env.CI)) {
-      global["console"].log(this.destinationPath())
-    }
   },
 
   writing: function () {

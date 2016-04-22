@@ -58,11 +58,11 @@ describe("spa generator", function () {
         "export default () => done()")
       fs.writeFileSync(path.join(this.dir, "src", "main.js"),
         "import lib from './lib'; lib()")
-      runGulp.bind(this, gulpTimeout)()
+      this.gulpErr = runGulp.bind(this, gulpTimeout)()
     })
 
     it("should execute \"default\" task without error", function () {
-      assert(true)
+      assert.equal(this.gulpErr, null)
     })
 
     // build html
@@ -91,6 +91,23 @@ describe("spa generator", function () {
 
     // * watch mode
     it.skip("should have a watch and serve mode", function () {
+      assert.jsonFileContent(
+        path.join(this.dir, "package.json"),
+        { scripts: { develop: "gulp develop" } }
+      )
+    })
+
+    // after testing the gulpfile, if anything went wrong, and we're not in CI
+    // mode,l print out the folder name to make it easy to go and see what
+    // occurred
+    after("print out the directory name if appropriate", function () {
+      var anyTestsFailed = this.test.parent.tests.some(
+        function(t) { return t.state === "failed" }
+      )
+      var isCI = !!(process.env.CI)
+      if (anyTestsFailed && !isCI) {
+        global["console"].log(this.dir)
+      }
     })
   })
 

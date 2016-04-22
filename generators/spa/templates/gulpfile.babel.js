@@ -5,9 +5,7 @@ import buildStylesheets from "./gulp-tasks/build-stylesheets"
 import browserBundle from "@n3dst4/browser-bundle"
 
 
-gulp.task("default", ["build-html", "build-stylesheets", "build-scripts"], function () {
-  //console.log("hi")
-})
+gulp.task("default", ["build-html", "build-stylesheets", "build-scripts"])
 
 gulp.task("build-scripts", function () {
   browserBundle("src/main.js", "__generated/js/main.js")
