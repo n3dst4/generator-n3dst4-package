@@ -48,6 +48,14 @@ describe("spa generator", function () {
     })
   })
 
+  it("should remove prepublish script from package.json", function () {
+    assert.noJsonFileContent(path.join(this.dir, "package.json"), {
+      "scripts": {
+        "prepublish": "babel src --out-dir __build --source-maps inline"
+      }
+    })
+  })
+
   it("should not have a <name>.js file", function () {
     assert.noFile(`src/${this.name}.js`)
   });

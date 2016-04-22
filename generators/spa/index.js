@@ -53,6 +53,7 @@ module.exports = generators.Base.extend({
     package.dependencies["gulp-rework"] = "^1.2.0"
     package.dependencies["rework-assets"] = "^1.1.1"
     package.dependencies["@n3dst4/browser-bundle"] = "^1.0.5"
+    delete package.scripts.prepublish
     this.fs.writeJSON(this.destinationPath("package.json"), package)
 
   },
