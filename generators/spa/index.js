@@ -39,6 +39,7 @@ module.exports = generators.Base.extend({
     var package = this.fs.readJSON(this.destinationPath("package.json"));
     package.dependencies = package.dependencies || {}
     package.dependencies["browser-sync"] = "^2.12.3"
+    package.dependencies["gulp"] = "^3.9.1"
     package.dependencies["gulp-csso"] = "^2.0.0"
     package.dependencies["gulp-if"] = "^2.0.0"
     package.dependencies["gulp-less"] = "^3.0.5"
