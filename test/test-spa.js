@@ -35,7 +35,7 @@ describe("spa generator", function () {
   it("should add dependencies to package.json", function () {
     assert.jsonFileContent(path.join(this.dir, "package.json"), {
       "dependencies": {
-        "@n3dst4/browser-bundle": "^1.0.4",
+        "@n3dst4/browser-bundle": "^1.0.5",
         "browser-sync": "^2.12.3",
         "gulp-csso": "^2.0.0",
         "gulp-if": "^2.0.0",
@@ -55,17 +55,15 @@ describe("spa generator", function () {
       fs.writeFileSync(path.join(this.dir, "stylesheets", "main.less"),
         "foo { &.bar { color: red } }")
       fs.writeFileSync(path.join(this.dir, "src", "lib.js"),
-        "export default () => global.done()")
+        "export default () => done()")
       fs.writeFileSync(path.join(this.dir, "src", "main.js"),
-        "import lib from 'lib'; lib()")
+        "import lib from './lib'; lib()")
       runGulp.bind(this, gulpTimeout)()
     })
 
     it("should execute \"default\" task without error", function () {
       assert(true)
     })
-
-
 
     // build html
     it("should build html into output folder", function () {
@@ -84,7 +82,7 @@ describe("spa generator", function () {
     // build browserified scripts
     // skipping for now until we can get gulpfile to laod @n3dst4/browser-bundle
     // when node_modules is symlinked to generator
-    it.skip("should build scripts into output folder", function (done) {
+    it("should build scripts into output folder", function (done) {
       fs.readFile(path.join(this.dir, "__generated", "js", "main.js"),
         function (err, code) {
           vm.runInNewContext(code, {done: done})
@@ -95,9 +93,6 @@ describe("spa generator", function () {
     it.skip("should have a watch and serve mode", function () {
     })
   })
-
-
-
 
 
   // // these may not be part of the base spa
