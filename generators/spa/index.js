@@ -35,6 +35,12 @@ module.exports = generators.Base.extend({
       this.destinationPath("gulp-tasks/build-stylesheets.js"),
       {name: this.config.get("name")}
     )
+    this.fs.copyTpl(
+      this.templatePath("src/main.js"),
+      this.destinationPath("src/main.js"),
+      {name: this.config.get("name")}
+    )
+    this.fs.delete(`src/${this.config.get("name")}.js`)
 
     var package = this.fs.readJSON(this.destinationPath("package.json"));
     package.dependencies = package.dependencies || {}

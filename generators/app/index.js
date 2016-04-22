@@ -113,7 +113,6 @@ module.exports = generators.Base.extend({
   },
 
   default: function () {
-    console.log("BABEL: " + this.answers.babel)
   },
 
   writing: function () {

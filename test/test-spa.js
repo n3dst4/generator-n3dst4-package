@@ -37,7 +37,7 @@ describe("spa generator", function () {
       "dependencies": {
         "@n3dst4/browser-bundle": "^1.0.5",
         "browser-sync": "^2.12.3",
-        "gulp": "^3.9.1",        
+        "gulp": "^3.9.1",
         "gulp-csso": "^2.0.0",
         "gulp-if": "^2.0.0",
         "gulp-less": "^3.0.5",
@@ -47,6 +47,14 @@ describe("spa generator", function () {
       }
     })
   })
+
+  it("should not have a <name>.js file", function () {
+    assert.noFile(`src/${this.name}.js`)
+  });
+
+  it("should have a main.js file", function () {
+    assert.file("src/main.js")
+  });
 
   // gulp
   describe ("gulpfile", function () {
