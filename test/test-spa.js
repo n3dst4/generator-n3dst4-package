@@ -29,7 +29,7 @@ describe("spa generator", function () {
   })
 
   // npm start to run test watch + browser-sync + watchify
-  it.skip("should have an npm start command to run in browser", function () {
+  it("should have an npm start command to run in browser", function () {
     assert.jsonFileContent(path.join(this.dir, "package.json"), {
       "scripts": {
         "start": "gulp develop"
