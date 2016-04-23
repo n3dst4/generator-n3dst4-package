@@ -30,7 +30,20 @@ describe("spa generator", function () {
 
   // npm start to run test watch + browser-sync + watchify
   it.skip("should have an npm start command to run in browser", function () {
+    assert.jsonFileContent(path.join(this.dir, "package.json"), {
+      "scripts": {
+        "start": "gulp develop"
+      }
+    })
   });
+
+  // * watch mode
+  it.skip("should have a watch and serve mode", function () {
+    assert.jsonFileContent(
+      path.join(this.dir, "package.json"),
+      { scripts: { develop: "gulp develop" } }
+    )
+  })
 
   it("should add dependencies to package.json", function () {
     assert.jsonFileContent(path.join(this.dir, "package.json"), {
@@ -104,14 +117,6 @@ describe("spa generator", function () {
         function (err, code) {
           vm.runInNewContext(code, {done: done})
         })
-    })
-
-    // * watch mode
-    it.skip("should have a watch and serve mode", function () {
-      assert.jsonFileContent(
-        path.join(this.dir, "package.json"),
-        { scripts: { develop: "gulp develop" } }
-      )
     })
 
     // after testing the gulpfile, if anything went wrong, and we're not in CI
