@@ -38,10 +38,10 @@ describe("spa generator", function () {
   });
 
   // * watch mode
-  it.skip("should have a watch and serve mode", function () {
-    assert.jsonFileContent(
-      path.join(this.dir, "package.json"),
-      { scripts: { develop: "gulp develop" } }
+  it("should have a \"watch and serve\" gulp task", function () {
+    assert.fileContent(
+      path.join(this.dir, "gulpfile.babel.js"),
+      /gulp\.task\("develop",/
     )
   })
 
@@ -103,7 +103,7 @@ describe("spa generator", function () {
     })
 
     // build stylesheets
-    it("should build LESS into output folder", function () {
+    it("should build stylesheets into output folder", function () {
       assert.fileContent(
         path.join(this.dir, "__generated", "css", "main.css"),
         /foo\.bar.[\s\S]*?color: red/)

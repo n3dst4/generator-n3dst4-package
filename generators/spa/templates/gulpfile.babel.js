@@ -18,3 +18,7 @@ gulp.task("build-html", function () {
 });
 
 gulp.task("build-stylesheets", buildStylesheets)
+
+gulp.task("develop", function () {
+  browserBundle("src/main.js", "__generated/js/main.js", {watch: true})
+})
