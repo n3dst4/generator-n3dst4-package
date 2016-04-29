@@ -144,7 +144,6 @@ module.exports = generators.Base.extend({
       filesToCopy = filesToCopy.concat(["_.babelrc", "_.npmignore"])
     }
 
-    this.log(filesToCopy)
     filesToCopy.forEach(function (filename) {
       this.fs.copyTpl(
         this.templatePath(filename),
