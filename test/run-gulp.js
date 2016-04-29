@@ -31,7 +31,12 @@ module.exports = function (timeout) {
     var scriptName = os.platform() === "win32" ? "gulp.cmd" : "gulp"
     execSync(path.join(__dirname, "..", "node_modules", ".bin", scriptName), {
       cwd: this.dir,
-      timeout: timeout
+      timeout: timeout,
+      env: {
+        // babel cache just grows monotonically and doesn't accelerate anything
+        // because we're running in a new test folder every time
+        "BABEL_DISABLE_CACHE": "1"
+      },
     })
   }
   catch (err) {
