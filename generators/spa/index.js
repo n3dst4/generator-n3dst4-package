@@ -55,6 +55,7 @@ module.exports = generators.Base.extend({
     package.dependencies["@n3dst4/browser-bundle"] = "^1.0.5"
     delete package.scripts.prepublish
     package.scripts.start = "gulp develop"
+    package.scripts.build = "gulp build"
     this.fs.writeJSON(this.destinationPath("package.json"), package)
 
   },

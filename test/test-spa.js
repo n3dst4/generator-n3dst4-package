@@ -37,6 +37,15 @@ describe("spa generator", function () {
     })
   });
 
+  // npm start to run test watch + browser-sync + watchify
+  it("should have an npm build command", function () {
+    assert.jsonFileContent(path.join(this.dir, "package.json"), {
+      "scripts": {
+        "build": "gulp build"
+      }
+    })
+  });
+
   // * watch mode
   it("should have a \"watch and serve\" gulp task", function () {
     assert.fileContent(
@@ -78,7 +87,7 @@ describe("spa generator", function () {
   });
 
   // gulp
-  describe ("gulpfile", function () {
+  describe("gulpfile", function () {
 
     // this is kind of a slow operation so, we'll only trigger it once
     before(function () {
