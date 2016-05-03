@@ -56,6 +56,8 @@ describe("spa generator", function () {
 
   it("should add dependencies to package.json", function () {
     assert.jsonFileContent(path.join(this.dir, "package.json"), {
+      "devDependencies": {
+      },
       "dependencies": {
         "@n3dst4/browser-bundle": "^1.0.5",
         "browser-sync": "^2.12.3",
