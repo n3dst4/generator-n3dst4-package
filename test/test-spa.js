@@ -60,6 +60,7 @@ describe("spa generator", function () {
       },
       "dependencies": {
         "@n3dst4/browser-bundle": "^1.0.5",
+        "@n3dst4/build-stylesheets": "^1.0.1",
         "browser-sync": "^2.12.3",
         "gulp": "^3.9.1",
         "gulp-csso": "^2.0.0",

@@ -1,6 +1,7 @@
 import gulp from "gulp"
+import path from "path"
 import config from "./config"
-import buildStylesheets from "./gulp-tasks/build-stylesheets"
+import buildStylesheetsHelper from "@n3dst4/build-stylesheets"
 import browserBundleHelper from "@n3dst4/browser-bundle"
 import browserSync from "browser-sync"
 
@@ -27,7 +28,14 @@ gulp.task("build-html", function () {
 });
 
 gulp.task("build-stylesheets", () => {
-  buildStylesheets().pipe(bs.stream())
+  return gulp.src(path.join("stylesheets", "main.less")).
+    pipe(buildStylesheetsHelper({
+      src: "stylesheets",
+      dest: "__generated/css/assets",
+      prefix: "assets/"
+    }, production)).
+    pipe(gulp.dest(path.join("__generated", "css"))).
+    pipe(bs.stream({match: "**/*.css"}))
 })
 
 gulp.task("watch", ["build-scripts", "build-html"], function() {
