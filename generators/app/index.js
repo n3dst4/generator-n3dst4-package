@@ -72,13 +72,6 @@ module.exports = generators.Base.extend({
         default: false,
       },
       {
-        name: "react",
-        message: "Do you want your SPA to use React, Radium, & Redux?",
-        type: "confirm",
-        when: answers => answers.spa,
-        default: false,
-      },
-      {
         name: "install",
         message: "Do you want to run \"npm install\" at the end?",
         type: "confirm",

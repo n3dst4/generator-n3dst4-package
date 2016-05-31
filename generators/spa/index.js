@@ -5,6 +5,22 @@ module.exports = generators.Base.extend({
     generators.Base.apply(this, arguments)
   },
 
+  prompting: function () {
+    var done = this.async();
+
+    this.prompt([
+      {
+        name: "react",
+        message: "Do you want your SPA to use React, Radium, & Redux?",
+        type: "confirm",
+        default: false,
+      },
+    ], function (answers) {
+      this.answers = answers
+      done()
+    }.bind(this));
+  },
+
   configuring: function () {
     this.config.set("babel", true)
   },
