@@ -107,12 +107,27 @@ describe("spa generator", function () {
       assert.equal(this.gulpErr, null)
     })
 
-    // build html
-    it("should build html into output folder", function () {
-      assert.fileContent(
-        path.join(this.dir, "__generated", "index.html"),
-        /^<!DOCTYPE html>/)
+    describe("html", function () {
+      // build html
+      it("should have a doctype", function () {
+        assert.fileContent(
+          path.join(this.dir, "__generated", "index.html"),
+          /^<!DOCTYPE html>/)
+        })
+
+      it("should link to main.js", function () {
+        assert.fileContent(
+          path.join(this.dir, "__generated", "index.html"),
+          /<script\s*src="js\/main\.js"\s*><\/script>/)
+      })
+
+      it("should link to main.css", function () {
+        assert.fileContent(
+          path.join(this.dir, "__generated", "index.html"),
+          /<link rel="stylesheet" href="css\/main\.css"\/>/)
+      })
     })
+
 
     // build stylesheets
     it("should build stylesheets into output folder", function () {
