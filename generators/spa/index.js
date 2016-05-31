@@ -14,6 +14,7 @@ module.exports = generators.Base.extend({
         message: "Do you want your SPA to use React, Radium, & Redux?",
         type: "confirm",
         default: false,
+        when: false
       },
     ], function (answers) {
       this.answers = answers
@@ -22,7 +23,14 @@ module.exports = generators.Base.extend({
   },
 
   configuring: function () {
-    this.config.set("babel", true)
+    this.config.set("babel", true);
+    // compose with subgenerators if need be
+    if (this.answers.spa) {
+      this.composeWith(`n3dst4-package:react`,
+        {},
+        { local: require.resolve(`../react`)}
+      )
+    }
   },
 
   writing: function () {
