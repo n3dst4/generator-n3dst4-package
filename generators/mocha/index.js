@@ -1,5 +1,4 @@
 var generators = require('yeoman-generator');
-var _ = require("lodash");
 
 module.exports = generators.Base.extend({
   constructor: function () {
@@ -14,8 +13,8 @@ module.exports = generators.Base.extend({
       this.templatePath(`test/test-${this.config.get("babel")? "babel":"normal"}.js`),
       this.destinationPath(`test/test-${this.config.get("name")}.js`),
       {
-        name: this.config.get("name"),
-        camelName: _.camelCase(this.config.get("name"))
+        name: this.config.get("shortName"),
+        camelName: this.config.get("camelName")
       })
 
     var package = this.fs.readJSON(this.destinationPath("package.json"));

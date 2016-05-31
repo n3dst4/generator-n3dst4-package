@@ -7,6 +7,7 @@ var crypto = require("crypto")
 var studlyName = "FtangFtangOle.BiscuitBarrel"
 var kebabName = "ftang-ftang-ole-biscuit-barrel"
 var camelName = "ftangFtangOleBiscuitBarrel"
+var namespacedName = `@luxuryyacht/${kebabName}`
 
 module.exports = function runGenerator (opts, args, prompts) {
   return function (done) {
@@ -28,3 +29,4 @@ module.exports = function runGenerator (opts, args, prompts) {
 module.exports.studlyName = studlyName
 module.exports.kebabName = kebabName
 module.exports.camelName = camelName
+module.exports.namespacedName = namespacedName

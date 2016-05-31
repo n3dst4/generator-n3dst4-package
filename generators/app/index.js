@@ -2,10 +2,21 @@ var generators = require('yeoman-generator');
 var gitEmail = require("git-user-email");
 var gitUsername = require("git-user-name");
 var dashify = require("dashify")
+var _ = require("lodash");
+var exec = require("child_process").exec;
 
 module.exports = generators.Base.extend({
   constructor: function () {
     generators.Base.apply(this, arguments);
+  },
+
+  initializing: function () {
+    var done = this.async();
+    exec("npm whoami", (error, stdout) => {
+      this.npmUser = (error == null) ? stdout.trim() : null
+      this.log(`npm user is ${this.npmUser}`)
+      done()
+    });
   },
 
   prompting: function () {
@@ -16,8 +27,26 @@ module.exports = generators.Base.extend({
         type: "input",
         name: "name",
         message: "Package name",
-        default: dashify(this.appname),
-        when: !(this.options.name)
+        default: dashify(this.appname)
+      },
+      // if the use is logged into npm but doesn't enter a namespace, give them
+      // the option to use their npm username as the namespace
+      {
+        name: "isNamespacedAsNpmUser",
+        message: "Should this package be namespaced?",
+        type: "list",
+        when: answers => ((! /^@(\w+)\//.test(answers.name)) && this.npmUser),
+        choices: answers => [
+          {
+            name: `No (${answers.name})`,
+            value: false
+          },
+          {
+            name: `Yes (@${this.npmUser}/${answers.name})`,
+            value: true
+          }
+        ],
+        default: false,
       },
       {
         name: "description",
@@ -84,6 +113,16 @@ module.exports = generators.Base.extend({
   },
 
   configuring: function () {
+    var match = /^(?:@\w+\/)?(.+)/.exec(this.answers.name)
+
+    this.answers.shortName = match[1]
+    this.answers.camelName = _.camelCase(this.answers.shortName)
+
+
+    if (this.answers.isNamespacedAsNpmUser) {
+      this.answers.name = `@${this.npmUser}/${this.answers.name}`
+    }
+
     if (this.answers.spa) {
       this.answers.babel = true
       this.answers.mocha = true
@@ -93,6 +132,8 @@ module.exports = generators.Base.extend({
     this.config.set({
       babel: this.answers.babel,
       name: this.answers.name,
+      camelName: this.answers.camelName,
+      shortName: this.answers.shortName
     });
     // compose with subgenerators if need be
     ["bin", "mocha", "karma", "spa"].forEach(name => {
@@ -111,7 +152,7 @@ module.exports = generators.Base.extend({
   writing: function () {
     var package = this.fs.readJSON(this.templatePath("_package.json"));
     package.name = this.answers.name;
-    package.main = `src/${this.answers.name}.js`
+    package.main = `src/${this.answers.shortName}.js`
     package.author = `${this.answers.username} <${this.answers.email}>`
     package.description = this.answers.description
 
@@ -127,7 +168,7 @@ module.exports = generators.Base.extend({
 
     this.fs.copyTpl(
       this.templatePath(`src/main-${this.answers.babel? "es-new" : "es5"}.js`),
-      this.destinationPath(`src/${this.answers.name}.js`),
+      this.destinationPath(`src/${this.answers.shortName}.js`),
       this.answers
     );
 

@@ -9,8 +9,9 @@ var crypto = require("crypto")
 var runGenerator = require("./run-generator")
 var kebabName = runGenerator.kebabName
 var studlyName = runGenerator.studlyName
+var namespacedName = runGenerator.namespacedName
 
-describe("base app genmerator", function () {
+describe("base app generator", function () {
   before(runGenerator())
 
   it("should set valid defaults in package.json", function () {
@@ -58,6 +59,7 @@ describe("base app genmerator", function () {
     assert.file(path.join(this.dir, ".gitignore"))
   })
 
+  // helper to test names
   function testName (name) {
     it("should set the project name in the package.json", function () {
       assert.jsonFileContent(path.join(this.dir, "package.json"), {
@@ -100,6 +102,19 @@ describe("base app genmerator", function () {
       .on('end', done);
     })
     testName(kebabName)
+  });
+
+  describe("namespaced name", function () {
+    before(runGenerator({}, [], {name: namespacedName}))
+    it("should set the project name in the package.json", function () {
+      assert.jsonFileContent(path.join(this.dir, "package.json"), {
+        name: namespacedName,
+        main: `src/${kebabName}.js`
+      })
+    })
+    it("should name the main file acordingly", function () {
+      assert.file(path.join(this.dir, "src", `${kebabName}.js`))
+    })
   });
 
   describe("description, email, and username prompts", function () {
