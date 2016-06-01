@@ -5,18 +5,22 @@ var dashify = require("dashify")
 var _ = require("lodash");
 var exec = require("child_process").exec;
 
+var npmUser = null
+
 module.exports = generators.Base.extend({
   constructor: function () {
     generators.Base.apply(this, arguments);
   },
 
   initializing: function () {
-    var done = this.async();
-    exec("npm whoami", (error, stdout) => {
-      this.npmUser = (error == null) ? stdout.trim() : null
-      this.log(`npm user is ${this.npmUser}`)
-      done()
-    });
+    if (!npmUser) {
+      var done = this.async();
+      exec("npm whoami", (error, stdout) => {
+        npmUser = (error == null) ? stdout.trim() : null
+        this.log(`npm user is ${npmUser}`)
+        done()
+      });
+    }
   },
 
   prompting: function () {
@@ -35,14 +39,14 @@ module.exports = generators.Base.extend({
         name: "isNamespacedAsNpmUser",
         message: "Should this package be namespaced?",
         type: "list",
-        when: answers => ((! /^@(\w+)\//.test(answers.name)) && this.npmUser),
+        when: answers => ((! /^@(\w+)\//.test(answers.name)) && npmUser),
         choices: answers => [
           {
             name: `No (${answers.name})`,
             value: false
           },
           {
-            name: `Yes (@${this.npmUser}/${answers.name})`,
+            name: `Yes (@${npmUser}/${answers.name})`,
             value: true
           }
         ],
@@ -120,7 +124,7 @@ module.exports = generators.Base.extend({
 
 
     if (this.answers.isNamespacedAsNpmUser) {
-      this.answers.name = `@${this.npmUser}/${this.answers.name}`
+      this.answers.name = `@${npmUser}/${this.answers.name}`
     }
 
     if (this.answers.spa) {
