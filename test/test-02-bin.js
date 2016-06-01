@@ -11,12 +11,22 @@ describe("bin prompt", function () {
       preferGlobal: true
     })
   })
-  it("should create the bin file", function () {
-    assert.file(path.join(this.dir, "src", "bin", `${this.name}.js`))
+  it("should create the bin file as es5", function () {
+    assert.noFileContent(
+      path.join(this.dir, "src", "bin", `${this.name}.js`),
+      /import/
+    )
   })
 
   describe("with babel enabled", function () {
     before(runGenerator({}, [], {babel: true, bin: true}))
+
+    it("should create the bin file as es6", function () {
+      assert.fileContent(
+        path.join(this.dir, "src", "bin", `${this.name}.js`),
+        /import/
+      )
+    })
 
     it("should point bin into __build", function () {
       assert.jsonFileContent(path.join(this.dir, "package.json"), {

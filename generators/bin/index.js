@@ -1,5 +1,4 @@
 var generators = require('yeoman-generator');
-var _ = require("lodash");
 
 module.exports = generators.Base.extend({
   constructor: function () {
@@ -13,24 +12,23 @@ module.exports = generators.Base.extend({
         type: "input",
         name: "name",
         message: "Executable script name (without extension)",
-        default: config.name || this.appname
+        default: config.shortName || this.appname
       },
     ], function (answers) {
       answers.babel = config.babel
+      answers.shortName = config.shortName
+      answers.camelName = config.camelName
       this.answers = answers
       done()
     }.bind(this));
   },
 
-  configuring: function () {
-    this.answers.camelCaseName = _.camelCase(this.answers.name)
-  },
-
   writing: function () {
     // shebang script
+    var templatePath = this.answers.babel? "src/bin/bin-es6.js" : "src/bin/bin-es5.js"
     this.fs.copyTpl(
-      this.templatePath("src/bin/bin.js"),
-      this.destinationPath("src/bin/" + this.answers.name + ".js"),
+      this.templatePath(templatePath),
+      this.destinationPath("src/bin/" + this.answers.shortName + ".js"),
       this.answers
     );
 
@@ -38,9 +36,8 @@ module.exports = generators.Base.extend({
     var package = this.fs.readJSON(this.destinationPath("package.json"));
     package.bin = package.bin || {};
     var rootPath = this.answers.babel ? "__build" : "src";
-    package.bin[this.answers.name] = `${rootPath}/bin/${this.answers.name}.js`;
+    package.bin[this.answers.shortName] = `${rootPath}/bin/${this.answers.shortName}.js`;
     package.preferGlobal = true;
     this.fs.writeJSON(this.destinationPath("package.json"), package)
-
   },
 });
