@@ -171,7 +171,7 @@ module.exports = generators.Base.extend({
     this.fs.writeJSON(this.destinationPath("package.json"), package)
 
     this.fs.copyTpl(
-      this.templatePath(`src/main-${this.answers.babel? "es-new" : "es5"}.js`),
+      this.templatePath(`src/main-${this.answers.babel? "es6" : "es5"}.js`),
       this.destinationPath(`src/${this.answers.shortName}.js`),
       this.answers
     );
