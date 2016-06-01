@@ -11,7 +11,7 @@ var namespacedName = `@luxuryyacht/${kebabName}`
 
 module.exports = function runGenerator (opts, args, prompts) {
   return function (done) {
-    var self = this;
+    var self = this
     var tmpDir = path.join(os.tmpdir(), crypto.randomBytes(20).toString('hex'), kebabName)
     helpers.run(path.join( __dirname, '../generators/app'))
       .withOptions(opts || {})
@@ -22,7 +22,7 @@ module.exports = function runGenerator (opts, args, prompts) {
         self.dir = dir
         self.name = path.basename(dir)
       }.bind(this))
-      .on('end', done);
+      .on('end', done)
   }
 }
 

@@ -81,28 +81,28 @@ describe("base app generator", function () {
   describe("kebab-case folder name", function () {
     before(function (done) {
       var tmpDir = path.join(os.tmpdir(), crypto.randomBytes(20).toString('hex'), kebabName)
-      var self = this;
+      var self = this
       helpers.run(path.join( __dirname, '../generators/app'))
       .inDir(tmpDir, function (dir) {
         self.dir = dir
       }.bind(this))
-      .on('end', done);
+      .on('end', done)
     })
     testName(kebabName)
-  });
+  })
 
   describe("StudlyCaps folder name", function () {
     before(function (done) {
       var tmpDir = path.join(os.tmpdir(), crypto.randomBytes(20).toString('hex'), studlyName)
-      var self = this;
+      var self = this
       helpers.run(path.join( __dirname, '../generators/app'))
       .inDir(tmpDir, function (dir) {
         self.dir = dir
       }.bind(this))
-      .on('end', done);
+      .on('end', done)
     })
     testName(kebabName)
-  });
+  })
 
   describe("namespaced name", function () {
     before(runGenerator({}, [], {name: namespacedName}))
@@ -115,7 +115,7 @@ describe("base app generator", function () {
     it("should name the main file acordingly", function () {
       assert.file(path.join(this.dir, "src", `${kebabName}.js`))
     })
-  });
+  })
 
   describe("description, email, and username prompts", function () {
     var description = uuid()

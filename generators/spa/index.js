@@ -1,4 +1,4 @@
-var generators = require('yeoman-generator');
+var generators = require('yeoman-generator')
 
 module.exports = generators.Base.extend({
   constructor: function () {
@@ -6,7 +6,7 @@ module.exports = generators.Base.extend({
   },
 
   prompting: function () {
-    var done = this.async();
+    var done = this.async()
 
     this.prompt([
       {
@@ -19,11 +19,11 @@ module.exports = generators.Base.extend({
     ], function (answers) {
       this.answers = answers
       done()
-    }.bind(this));
+    }.bind(this))
   },
 
   configuring: function () {
-    this.config.set("babel", true);
+    this.config.set("babel", true)
     // compose with subgenerators if need be
     if (this.answers.spa) {
       this.composeWith(`n3dst4-package:react`,
@@ -61,7 +61,7 @@ module.exports = generators.Base.extend({
     )
     this.fs.delete(`src/${this.config.get("name")}.js`)
 
-    var package = this.fs.readJSON(this.destinationPath("package.json"));
+    var package = this.fs.readJSON(this.destinationPath("package.json"))
     package.dependencies = package.dependencies || {}
     package.dependencies["browser-sync"] = "^2.12.3"
     package.dependencies["gulp"] = "^3.9.1"
@@ -81,4 +81,4 @@ module.exports = generators.Base.extend({
 
   },
 
-});
+})

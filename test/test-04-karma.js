@@ -10,7 +10,7 @@ describe("karma prompt", function () {
 
   it("should create karma conf", function () {
     assert.file(path.join(this.dir, "karma.conf.js"))
-  });
+  })
 
   it("should add various devDependencies", function () {
     assert.jsonFileContent(path.join(this.dir, "package.json"), {
@@ -25,7 +25,7 @@ describe("karma prompt", function () {
         "watchify": "^3.7.0",
       }
     })
-  });
+  })
 
   it("should change the test command", function () {
     assert.jsonFileContent(path.join(this.dir, "package.json"), {
@@ -34,11 +34,11 @@ describe("karma prompt", function () {
         watch: "karma start"
       }
     })
-  });
+  })
 
   it("should add xvfb magic to travis config", function () {
     var travisConfigText = fs.readFileSync(path.join(this.dir, ".travis.yml"), "utf-8")
-    var travisConfig = yaml.safeLoad(travisConfigText);
+    var travisConfig = yaml.safeLoad(travisConfigText)
     assert.objectContent(travisConfig, {
       before_script: [
         "export DISPLAY=:99.0",
@@ -46,6 +46,4 @@ describe("karma prompt", function () {
       ]
     })
   })
-
-
 })

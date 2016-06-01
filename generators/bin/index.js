@@ -1,12 +1,12 @@
-var generators = require('yeoman-generator');
+var generators = require('yeoman-generator')
 
 module.exports = generators.Base.extend({
   constructor: function () {
-    generators.Base.apply(this, arguments);
+    generators.Base.apply(this, arguments)
   },
 
   prompting: function () {
-    var done = this.async();
+    var done = this.async()
     var config = this.config.getAll()
     this.prompt([{
         type: "input",
@@ -20,7 +20,7 @@ module.exports = generators.Base.extend({
       answers.camelName = config.camelName
       this.answers = answers
       done()
-    }.bind(this));
+    }.bind(this))
   },
 
   writing: function () {
@@ -30,14 +30,14 @@ module.exports = generators.Base.extend({
       this.templatePath(templatePath),
       this.destinationPath("src/bin/" + this.answers.shortName + ".js"),
       this.answers
-    );
+    )
 
     // add bin and preferGlobal to package.json
-    var package = this.fs.readJSON(this.destinationPath("package.json"));
-    package.bin = package.bin || {};
-    var rootPath = this.answers.babel ? "__build" : "src";
-    package.bin[this.answers.shortName] = `${rootPath}/bin/${this.answers.shortName}.js`;
-    package.preferGlobal = true;
+    var package = this.fs.readJSON(this.destinationPath("package.json"))
+    package.bin = package.bin || {}
+    var rootPath = this.answers.babel ? "__build" : "src"
+    package.bin[this.answers.shortName] = `${rootPath}/bin/${this.answers.shortName}.js`
+    package.preferGlobal = true
     this.fs.writeJSON(this.destinationPath("package.json"), package)
   },
-});
+})

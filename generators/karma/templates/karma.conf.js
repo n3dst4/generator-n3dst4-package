@@ -9,8 +9,8 @@
 
 // When running under TeamCity, it will also use the TeamCity reporter.
 
-var isTeamCity = !!process.env.TEAMCITY_VERSION;
-var isCIEnvironment = isTeamCity || !!(process.env.CI);
+var isTeamCity = !!process.env.TEAMCITY_VERSION
+var isCIEnvironment = isTeamCity || !!(process.env.CI)
 // this gets inserted by yeoman generator n3dst4-package:karma based on the
 // "babel" config value
 var useBabelify = <%= babel %>
@@ -86,5 +86,5 @@ module.exports = function(config) {
         ui: 'bdd'
       }
     }
-  });
+  })
 }

@@ -1,30 +1,30 @@
-var generators = require('yeoman-generator');
-var gitEmail = require("git-user-email");
-var gitUsername = require("git-user-name");
+var generators = require('yeoman-generator')
+var gitEmail = require("git-user-email")
+var gitUsername = require("git-user-name")
 var dashify = require("dashify")
-var _ = require("lodash");
-var exec = require("child_process").exec;
+var _ = require("lodash")
+var exec = require("child_process").exec
 
 var npmUser = null
 
 module.exports = generators.Base.extend({
   constructor: function () {
-    generators.Base.apply(this, arguments);
+    generators.Base.apply(this, arguments)
   },
 
   initializing: function () {
     if (!npmUser) {
-      var done = this.async();
+      var done = this.async()
       exec("npm whoami", (error, stdout) => {
         npmUser = (error == null) ? stdout.trim() : null
         this.log(`npm user is ${npmUser}`)
         done()
-      });
+      })
     }
   },
 
   prompting: function () {
-    var done = this.async();
+    var done = this.async()
 
     this.prompt([
       {
@@ -113,7 +113,7 @@ module.exports = generators.Base.extend({
     ], function (answers) {
       this.answers = answers
       done()
-    }.bind(this));
+    }.bind(this))
   },
 
   configuring: function () {
@@ -138,9 +138,9 @@ module.exports = generators.Base.extend({
       name: this.answers.name,
       camelName: this.answers.camelName,
       shortName: this.answers.shortName
-    });
+    })
     // compose with subgenerators if need be
-    ["bin", "mocha", "karma", "spa"].forEach(name => {
+    ;["bin", "mocha", "karma", "spa"].forEach(name => {
       if (this.answers[name]) {
         this.composeWith(`n3dst4-package:${name}`,
           {},
@@ -154,8 +154,8 @@ module.exports = generators.Base.extend({
   },
 
   writing: function () {
-    var package = this.fs.readJSON(this.templatePath("_package.json"));
-    package.name = this.answers.name;
+    var package = this.fs.readJSON(this.templatePath("_package.json"))
+    package.name = this.answers.name
     package.main = `src/${this.answers.shortName}.js`
     package.author = `${this.answers.username} <${this.answers.email}>`
     package.description = this.answers.description
@@ -174,9 +174,9 @@ module.exports = generators.Base.extend({
       this.templatePath(`src/main-${this.answers.babel? "es6" : "es5"}.js`),
       this.destinationPath(`src/${this.answers.shortName}.js`),
       this.answers
-    );
+    )
 
-    var filesToCopy = ["_README.markdown", "_.travis.yml", "_.gitignore"];
+    var filesToCopy = ["_README.markdown", "_.travis.yml", "_.gitignore"]
 
     if (this.config.get("babel")) {
       filesToCopy = filesToCopy.concat(["_.babelrc", "_.npmignore"])
@@ -197,4 +197,4 @@ module.exports = generators.Base.extend({
       this.npmInstall()
     }
   },
-});
+})

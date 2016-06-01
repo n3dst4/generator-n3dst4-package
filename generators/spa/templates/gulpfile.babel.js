@@ -10,7 +10,7 @@ const production = process.env.NODE_ENV === "production"
 
 function browserBundle (opts = {}) {
   opts.production = production
-  const bundleStream =  browserBundleHelper("src/main.js", "__generated/js/main.js", opts);
+  const bundleStream =  browserBundleHelper("src/main.js", "__generated/js/main.js", opts)
   bundleStream.on("updated", bs.reload)
   return bundleStream
 }
@@ -24,8 +24,8 @@ gulp.task("build-scripts", function () {
 })
 
 gulp.task("build-html", function () {
-  return gulp.src("pages/*.html").pipe(gulp.dest(config.buildFolder)).pipe(bs.stream());
-});
+  return gulp.src("pages/*.html").pipe(gulp.dest(config.buildFolder)).pipe(bs.stream())
+})
 
 gulp.task("build-stylesheets", () => {
   return gulp.src(path.join("stylesheets", "main.less")).
@@ -39,11 +39,11 @@ gulp.task("build-stylesheets", () => {
 })
 
 gulp.task("watch", ["build-scripts", "build-html"], function() {
-  browserBundle({watch: true});
-  gulp.watch(['config.json'], ['build-scripts', 'build-html']);
-  gulp.watch(["pages/**/*.html"], ['build-html']);
-  gulp.watch(["stylesheets/**/*.less"], ['build-stylesheets']);
-});
+  browserBundle({watch: true})
+  gulp.watch(['config.json'], ['build-scripts', 'build-html'])
+  gulp.watch(["pages/**/*.html"], ['build-html'])
+  gulp.watch(["stylesheets/**/*.less"], ['build-stylesheets'])
+})
 
 gulp.task('webserver', function() {
   bs.init({
@@ -52,7 +52,7 @@ gulp.task('webserver', function() {
     ghostMode: false,
     reloadOnRestart: false,
     notify: false
-  });
-});
+  })
+})
 
-gulp.task("develop", ["watch", "webserver"]);
+gulp.task("develop", ["watch", "webserver"])

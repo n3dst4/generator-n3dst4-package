@@ -1,5 +1,5 @@
 /*eslint-env node, mocha */
-var fs = require("fs");
+var fs = require("fs")
 var path = require("path")
 var assert = require('yeoman-assert')
 var runGenerator = require("./run-generator")
@@ -35,7 +35,7 @@ describe("spa generator", function () {
         "start": "gulp develop"
       }
     })
-  });
+  })
 
   // npm start to run test watch + browser-sync + watchify
   it("should have an npm build command", function () {
@@ -44,7 +44,7 @@ describe("spa generator", function () {
         "build": "gulp build"
       }
     })
-  });
+  })
 
   // * watch mode
   it("should have a \"watch and serve\" gulp task", function () {
@@ -83,11 +83,11 @@ describe("spa generator", function () {
 
   it("should not have a <name>.js file", function () {
     assert.noFile(`src/${this.name}.js`)
-  });
+  })
 
   it("should have a main.js file", function () {
     assert.file("src/main.js")
-  });
+  })
 
   // gulp
   describe("gulpfile", function () {
@@ -165,14 +165,14 @@ describe("spa generator", function () {
   //
   // // main component
   // it.skip("should create a main component", function () {
-  // });
+  // })
   //
   // // stores
   // it.skip("should create a store", function () {
-  // });
+  // })
   //
   // // actions
   // it.skip("should create a defaulkt actions library", function () {
-  // });
+  // })
 
 })

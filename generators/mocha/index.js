@@ -1,4 +1,4 @@
-var generators = require('yeoman-generator');
+var generators = require('yeoman-generator')
 
 module.exports = generators.Base.extend({
   constructor: function () {
@@ -17,7 +17,7 @@ module.exports = generators.Base.extend({
         camelName: this.config.get("camelName")
       })
 
-    var package = this.fs.readJSON(this.destinationPath("package.json"));
+    var package = this.fs.readJSON(this.destinationPath("package.json"))
     package.devDependencies = package.devDependencies || {}
     package.devDependencies.chai = "^3.5.0"
     package.devDependencies.mocha = "^2.4.5"
@@ -29,4 +29,4 @@ module.exports = generators.Base.extend({
     package.scripts.watch = "mocha --watch"
     this.fs.writeJSON(this.destinationPath("package.json"), package)
   },
-});
+})

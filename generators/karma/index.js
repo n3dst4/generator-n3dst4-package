@@ -1,6 +1,6 @@
-var generators = require('yeoman-generator');
-var _ = require("lodash");
-var yaml = require('js-yaml');
+var generators = require('yeoman-generator')
+var _ = require("lodash")
+var yaml = require('js-yaml')
 
 module.exports = generators.Base.extend({
   constructor: function () {
@@ -8,7 +8,7 @@ module.exports = generators.Base.extend({
   },
 
   writing: function () {
-    var package = this.fs.readJSON(this.destinationPath("package.json"));
+    var package = this.fs.readJSON(this.destinationPath("package.json"))
     package.devDependencies = package.devDependencies || {}
     package.devDependencies["browserify"] = "^13.0.0"
     package.devDependencies["envify"] = "^3.4.0"
@@ -32,17 +32,17 @@ module.exports = generators.Base.extend({
     if (this.fs.exists(travisPath)) {
       // STRICTLY SPEAKING, we don't need to do this unless we're also going to
       // use karma or some other browser-based test runner.
-      var travisConfig = yaml.safeLoad(this.fs.read(travisPath));
+      var travisConfig = yaml.safeLoad(this.fs.read(travisPath))
       travisConfig.before_script = _.concat(travisConfig.before_script || [],
         [
           "export DISPLAY=:99.0",
           "sh -e /etc/init.d/xvfb start"
         ]
-      );
+      )
       this.fs.write(travisPath, yaml.safeDump(travisConfig))
     }
     else {
-      this.log.warn(".travis.yml didn't exist, so it hasn't been updated");
+      this.log.warn(".travis.yml didn't exist, so it hasn't been updated")
     }
 
     // create karma config
@@ -52,4 +52,4 @@ module.exports = generators.Base.extend({
       {babel: this.config.get("babel")})
 
   },
-});
+})
