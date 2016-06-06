@@ -14,7 +14,7 @@ module.exports = generators.Base.extend({
         message: "Do you want your SPA to use React, Radium, & Redux?",
         type: "confirm",
         default: false,
-        when: false
+        when: true
       },
     ], function (answers) {
       this.answers = answers
