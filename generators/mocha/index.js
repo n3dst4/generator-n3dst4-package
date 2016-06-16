@@ -11,7 +11,7 @@ module.exports = generators.Base.extend({
 
     this.fs.copyTpl(
       this.templatePath(`test/test-${this.config.get("babel")? "babel":"normal"}.js`),
-      this.destinationPath(`test/test-${this.config.get("name")}.js`),
+      this.destinationPath(`test/test-${this.config.get("shortName")}.js`),
       {
         name: this.config.get("shortName"),
         camelName: this.config.get("camelName")
