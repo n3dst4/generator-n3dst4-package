@@ -3,7 +3,7 @@ var path = require("path")
 var assert = require('yeoman-assert')
 var runGenerator = require("./run-generator")
 
-describe.only("react-redux generator", function () {
+describe("react-redux generator", function () {
   before(runGenerator({}, [], { spa: true, reactRedux: true }))
 
   it("should add dependencies to package.json", function () {

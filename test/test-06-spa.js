@@ -59,7 +59,7 @@ describe("spa generator", function () {
       "devDependencies": {
       },
       "dependencies": {
-        "@n3dst4/browser-bundle": "^1.0.5",
+        "@n3dst4/browser-bundle": "^1.1.0",
         "@n3dst4/build-stylesheets": "^1.0.1",
         "browser-sync": "^2.12.3",
         "gulp": "^3.9.1",
@@ -159,20 +159,4 @@ describe("spa generator", function () {
       }
     })
   })
-
-
-  // // these may not be part of the base spa
-  //
-  // // main component
-  // it.skip("should create a main component", function () {
-  // })
-  //
-  // // stores
-  // it.skip("should create a store", function () {
-  // })
-  //
-  // // actions
-  // it.skip("should create a defaulkt actions library", function () {
-  // })
-
 })
