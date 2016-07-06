@@ -27,8 +27,7 @@
     "glob": "^7.0.3",
     "js-yaml": "^3.5.3",
     "lodash": "^4.0.1",
-    "yeoman-generator": "^0.22.3",
-    "yeoman-test": "^1.4.0"
+    "yeoman-generator": "^0.22.3"
   },
   "devDependencies": {
     "@n3dst4/browser-bundle": "^1.0.5",
@@ -48,7 +47,7 @@
     "rework-assets": "^1.1.1",
     "uuid": "^2.0.1",
     "yeoman-assert": "^2.2.0",
-    "yeoman-test": "^1.0.0"
+    "yeoman-test": "^1.4.0"
   },
   "eslintConfig": {
     "extends": "eslint:recommended",
