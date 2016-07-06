@@ -17,16 +17,16 @@ module.exports = generators.Base.extend({
         camelName: this.config.get("camelName")
       })
 
-    var package = this.fs.readJSON(this.destinationPath("package.json"))
-    package.devDependencies = package.devDependencies || {}
-    package.devDependencies.chai = "^3.5.0"
-    package.devDependencies.mocha = "^2.4.5"
+    var pkg = this.fs.readJSON(this.destinationPath("package.json"))
+    pkg.devDependencies = pkg.devDependencies || {}
+    pkg.devDependencies.chai = "^3.5.0"
+    pkg.devDependencies.mocha = "^2.4.5"
     if (this.config.get("babel")) {
-      package.devDependencies["babel-register"] = "^6.7.2"
+      pkg.devDependencies["babel-register"] = "^6.7.2"
     }
-    package.scripts = package.scripts || {}
-    package.scripts.test = "mocha"
-    package.scripts.watch = "mocha --watch"
-    this.fs.writeJSON(this.destinationPath("package.json"), package)
+    pkg.scripts = pkg.scripts || {}
+    pkg.scripts.test = "mocha"
+    pkg.scripts.watch = "mocha --watch"
+    this.fs.writeJSON(this.destinationPath("package.json"), pkg)
   },
 })
