@@ -4,18 +4,30 @@ var path = require("path")
 var runGenerator = require("./run-generator")
 
 describe("bin prompt", function () {
-  before(runGenerator({}, [], { bin: true }))
-  it("should create a bin entry in package.json", function () {
-    assert.jsonFileContent(path.join(this.dir, "package.json"), {
-      bin: { [this.name]: `src/bin/${this.name}.js`},
-      preferGlobal: true
+  describe("with default name", function () {
+    before(runGenerator({}, [], { bin: true }))
+    it("should create a bin entry in package.json", function () {
+      assert.jsonFileContent(path.join(this.dir, "package.json"), {
+        bin: { [this.name]: `src/bin/${this.name}.js`},
+        preferGlobal: true
+      })
+    })
+    it("should create the bin file as es5", function () {
+      assert.noFileContent(
+        path.join(this.dir, "src", "bin", `${this.name}.js`),
+        /import/
+      )
     })
   })
-  it("should create the bin file as es5", function () {
-    assert.noFileContent(
-      path.join(this.dir, "src", "bin", `${this.name}.js`),
-      /import/
-    )
+
+  describe("with manually entered bin name", function (){
+    before(runGenerator({}, [], { bin: true, binName: "spedoinkle" }))
+    it("should use the name you give it", function () {
+      assert.file(
+        path.join(this.dir, "src", "bin", "spedoinkle.js")
+      )
+
+    })
   })
 
   describe("with babel enabled", function () {

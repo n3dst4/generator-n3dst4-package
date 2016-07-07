@@ -10,7 +10,7 @@ module.exports = generators.Base.extend({
     var config = this.config.getAll()
     this.prompt([{
         type: "input",
-        name: "name",
+        name: "binName",
         message: "Executable script name (without extension)",
         default: config.shortName || this.appname
       },
@@ -28,7 +28,7 @@ module.exports = generators.Base.extend({
     var templatePath = this.answers.babel? "src/bin/bin-es6.js" : "src/bin/bin-es5.js"
     this.fs.copyTpl(
       this.templatePath(templatePath),
-      this.destinationPath("src/bin/" + this.answers.shortName + ".js"),
+      this.destinationPath("src/bin/" + this.answers.binName + ".js"),
       this.answers
     )
 
