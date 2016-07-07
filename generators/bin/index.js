@@ -33,11 +33,11 @@ module.exports = generators.Base.extend({
     )
 
     // add bin and preferGlobal to package.json
-    var package = this.fs.readJSON(this.destinationPath("package.json"))
-    package.bin = package.bin || {}
+    var pkg = this.fs.readJSON(this.destinationPath("package.json"))
+    pkg.bin = pkg.bin || {}
     var rootPath = this.answers.babel ? "__build" : "src"
-    package.bin[this.answers.shortName] = `${rootPath}/bin/${this.answers.shortName}.js`
-    package.preferGlobal = true
-    this.fs.writeJSON(this.destinationPath("package.json"), package)
+    pkg.bin[this.answers.shortName] = `${rootPath}/bin/${this.answers.shortName}.js`
+    pkg.preferGlobal = true
+    this.fs.writeJSON(this.destinationPath("package.json"), pkg)
   },
 })

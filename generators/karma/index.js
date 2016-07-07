@@ -8,24 +8,24 @@ module.exports = generators.Base.extend({
   },
 
   writing: function () {
-    var package = this.fs.readJSON(this.destinationPath("package.json"))
-    package.devDependencies = package.devDependencies || {}
-    package.devDependencies["browserify"] = "^13.0.0"
-    package.devDependencies["envify"] = "^3.4.0"
-    package.devDependencies["karma"] = "^0.13.21"
-    package.devDependencies["karma-browserify"] = "^5.0.1"
-    package.devDependencies["karma-firefox-launcher"] = "^0.1.7"
-    package.devDependencies["karma-mocha"] = "^0.2.2"
-    package.devDependencies["karma-notify-reporter"] = "^0.1.1"
-    package.devDependencies["karma-teamcity-reporter"] = "^0.2.1"
-    package.devDependencies["watchify"] = "^3.7.0"
+    var pkg = this.fs.readJSON(this.destinationPath("package.json"))
+    pkg.devDependencies = pkg.devDependencies || {}
+    pkg.devDependencies["browserify"] = "^13.0.0"
+    pkg.devDependencies["envify"] = "^3.4.0"
+    pkg.devDependencies["karma"] = "^0.13.21"
+    pkg.devDependencies["karma-browserify"] = "^5.0.1"
+    pkg.devDependencies["karma-firefox-launcher"] = "^0.1.7"
+    pkg.devDependencies["karma-mocha"] = "^0.2.2"
+    pkg.devDependencies["karma-notify-reporter"] = "^0.1.1"
+    pkg.devDependencies["karma-teamcity-reporter"] = "^0.2.1"
+    pkg.devDependencies["watchify"] = "^3.7.0"
     if (this.config.get("babel")) {
-      package.devDependencies["babelify"] = "^7.2.0"
+      pkg.devDependencies["babelify"] = "^7.2.0"
     }
-    package.scripts = package.scripts || {}
-    package.scripts.test = "karma start --single-run"
-    package.scripts.watch = "karma start"
-    this.fs.writeJSON(this.destinationPath("package.json"), package)
+    pkg.scripts = pkg.scripts || {}
+    pkg.scripts.test = "karma start --single-run"
+    pkg.scripts.watch = "karma start"
+    this.fs.writeJSON(this.destinationPath("package.json"), pkg)
 
     // add xvfb magic to Travis config to allow Karma to run Firefox, if needed
     var travisPath = this.destinationPath(".travis.yml")
@@ -50,6 +50,5 @@ module.exports = generators.Base.extend({
       this.templatePath("karma.conf.js"),
       this.destinationPath("karma.conf.js"),
       {babel: this.config.get("babel")})
-
   },
 })

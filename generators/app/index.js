@@ -162,21 +162,21 @@ module.exports = generators.Base.extend({
   },
 
   writing: function () {
-    var package = this.fs.readJSON(this.templatePath("_package.json"))
-    package.name = this.answers.name
-    package.main = `src/${this.answers.shortName}.js`
-    package.author = `${this.answers.username} <${this.answers.email}>`
-    package.description = this.answers.description
+    var pkg = this.fs.readJSON(this.templatePath("_package.json"))
+    pkg.name = this.answers.name
+    pkg.main = `src/${this.answers.shortName}.js`
+    pkg.author = `${this.answers.username} <${this.answers.email}>`
+    pkg.description = this.answers.description
 
     if (this.config.get("babel")) {
-      package.main = `__build/${this.answers.name}.js`
-      package.scripts.prepublish = "babel src --out-dir __build --source-maps inline"
-      package.devDependencies["babel-cli"] = "^6.5.1"
-      package.devDependencies["babel-preset-es2015"] = "^6.5.0"
-      package.devDependencies["babel-preset-react"] = "^6.5.0"
+      pkg.main = `__build/${this.answers.shortName}.js`
+      pkg.scripts.prepublish = "babel src --out-dir __build --source-maps inline"
+      pkg.devDependencies["babel-cli"] = "^6.5.1"
+      pkg.devDependencies["babel-preset-es2015"] = "^6.5.0"
+      pkg.devDependencies["babel-preset-react"] = "^6.5.0"
     }
 
-    this.fs.writeJSON(this.destinationPath("package.json"), package)
+    this.fs.writeJSON(this.destinationPath("package.json"), pkg)
 
     this.fs.copyTpl(
       this.templatePath(`src/main-${this.answers.babel? "es6" : "es5"}.js`),
