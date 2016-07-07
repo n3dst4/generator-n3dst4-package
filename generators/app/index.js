@@ -7,6 +7,14 @@ var exec = require("child_process").exec
 
 var npmUser = null
 
+var defaultEmail
+try { defaultEmail = gitEmail() }
+catch (e) { defaultEmail = "" }
+
+var defaultUsername
+try { defaultUsername = gitUsername() }
+catch (e) { defaultUsername = "" }
+
 module.exports = generators.Base.extend({
   constructor: function () {
     generators.Base.apply(this, arguments)
@@ -62,13 +70,13 @@ module.exports = generators.Base.extend({
         name: "email",
         message: "Your email address",
         type: "input",
-        default: gitEmail(),
+        default: defaultEmail,
       },
       {
         name: "username",
         message: "Your name",
         type: "input",
-        default: gitUsername(),
+        default: defaultUsername,
       },
       {
         name: "spa",
