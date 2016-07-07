@@ -26,8 +26,14 @@ describe("bin prompt", function () {
       assert.file(
         path.join(this.dir, "src", "bin", "spedoinkle.js")
       )
-
     })
+    it("should create a bin entry in package.json", function () {
+      assert.jsonFileContent(path.join(this.dir, "package.json"), {
+        bin: { spedoinkle: `src/bin/spedoinkle.js`},
+        preferGlobal: true
+      })
+    })
+
   })
 
   describe("with babel enabled", function () {
