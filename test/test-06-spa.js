@@ -61,6 +61,7 @@ describe("spa generator", function () {
       "dependencies": {
         "@n3dst4/browser-bundle": "^1.1.0",
         "@n3dst4/build-stylesheets": "^1.0.1",
+          "babel-polyfill": "6.9.1",
         "browser-sync": "^2.12.3",
         "gulp": "^3.9.1",
         "gulp-csso": "^2.0.0",
@@ -87,6 +88,10 @@ describe("spa generator", function () {
 
   it("should have a main.js file", function () {
     assert.file("src/main.js")
+    })
+
+    it("should import babel-polyfill in main.js", function () {
+      assert.fileContent("src/main.js", /^import\s+"babel-polyfill"\s*;?$/m)
   })
 
   // gulp

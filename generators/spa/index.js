@@ -61,23 +61,24 @@ module.exports = generators.Base.extend({
     )
     this.fs.delete(`src/${this.config.get("name")}.js`)
 
-    var package = this.fs.readJSON(this.destinationPath("package.json"))
-    package.dependencies = package.dependencies || {}
-    package.dependencies["browser-sync"] = "^2.12.3"
-    package.dependencies["gulp"] = "^3.9.1"
-    package.dependencies["gulp-csso"] = "^2.0.0"
-    package.dependencies["gulp-if"] = "^2.0.0"
-    package.dependencies["gulp-less"] = "^3.0.5"
-    package.dependencies["gulp-plumber"] = "^1.1.0"
-    package.dependencies["gulp-rework"] = "^1.2.0"
-    package.dependencies["rework-assets"] = "^1.1.1"
-    package.dependencies["@n3dst4/browser-bundle"] = "^1.1.0"
-    package.dependencies["@n3dst4/build-stylesheets"] = "^1.0.1"
+    var pkg = this.fs.readJSON(this.destinationPath("package.json"))
+    pkg.dependencies = pkg.dependencies || {}
+    pkg.dependencies["browser-sync"] = "^2.12.3"
+    pkg.dependencies["gulp"] = "^3.9.1"
+    pkg.dependencies["gulp-csso"] = "^2.0.0"
+    pkg.dependencies["gulp-if"] = "^2.0.0"
+    pkg.dependencies["gulp-less"] = "^3.0.5"
+    pkg.dependencies["gulp-plumber"] = "^1.1.0"
+    pkg.dependencies["gulp-rework"] = "^1.2.0"
+    pkg.dependencies["rework-assets"] = "^1.1.1"
+    pkg.dependencies["@n3dst4/browser-bundle"] = "^1.1.0"
+    pkg.dependencies["@n3dst4/build-stylesheets"] = "^1.0.1"
+    pkg.dependencies["babel-polyfill"] = "6.9.1"
 
-    delete package.scripts.prepublish
-    package.scripts.start = "gulp develop"
-    package.scripts.build = "gulp build"
-    this.fs.writeJSON(this.destinationPath("package.json"), package)
+    delete pkg.scripts.prepublish
+    pkg.scripts.start = "gulp develop"
+    pkg.scripts.build = "gulp build"
+    this.fs.writeJSON(this.destinationPath("package.json"), pkg)
 
   },
 
