@@ -23,6 +23,7 @@ module.exports = function runGenerator (opts, args, prompts) {
         this.name = path.basename(dir)
       }.bind(this))
       .on("end", done)
+      .on("error", console.error)
   }
 }
 
