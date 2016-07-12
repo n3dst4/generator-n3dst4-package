@@ -39,6 +39,8 @@ module.exports = generators.Base.extend({
         type: "input",
         name: "name",
         message: "Package name",
+        validate: n => /^(?:@[0-9a-z][0-9a-z\-]*\/)?[0-9a-z][0-9a-z\-]*$/.test(n) ||
+          "Name should be in kebab-case-only (with optional @username/ prefix)",
         default: dashify(this.appname)
       },
       // if the use is logged into npm but doesn't enter a namespace, give them

@@ -118,6 +118,14 @@ describe("base app generator", function () {
     })
   })
 
+  // it would be nice to test the validation here, but the runContext seems to
+  // ignore it.
+  // describe.only("invalid name", function () {
+  //   before(runGenerator({}, [], {name: "&BINGBANG^&$123"}))
+  //   it("should set the project name in the package.json", function () {
+  //   })
+  // })
+
   describe("description, email, and username prompts", function () {
     var description = uuid()
     var email = uuid()
