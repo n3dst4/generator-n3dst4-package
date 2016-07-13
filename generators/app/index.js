@@ -192,7 +192,9 @@ module.exports = generators.Base.extend({
 
     if (this.config.get("babel")) {
       pkg.main = `__build/${this.answers.shortName}.js`
-      pkg.scripts.prepublish = "babel src --out-dir __build --source-maps inline"
+      pkg.scripts.build = "babel src --out-dir __build --source-maps inline"
+      pkg.scripts.prepublish = "npm run build"
+      pkg.scripts["watch-build"] = "npm run build -- --watch"
       pkg.devDependencies["babel-cli"] = "^6.5.1"
       pkg.devDependencies["babel-preset-es2015"] = "^6.5.0"
       pkg.devDependencies["babel-preset-react"] = "^6.5.0"

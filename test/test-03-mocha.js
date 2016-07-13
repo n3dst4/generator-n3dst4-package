@@ -35,7 +35,7 @@ describe("mocha prompt", function () {
     assert.jsonFileContent(path.join(this.dir, "package.json"), {
       scripts: {
         test: "mocha",
-        watch: "mocha --watch"
+        "watch-test": "npm test -- --watch"
       }
     })
   })

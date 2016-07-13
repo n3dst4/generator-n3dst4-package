@@ -26,7 +26,7 @@ module.exports = generators.Base.extend({
     }
     pkg.scripts = pkg.scripts || {}
     pkg.scripts.test = "mocha"
-    pkg.scripts.watch = "mocha --watch"
+    pkg.scripts["watch-test"] = "npm test -- --watch"
     this.fs.writeJSON(this.destinationPath("package.json"), pkg)
   },
 })

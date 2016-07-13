@@ -147,7 +147,9 @@ describe("base app generator", function () {
       assert.jsonFileContent(path.join(this.dir, "package.json"), {
         main: `__build/${this.name}.js`,
         scripts: {
-          prepublish: "babel src --out-dir __build --source-maps inline"
+          build: "babel src --out-dir __build --source-maps inline",
+          prepublish: "npm run build",
+          "watch-build": "npm run build -- --watch",
         },
         devDependencies: {
           "babel-cli": "^6.5.1",
