@@ -22,7 +22,7 @@ module.exports = generators.Base.extend({
   },
 
   initializing: function () {
-    // base appname on package.json, or failing that, folder name
+    // we base the appname on package.json, or failing that, the folder name.
     // we can't use Yeoman's built-in "this.appname" because it strips
     // punctuation
     var nameFromPackage = this.fs.readJSON(this.destinationPath('package.json'), {}).name
