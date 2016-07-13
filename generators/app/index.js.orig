@@ -3,8 +3,13 @@ var gitEmail = require("git-user-email")
 var gitUsername = require("git-user-name")
 var dashify = require("dashify")
 var _ = require("lodash")
-var execSync = require("child_process").execSync
+<<<<<<< HEAD
+var exec = require("child_process").exec
+
+var npmUser = null
+=======
 var path = require("path")
+>>>>>>> 0650dea... fix bug with namespace not being preserved
 
 var defaultEmail
 try { defaultEmail = gitEmail() }
@@ -14,42 +19,38 @@ var defaultUsername
 try { defaultUsername = gitUsername() }
 catch (e) { defaultUsername = "" }
 
-var npmUser
-
 module.exports = generators.Base.extend({
   constructor: function () {
     generators.Base.apply(this, arguments)
   },
 
   initializing: function () {
+<<<<<<< HEAD
+    if (!npmUser) {
+      var done = this.async()
+      exec("npm whoami", (error, stdout) => {
+        npmUser = (error == null) ? stdout.trim() : null
+        this.log(`npm user is ${npmUser}`)
+        done()
+      })
+=======
     // base appname on package.json, or failing that, folder name
     // we can't use Yeoman's built-in "this.appname" because it strips
     // punctuation
     var nameFromPackage = this.fs.readJSON(this.destinationPath('package.json'), {}).name
 
-    if (npmUser === undefined) {
-      try {
-        npmUser = execSync("npm whoami", {stdio: ["pipe", "pipe", "ignore"]}).toString('utf8').trim()
-      }
-      catch (e) {
-        npmUser = null
-      }
-    }
-
-    this.log(`npm user is ${npmUser}`)
-
     if (nameFromPackage) {
       var namespaceMatch = /^(?:@(\w+)\/)?(.+)/.exec(nameFromPackage)
-      this.defaultNamespace = namespaceMatch[1] || npmUser
+      this.defaultNamespace = namespaceMatch[1] || "sportingsolutions"
       this.shouldUseNamespace = !!(namespaceMatch[1])
       this.defaultName = namespaceMatch[2]
     }
     else {
-      this.defaultNamespace = npmUser
-      this.shouldUseNamespace = false
+      this.defaultNamespace = "sportingsolutions"
+      this.shouldUseNamespace = true
       this.defaultName = dashify(path.basename(this.destinationRoot()))
+>>>>>>> 0650dea... fix bug with namespace not being preserved
     }
-
   },
 
   prompting: function () {
@@ -67,21 +68,36 @@ module.exports = generators.Base.extend({
       // if the use is logged into npm but doesn't enter a namespace, give them
       // the option to use their npm username as the namespace
       {
-        name: "isNamespaced",
+        name: "isNamespacedAsNpmUser",
         message: "Should this package be namespaced?",
         type: "list",
-        when: answers => ((! /^@.+\//.test(answers.name)) && !!(this.defaultNamespace)),
+<<<<<<< HEAD
+        when: answers => ((! /^@(\w+)\//.test(answers.name)) && npmUser),
         choices: answers => [
           {
             name: `No (${answers.name})`,
             value: false
           },
           {
-            name: `Yes (@${this.defaultNamespace}/${answers.name})`,
+            name: `Yes (@${npmUser}/${answers.name})`,
             value: true
           }
         ],
         default: false,
+=======
+        when: answers => ((! /^@.+\//.test(answers.name)) && !!(this.defaultNamespace)),
+        choices: answers => (this.shouldUseNamespace? _.identity : _.reverse)([
+          {
+            name: `Yes (@${this.defaultNamespace}/${answers.name})`,
+            value: true
+          },
+          {
+            name: `No (${answers.name})`,
+            value: false
+          },
+        ]),
+        default: true
+>>>>>>> 0650dea... fix bug with namespace not being preserved
       },
       {
         name: "description",
@@ -153,8 +169,14 @@ module.exports = generators.Base.extend({
     this.answers.shortName = match[1]
     this.answers.camelName = _.camelCase(this.answers.shortName)
 
-    if (this.answers.isNamespaced) {
+<<<<<<< HEAD
+
+    if (this.answers.isNamespacedAsNpmUser) {
+      this.answers.name = `@${npmUser}/${this.answers.name}`
+=======
+    if (this.answers.isNamespacedAsDefault) {
       this.answers.name = `@${this.defaultNamespace}/${this.answers.name}`
+>>>>>>> 0650dea... fix bug with namespace not being preserved
     }
 
     if (this.answers.spa) {
