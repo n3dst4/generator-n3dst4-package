@@ -31,7 +31,7 @@ describe("karma prompt", function () {
     assert.jsonFileContent(path.join(this.dir, "package.json"), {
       scripts: {
         test: "karma start --single-run",
-        watch: "karma start"
+        "watch-test": "karma start"
       }
     })
   })
