@@ -24,7 +24,7 @@ module.exports = generators.Base.extend({
     }
     pkg.scripts = pkg.scripts || {}
     pkg.scripts.test = "karma start --single-run"
-    pkg.scripts.["watch-test"] = "karma start"
+    pkg.scripts["watch-test"] = "karma start"
     this.fs.writeJSON(this.destinationPath("package.json"), pkg)
 
     // add xvfb magic to Travis config to allow Karma to run Firefox, if needed
