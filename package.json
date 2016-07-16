@@ -27,6 +27,7 @@
     "glob": "^7.0.3",
     "js-yaml": "^3.5.3",
     "lodash": "^4.0.1",
+    "jsdom": "^9.4.1",
     "yeoman-generator": "^0.22.3"
   },
   "devDependencies": {

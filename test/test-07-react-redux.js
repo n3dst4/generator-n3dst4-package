@@ -37,7 +37,7 @@ describe("react-redux generator", function () {
     assert.file(path.join(this.dir, "src", "containers", "app-container.js"))
   })
 
-  it ("should add an app div to the index.html", function () {
-    assert.fileContent(path.join(this.dir, "pages", "index.html"), /<div id=\"app\" \/>/)
+  it("should add an app div to the index.html", function () {
+    assert.fileContent(path.join(this.dir, "pages", "index.html"), /<div id=\"app\"/)
   })
 })

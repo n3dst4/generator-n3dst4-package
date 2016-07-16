@@ -1,7 +1,7 @@
 // react + redux generator
 var glob = require("glob")
-
 var generators = require('yeoman-generator')
+var jsdom = require("jsdom")
 
 module.exports = generators.Base.extend({
   constructor: function () {
@@ -16,10 +16,24 @@ module.exports = generators.Base.extend({
       this.destinationPath("src"),
       context)
 
-    this.fs.copyTpl(
-      this.templatePath('pages/index.html'),
-      this.destinationPath("pages/index.html"),
-      context)
+    var html = this.fs.read(this.destinationPath("pages/index.html"))
+
+    var done = this.async();
+
+    jsdom.env(html, (error, window) => {
+      var body = window.document.getElementsByTagName("body")[0]
+      body.innerHTML =
+        '<div id="app" \/>\n' +
+        body.innerHTML
+
+      var html = jsdom.serializeDocument(window.document)
+
+      this.fs.write(
+        this.destinationPath("pages/index.html"),
+        html)
+
+      done()
+    })
 
     var pkg = this.fs.readJSON(this.destinationPath("package.json"))
     pkg.devDependencies = pkg.devDependencies || {}
