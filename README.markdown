@@ -22,6 +22,66 @@ npm install generator-n3dst4-package -g
 yo n3dst4-package
 ```
 
+
+## Options
+
+The generator will ask you a series of questions. Here's what they all mean:
+
+### ? 'Allo <user>! What would you like to do?
+
+This is the first question that `yo` will ask you unless you specified a generator on the command line. This where you tell yeoman what to do. You should pick this package generator.
+
+
+### Package name
+
+This should be a minimal but complete name in "kebab-case".
+
+### Should this package be namespaced?
+
+By default all packages are not namespace. If you're creating a package mainly for private use, you can choose to have it namespaced (it will pick your currently logged in npm username).
+
+### Description
+
+A one-line description of what the package does. Try not to skip this step!
+
+### Your email address (and) Your name
+
+These will be taken from your git config by default.
+
+### Do you want to create a SPA (single-page web app)?
+
+If you're looking to kick off a new UI project, answer **Yes** to this question. If you're just looking to create a shareable package, answer **No**.
+
+### Do you want your SPA to use React, Radium, & Redux?
+
+This will only be asked if you answered Yes to the SPA question. Answer **Yes** to have the project automatically set up with a React/Redux architecture.
+
+### Do you want an executable bin script?
+
+If you're creating a command line utility, answer **Yes** to this question. Otherwise answer no.
+
+### Executable script name (without extension)
+
+This will only be asked if you answered Yes to the question about having a bin script. The answer to this question should be the name of the script that will be generated. It defaults to the name of the package.
+
+### Do you want your code compiled with Babel?
+
+Babel is a code transpiler that translates "new" JS syntax into old, fully browser-compatible syntax. Answer **Yes** to this question if you'd like to write your code in ES6+ and have it automatically compiled to ES5.  Answer **No** if you're happy to write in ES5.
+
+### Do you want a Mocha test suite?
+
+Answer **Yes** to generate the start of a test suite, which you can run by typing `npm test`. Only answer No if you have a very very good reason for doing so.
+
+###  Do you want the test suite to run in a browser (through Karma)?
+
+This question will only be asked if you answered Yes to the question about Mocha, above. Answer **Yes** to this question to have the tests set jup to run through Karma, which will launch a browser to run the tests so you know that your code is browser-compatible.
+
+### Do you want to run "npm install" at the end?
+
+As a convenience, the generator can run `npm install` on your behalf if you answer **Yes** to this question.
+
+
+
 ## Generators
 
 ### `n3dst4-package`
