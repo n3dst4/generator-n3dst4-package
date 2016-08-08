@@ -18,10 +18,15 @@ describe("spa generator", function () {
       /^<!DOCTYPE html>/)
   })
 
-  // stylesheets
-  it("should create a stylesheets folder with a LESS file in it", function () {
-    assert.file(path.join(this.dir, "stylesheets", "main.less"))
-  })
+    it("should put a magic IE-fixing tag right at the top of the <head>", function () {
+      assert.fileContent(
+        path.join(this.dir, "pages", "index.html"),
+        /<head>\s*<meta http-equiv="X-UA-Compatible" content="IE=edge">/)
+    })
+
+    it("should create a stylesheets folder with a LESS file in it", function () {
+      assert.file(path.join(this.dir, "stylesheets", "main.less"))
+    })
 
   // config
   it("should create config.js", function () {
