@@ -3,13 +3,18 @@ var assert = require('yeoman-assert')
 var path = require("path")
 var runGenerator = require("./run-generator")
 
-describe("bin prompt", function () {
+describe.only("bin prompt", function () {
   describe("with default name", function () {
     before(runGenerator({}, [], { bin: true }))
     it("should create a bin entry in package.json", function () {
       assert.jsonFileContent(path.join(this.dir, "package.json"), {
         bin: { [this.name]: `src/bin/${this.name}.js`},
         preferGlobal: true
+      })
+    })
+    it("should create start script entry in package.json", function () {
+      assert.jsonFileContent(path.join(this.dir, "package.json"), {
+        scripts: {start: "node src/bin/" + this.name}
       })
     })
     it("should create the bin file as es5", function () {
@@ -65,7 +70,11 @@ describe("bin prompt", function () {
         /export default\s*function\s*\(\s*\)\s*{\s*}/
       )
     })
+    it("should create start script entry in package.json", function () {
+      assert.jsonFileContent(path.join(this.dir, "package.json"), {
+        scripts: {start: "node __build/bin/" + this.name}
+      })
+    })
 
   })
-
 })

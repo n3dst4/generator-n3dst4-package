@@ -44,6 +44,8 @@ module.exports = generators.Base.extend({
     pkg.bin = pkg.bin || {}
     var rootPath = this.answers.babel ? "__build" : "src"
     pkg.bin[this.answers.binName] = `${rootPath}/bin/${this.answers.binName}.js`
+    pkg.scripts = pkg.scripts || {}
+    pkg.scripts.start = "node " + rootPath +"/bin/" + this.answers.binName
     pkg.preferGlobal = true
     this.fs.writeJSON(this.destinationPath("package.json"), pkg)
   },
