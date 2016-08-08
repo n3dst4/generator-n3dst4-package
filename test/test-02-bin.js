@@ -3,7 +3,7 @@ var assert = require('yeoman-assert')
 var path = require("path")
 var runGenerator = require("./run-generator")
 
-describe.only("bin prompt", function () {
+describe("bin prompt", function () {
   describe("with default name", function () {
     before(runGenerator({}, [], { bin: true }))
     it("should create a bin entry in package.json", function () {
