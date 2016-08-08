@@ -18,7 +18,14 @@ describe("bin prompt", function () {
         /import/
       )
     })
+    it("should expand the main source file to export a function", function () {
+      assert.fileContent(
+        path.join(this.dir, "src", `${this.name}.js`),
+        /module.exports\s*=\s*function\s*\(\s*\)\s*{\s*}/
+      )
+    })
   })
+
 
   describe("with manually entered bin name", function (){
     before(runGenerator({}, [], { bin: true, binName: "spedoinkle" }))
@@ -51,6 +58,14 @@ describe("bin prompt", function () {
         bin: { [this.name]: `__build/bin/${this.name}.js`},
       })
     })
+
+    it("should expand the main source file to export a function", function () {
+      assert.fileContent(
+        path.join(this.dir, "src", `${this.name}.js`),
+        /export default\s*function\s*\(\s*\)\s*{\s*}/
+      )
+    })
+
   })
 
 })

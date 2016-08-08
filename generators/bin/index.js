@@ -32,6 +32,13 @@ module.exports = generators.Base.extend({
       this.answers
     )
 
+    templatePath = this.answers.babel? "src/main-es6.js" : "src/main-es5.js"
+    this.fs.copyTpl(
+      this.templatePath(templatePath),
+      this.destinationPath("src/" + this.answers.shortName + ".js"),
+      this.answers
+    )
+
     // add bin and preferGlobal to package.json
     var pkg = this.fs.readJSON(this.destinationPath("package.json"))
     pkg.bin = pkg.bin || {}
