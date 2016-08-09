@@ -23,6 +23,7 @@ describe("react-redux generator", function () {
         "redux-storage-decorator-debounce": "^1.0.1",
         "redux-storage-engine-localstorage": "^1.1.1",
         "redux-thunk": "^2.1.0",
+
       }
     })
   })
@@ -40,4 +41,12 @@ describe("react-redux generator", function () {
   it("should add an app div to the index.html", function () {
     assert.fileContent(path.join(this.dir, "pages", "index.html"), /<div id=\"app\"/)
   })
+
+  it("should try to fake the NODE_PATH in the gulpfile", function () {
+    assert.fileContent(
+      path.join(this.dir, "gulpfile.babel.js"),
+      /process\.env.NODE_PATH\s=\s['"].\/node_modules/
+    )
+  })
+
 })

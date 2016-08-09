@@ -5,6 +5,20 @@ import buildStylesheetsHelper from "@n3dst4/build-stylesheets"
 import browserBundleHelper from "@n3dst4/browser-bundle"
 import browserSync from "browser-sync"
 
+// this helps in development, when you may have used `npm link` to work on
+// something which has a peer dependency on something in our local node_modules
+try {
+    process.env.NODE_PATH = "./node_modules";
+    // _initPaths is a private API, so this could easily break in future
+    // versions
+    require("module").Module._initPaths();
+}
+catch (err) {
+    console.warn("Failed to set NODE_PATH programatically - linked packages " +
+                 "may not work if they have peerDependencies in this folder. " +
+                 "See http://stackoverflow.com/a/33886121/212676")
+}
+
 const bs = browserSync.create()
 const production = process.env.NODE_ENV === "production"
 

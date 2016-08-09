@@ -18,22 +18,21 @@ describe("spa generator", function () {
       /^<!DOCTYPE html>/)
   })
 
-    it("should put a magic IE-fixing tag right at the top of the <head>", function () {
-      assert.fileContent(
-        path.join(this.dir, "pages", "index.html"),
-        /<head>\s*<meta http-equiv="X-UA-Compatible" content="IE=edge">/)
-    })
+  it("should put a magic IE-fixing tag right at the top of the <head>", function () {
+    assert.fileContent(
+      path.join(this.dir, "pages", "index.html"),
+      /<head>\s*<meta http-equiv="X-UA-Compatible" content="IE=edge">/)
+  })
 
-    it("should create a stylesheets folder with a LESS file in it", function () {
-      assert.file(path.join(this.dir, "stylesheets", "main.less"))
-    })
+  it("should create a stylesheets folder with a LESS file in it", function () {
+    assert.file(path.join(this.dir, "stylesheets", "main.less"))
+  })
 
   // config
   it("should create config.js", function () {
     assert.file(path.join(this.dir, "config.json"))
   })
 
-  // npm start to run test watch + browser-sync + watchify
   it("should have an npm start command to run in browser", function () {
     assert.jsonFileContent(path.join(this.dir, "package.json"), {
       "scripts": {
@@ -42,7 +41,6 @@ describe("spa generator", function () {
     })
   })
 
-  // npm start to run test watch + browser-sync + watchify
   it("should have an npm build command", function () {
     assert.jsonFileContent(path.join(this.dir, "package.json"), {
       "scripts": {
@@ -51,12 +49,17 @@ describe("spa generator", function () {
     })
   })
 
-  // * watch mode
   it("should have a \"watch and serve\" gulp task", function () {
     assert.fileContent(
       path.join(this.dir, "gulpfile.babel.js"),
       /gulp\.task\("develop",/
     )
+  })
+
+  it("should try to fake the NODE_PATH in the gulpfile", function () {
+    assert.fileContent(
+      path.join(this.dir, "gulpfile.babel.js"),
+      /process\.env.NODE_PATH\s=\s['"].\/node_modules/)
   })
 
   it("should add dependencies to package.json", function () {
@@ -66,7 +69,7 @@ describe("spa generator", function () {
       "dependencies": {
         "@n3dst4/browser-bundle": "^1.1.0",
         "@n3dst4/build-stylesheets": "^1.0.1",
-          "babel-polyfill": "6.9.1",
+        "babel-polyfill": "6.9.1",
         "browser-sync": "^2.12.3",
         "gulp": "^3.9.1",
         "gulp-csso": "^2.0.0",
