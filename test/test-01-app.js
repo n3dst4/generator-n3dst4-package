@@ -60,6 +60,13 @@ describe("base app generator", function () {
     assert.file(path.join(this.dir, ".gitignore"))
   })
 
+  it("should mention __build and __generated in .gitignore", function () {
+    assert.fileContent(path.join(this.dir, ".gitignore"),
+      /__build/)
+    assert.fileContent(path.join(this.dir, ".gitignore"),
+      /__generated/)
+  })
+
   // helper to test names
   function testName (name) {
     it("should set the project name in the package.json", function () {
