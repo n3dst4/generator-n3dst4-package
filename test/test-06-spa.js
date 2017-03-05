@@ -1,5 +1,5 @@
 /*eslint-env node, mocha */
-var fs = require("fs")
+var fs = require("graceful-fs")
 var path = require("path")
 var assert = require('yeoman-assert')
 var runGenerator = require("./run-generator")
