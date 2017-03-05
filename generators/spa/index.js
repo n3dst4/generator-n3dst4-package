@@ -71,8 +71,8 @@ module.exports = generators.Base.extend({
     pkg.dependencies["gulp-plumber"] = "^1.1.0"
     pkg.dependencies["gulp-rework"] = "^1.2.0"
     pkg.dependencies["rework-assets"] = "^1.1.1"
-    pkg.dependencies["@n3dst4/browser-bundle"] = "^1.1.0"
-    pkg.dependencies["@n3dst4/build-stylesheets"] = "^1.0.1"
+    pkg.dependencies["@n3dst4/browser-bundle"] = "^1.2.0"
+    pkg.dependencies["@n3dst4/build-stylesheets"] = "^1.1.0"
     pkg.dependencies["babel-polyfill"] = "6.9.1"
 
     delete pkg.scripts.prepublish

@@ -67,8 +67,8 @@ describe("spa generator", function () {
       "devDependencies": {
       },
       "dependencies": {
-        "@n3dst4/browser-bundle": "^1.1.0",
-        "@n3dst4/build-stylesheets": "^1.0.1",
+        "@n3dst4/browser-bundle": "^1.2.0",
+        "@n3dst4/build-stylesheets": "^1.1.0",
         "babel-polyfill": "6.9.1",
         "browser-sync": "^2.12.3",
         "gulp": "^3.9.1",
