@@ -219,7 +219,7 @@ module.exports = generators.Base.extend({
     var filesToCopy = ["_README.markdown", "_.travis.yml", "_.gitignore"]
 
     if (this.config.get("babel")) {
-      filesToCopy = filesToCopy.concat(["_.babelrc", "_.npmignore"])
+      filesToCopy = filesToCopy.concat(["_.npmignore"])
     }
 
     filesToCopy.forEach(function (filename) {

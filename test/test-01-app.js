@@ -67,6 +67,11 @@ describe("base app generator", function () {
     assert.noFile(path.join(this.dir, ".npmignore"))
   })
 
+  it("should NOT create a babelrc", function () {
+    assert.noFile(path.join(this.dir, ".babelrc"))
+  })
+
+
   it("should create a .gitignore", function () {
     assert.file(path.join(this.dir, ".gitignore"))
   })
@@ -173,6 +178,9 @@ describe("base app generator", function () {
           "babel-cli": "^6.5.1",
           "babel-preset-es2015": "^6.5.0",
           "babel-preset-react": "^6.5.0"
+        },
+        babel: {
+          presets: ["es2015", "react"]
         }
       })
     })
@@ -181,10 +189,8 @@ describe("base app generator", function () {
       assert.fileContent(path.join(this.dir, "src", this.name + ".js"), /^export default {}$/m)
     })
 
-    it("should create a babelrc", function () {
-      assert.jsonFileContent(path.join(this.dir, ".babelrc"), {
-        "presets": ["es2015", "react"]
-      })
+    it("should NOT create a babelrc", function () {
+      assert.noFile(path.join(this.dir, ".babelrc"))
     })
 
     it("should create an npmignore that excludes src", function () {
