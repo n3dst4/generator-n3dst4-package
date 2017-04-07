@@ -181,7 +181,7 @@ describe("base app generator", function () {
           "babel-plugin-transform-object-rest-spread": "^6.23.0"
         },
         babel: {
-          plugins: ["transform-object-reset-spread"],
+          plugins: ["transform-object-rest-spread"],
           presets: ["es2015", "react"]
         }
       })
