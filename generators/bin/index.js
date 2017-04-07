@@ -18,6 +18,8 @@ module.exports = generators.Base.extend({
       answers.babel = config.babel
       answers.shortName = config.shortName
       answers.camelName = config.camelName
+      answers.name = config.name
+      answers.description = config.description
       this.answers = answers
       done()
     }.bind(this))
@@ -36,6 +38,12 @@ module.exports = generators.Base.extend({
     this.fs.copyTpl(
       this.templatePath(templatePath),
       this.destinationPath("src/" + this.answers.shortName + ".js"),
+      this.answers
+    )
+
+    this.fs.copyTpl(
+      this.templatePath("_README.markdown"),
+      this.destinationPath("README.markdown"),
       this.answers
     )
 

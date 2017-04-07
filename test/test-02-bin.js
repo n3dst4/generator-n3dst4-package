@@ -3,6 +3,8 @@ var assert = require('yeoman-assert')
 var path = require("path")
 var runGenerator = require("./run-generator")
 
+var namespacedName = runGenerator.namespacedName
+
 describe("bin prompt", function () {
   describe("with default name", function () {
     before(runGenerator({}, [], { bin: true }))
@@ -28,6 +30,15 @@ describe("bin prompt", function () {
         path.join(this.dir, "src", `${this.name}.js`),
         /module.exports\s*=\s*function\s*\(\s*\)\s*{\s*}/
       )
+    })
+    it("should put installation instructions in README", function () {
+      var readmePath = path.join(this.dir, "README.markdown")
+      assert.fileContent(readmePath,
+        `## Installation\n\n\`\`\`sh\nnpm install ${namespacedName} --global\n\`\`\``)
+    })
+    it("should put usage instructions in README", function () {
+      assert.fileContent(path.join(this.dir, "README.markdown"),
+        `## Usage\n\n\`\`\`sh\n${this.name}\n\`\`\``)
     })
   })
 

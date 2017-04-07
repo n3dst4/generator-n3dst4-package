@@ -174,7 +174,8 @@ module.exports = generators.Base.extend({
       babel: this.answers.babel,
       name: this.answers.name,
       camelName: this.answers.camelName,
-      shortName: this.answers.shortName
+      shortName: this.answers.shortName,
+      description: this.answers.description
     })
     // compose with subgenerators if need be
     ;["bin", "mocha", "karma", "spa", "reactComponent"].forEach(name => {
