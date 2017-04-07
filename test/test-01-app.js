@@ -57,7 +57,7 @@ describe("base app generator", function () {
       `## Installation\n\n\`\`\`sh\nnpm install ${namespacedName} --save\n\`\`\``)
   })
 
-  it("should put usgae instructions in README", function () {
+  it("should put usage instructions in README", function () {
     assert.fileContent(path.join(this.dir, "README.markdown"),
       `## Usage\n\n\`\`\`js\nimport ${this.name} from "${namespacedName}"\n\`\`\``)
   })
