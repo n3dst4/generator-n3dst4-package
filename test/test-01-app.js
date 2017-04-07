@@ -177,9 +177,11 @@ describe("base app generator", function () {
         devDependencies: {
           "babel-cli": "^6.5.1",
           "babel-preset-es2015": "^6.5.0",
-          "babel-preset-react": "^6.5.0"
+          "babel-preset-react": "^6.5.0",
+          "babel-plugin-transform-object-rest-spread": "^6.23.0"
         },
         babel: {
+          plugins: ["transform-object-reset-spread"],
           presets: ["es2015", "react"]
         }
       })

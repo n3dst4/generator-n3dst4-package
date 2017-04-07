@@ -206,6 +206,7 @@ module.exports = generators.Base.extend({
       pkg.devDependencies["babel-cli"] = "^6.5.1"
       pkg.devDependencies["babel-preset-es2015"] = "^6.5.0"
       pkg.devDependencies["babel-preset-react"] = "^6.5.0"
+      pkg.devDependencies["babel-plugin-transform-object-rest-spread"] = "^6.23.0"
     }
 
     this.fs.writeJSON(this.destinationPath("package.json"), pkg)
