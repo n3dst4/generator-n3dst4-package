@@ -8,7 +8,7 @@ module.exports = Generator.extend({
   prompting: function () {
     var done = this.async()
 
-    this.prompt([
+    return this.prompt([
       {
         name: "reactRedux",
         message: "Do you want your SPA to use React, Radium, & Redux?",
@@ -16,7 +16,7 @@ module.exports = Generator.extend({
         default: false,
         when: true
       },
-    ], function (answers) {
+    ]).then(function (answers) {
       this.answers = answers
       done()
     }.bind(this))

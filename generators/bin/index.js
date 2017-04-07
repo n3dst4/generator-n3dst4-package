@@ -8,13 +8,13 @@ module.exports = Generator.extend({
   prompting: function () {
     var done = this.async()
     var config = this.config.getAll()
-    this.prompt([{
+    return this.prompt([{
         type: "input",
         name: "binName",
         message: "Executable script name (without extension)",
         default: config.shortName || this.appname
       },
-    ], function (answers) {
+    ]).then(function (answers) {
       answers.babel = config.babel
       answers.shortName = config.shortName
       answers.camelName = config.camelName

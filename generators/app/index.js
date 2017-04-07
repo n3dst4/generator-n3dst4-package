@@ -55,7 +55,7 @@ module.exports = Generator.extend({
   prompting: function () {
     var done = this.async()
 
-    this.prompt([
+    return this.prompt([
       {
         type: "input",
         name: "name",
@@ -148,9 +148,9 @@ module.exports = Generator.extend({
         type: "confirm",
         default: false,
       },
-    ], function (answers) {
+    ]).then(function (answers) {
       this.answers = answers
-      console.log("we got here")
+      this.log("we got here")
       done()
     }.bind(this))
   },
