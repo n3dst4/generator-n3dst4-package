@@ -150,7 +150,6 @@ module.exports = Generator.extend({
       },
     ]).then(function (answers) {
       this.answers = answers
-      this.log("we got here")
       done()
     }.bind(this))
   },
