@@ -14,7 +14,7 @@ module.exports = Generator.extend({
     pkg.devDependencies["react"] = "^15.5.3"
     pkg.devDependencies["react-addons-test-utils"] = "^15.5.1"
     pkg.devDependencies["react-dom"] = "^15.5.3"
-    pkg.devDependencies["prop-types"] = "^15.5.6"
+    pkg.dependencies["prop-types"] = "^15.5.6"
     this.fs.writeJSON(this.destinationPath("package.json"), pkg)
 
     var templatePath = this.templatePath("src/main.js")
