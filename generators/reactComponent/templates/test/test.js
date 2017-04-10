@@ -10,7 +10,7 @@ chai.use(chaiEnzyme())
 chai.use(sinonChai)
 const expect = chai.expect
 
-describe("<%= camelCase %>", function () {
+describe("<%= pascalCase %>", function () {
   it("should definitely have more than one test", function () {
     const wrapper = shallow(<<%= pascalCase %> />)
     expect(wrapper).to.have.text("this hasn't been filled in yet")
