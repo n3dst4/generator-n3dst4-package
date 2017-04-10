@@ -15,9 +15,10 @@ describe("react component prompt", function () {
       devDependencies: {
         "chai-enzyme": "^0.6.1",
         "enzyme": "^2.8.0",
-        "react": "^15.4.2",
-        "react-addons-test-utils": "^15.4.2",
-        "react-dom": "^15.4.2",
+        "react": "^15.5.3",
+        "react-addons-test-utils": "^15.5.1",
+        "react-dom": "^15.5.3",
+        "prop-types": "^15.5.6",
       }
     })
   })
