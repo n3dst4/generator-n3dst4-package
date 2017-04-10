@@ -174,14 +174,18 @@ describe("base app generator", function () {
           prepublish: "npm run build",
           "watch-build": "npm run build -- --watch",
         },
+        dependencies: {
+          "babel-runtime": "^6.23.0",
+        },
         devDependencies: {
           "babel-cli": "^6.5.1",
           "babel-preset-es2015": "^6.5.0",
           "babel-preset-react": "^6.5.0",
-          "babel-plugin-transform-object-rest-spread": "^6.23.0"
+          "babel-plugin-transform-object-rest-spread": "^6.23.0",
+          "babel-plugin-transform-runtime": "^6.23.0",
         },
         babel: {
-          plugins: ["transform-object-rest-spread"],
+          plugins: ["transform-object-rest-spread", "transform-runtime"],
           presets: ["es2015", "react"],
           "env": {
             "testing": {

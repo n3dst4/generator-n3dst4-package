@@ -202,10 +202,12 @@ module.exports = Generator.extend({
       pkg.scripts.build = "babel src --out-dir __build --source-maps inline"
       pkg.scripts.prepublish = "npm run build"
       pkg.scripts["watch-build"] = "npm run build -- --watch"
+      pkg.dependencies["babel-runtime"] = "^6.23.0"
       pkg.devDependencies["babel-cli"] = "^6.5.1"
       pkg.devDependencies["babel-preset-es2015"] = "^6.5.0"
       pkg.devDependencies["babel-preset-react"] = "^6.5.0"
       pkg.devDependencies["babel-plugin-transform-object-rest-spread"] = "^6.23.0"
+      pkg.devDependencies["babel-plugin-transform-runtime"] = "^6.23.0"
     }
 
     this.fs.writeJSON(this.destinationPath("package.json"), pkg)
