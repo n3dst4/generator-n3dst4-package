@@ -1,10 +1,10 @@
-var generators = require('yeoman-generator')
+var Generator = require('yeoman-generator')
 var _ = require("lodash")
 var yaml = require('js-yaml')
 
-module.exports = generators.Base.extend({
+module.exports = Generator.extend({
   constructor: function () {
-    generators.Base.apply(this, arguments)
+    Generator.apply(this, arguments)
   },
 
   writing: function () {

@@ -1,4 +1,4 @@
-var generators = require('yeoman-generator')
+var Generator = require('yeoman-generator')
 var gitEmail = require("git-user-email")
 var gitUsername = require("git-user-name")
 var dashify = require("dashify")
@@ -16,9 +16,9 @@ catch (e) { defaultUsername = "" }
 
 var npmUser
 
-module.exports = generators.Base.extend({
+module.exports = Generator.extend({
   constructor: function () {
-    generators.Base.apply(this, arguments)
+    Generator.apply(this, arguments)
   },
 
   initializing: function () {
@@ -150,6 +150,7 @@ module.exports = generators.Base.extend({
       },
     ], function (answers) {
       this.answers = answers
+      console.log("we got here")
       done()
     }.bind(this))
   },
@@ -180,10 +181,9 @@ module.exports = generators.Base.extend({
     // compose with subgenerators if need be
     ;["bin", "mocha", "karma", "spa", "reactComponent"].forEach(name => {
       if (this.answers[name]) {
-        this.composeWith(`n3dst4-package:${name}`,
-          {},
-          { local: require.resolve(`../${name}`)}
-        )
+        this.composeWith(
+          require.resolve(`n3dst4-package:${name}`),
+          this.options)
       }
     })
   },

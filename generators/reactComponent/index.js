@@ -1,9 +1,9 @@
-var generators = require('yeoman-generator')
+var Generator = require('yeoman-generator')
 var pascalCase = require("pascal-case")
 
-module.exports = generators.Base.extend({
+module.exports = Generator.extend({
   constructor: function () {
-    generators.Base.apply(this, arguments)
+    Generator.apply(this, arguments)
   },
 
   writing: function () {
@@ -24,7 +24,7 @@ module.exports = generators.Base.extend({
     destinationPath = this.destinationPath(`test/test-${this.config.get("shortName")}.js`)
     this.fs.copyTpl(templatePath, destinationPath, {
       camelCase: this.config.get("camelName"),
-      pascalCase: pascalCase(this.config.get("shortName")), 
+      pascalCase: pascalCase(this.config.get("shortName")),
     })
   },
 })
