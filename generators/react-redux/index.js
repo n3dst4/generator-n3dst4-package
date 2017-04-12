@@ -1,11 +1,11 @@
 // react + redux generator
 var glob = require("glob")
-var generators = require('yeoman-generator')
+var Generator = require('yeoman-generator')
 var jsdom = require("jsdom")
 
-module.exports = generators.Base.extend({
+module.exports = Generator.extend({
   constructor: function () {
-    generators.Base.apply(this, arguments)
+    Generator.apply(this, arguments)
   },
 
   writing: function () {
