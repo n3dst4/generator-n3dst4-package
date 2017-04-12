@@ -32,7 +32,15 @@ module.exports = function(config) {
 
     browserify: {
       debug: true,
-      transform: useBabelify? ["babelify", "envify"] : ["envify"]
+      transform: useBabelify? ["babelify", "envify"] : ["envify"],
+      // for enzyme
+      configure: function(bundle) {
+        bundle.on('prebundle', function() {
+          bundle.external('react/addons');
+          bundle.external('react/lib/ReactContext');
+          bundle.external('react/lib/ExecutionEnvironment');
+        });
+      }
     },
 
     // list of files / patterns to load in the browser
@@ -58,7 +66,7 @@ module.exports = function(config) {
       ['progress', 'notify'], // probably desktop then
 
     notifyReporter: {
-      reportEachFailure: true, // Default: false, Will notify on every failed sepc
+      reportEachFailure: true, // Default: false, Will notify on every failed spec
       reportSuccess: true, // Default: true, Will notify when a suite was successful
     },
 

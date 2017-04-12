@@ -108,25 +108,32 @@ module.exports = generators.Base.extend({
         default: false,
       },
       {
+        name: "reactComponent",
+        message: "Do you want to create a React component?",
+        type: "confirm",
+        default: false,
+        when: answers => !(answers.spa)
+      },
+      {
         name: "bin",
         message: "Do you want an executable bin script?",
         type: "confirm",
         default: false,
-        when: answers => !(answers.spa)
+        when: answers => !(answers.spa || answers.reactComponent)
       },
       {
         name: "babel",
         message: "Do you want your code compiled with Babel?",
         type: "confirm",
         default: false,
-        when: answers => !(answers.spa)
+        when: answers => !(answers.spa || answers.reactComponent)
       },
       {
         name: "mocha",
         message: "Do you want a Mocha test suite?",
         type: "confirm",
         default: false,
-        when: answers => !(answers.spa)
+        when: answers => !(answers.spa || answers.reactComponent)
       },
       {
         name: "karma",
@@ -157,7 +164,7 @@ module.exports = generators.Base.extend({
       this.answers.name = `@${this.defaultNamespace}/${this.answers.name}`
     }
 
-    if (this.answers.spa) {
+    if (this.answers.spa || this.answers.reactComponent) {
       this.answers.babel = true
       this.answers.mocha = true
       this.answers.karma = true
@@ -170,7 +177,7 @@ module.exports = generators.Base.extend({
       shortName: this.answers.shortName
     })
     // compose with subgenerators if need be
-    ;["bin", "mocha", "karma", "spa"].forEach(name => {
+    ;["bin", "mocha", "karma", "spa", "reactComponent"].forEach(name => {
       if (this.answers[name]) {
         this.composeWith(`n3dst4-package:${name}`,
           {},

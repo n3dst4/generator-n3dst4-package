@@ -103,7 +103,7 @@ describe("spa generator", function () {
   })
 
   // gulp
-  describe("gulpfile", function () {
+  describe.skip ("gulpfile output", function () {
 
     // this is kind of a slow operation so, we'll only trigger it once
     before(function () {

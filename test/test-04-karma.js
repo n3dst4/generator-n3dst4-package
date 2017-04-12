@@ -46,4 +46,14 @@ describe("karma prompt", function () {
       ]
     })
   })
+
+  it("should have various exclusions for enzyme", function () {
+    [
+      "bundle.external('react/addons')",
+      "bundle.external('react/lib/ReactContext')",
+      "bundle.external('react/lib/ExecutionEnvironment')",
+    ].forEach(str => {
+      assert.fileContent(path.join(this.dir, "karma.conf.js"), str)
+    })
+  })
 })
