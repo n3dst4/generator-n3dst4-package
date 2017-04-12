@@ -54,12 +54,12 @@ describe("base app generator", function () {
 
   it("should put installation instructions in README", function () {
     assert.fileContent(path.join(this.dir, "README.markdown"),
-      `## Installation\n\n\`\`\`sh\nnpm install ${namespacedName} --save\n\`\`\``)
+      `## Installation\n\n\`\`\`sh\nnpm install ${kebabName} --save\n\`\`\``)
   })
 
   it("should put usage instructions in README", function () {
     assert.fileContent(path.join(this.dir, "README.markdown"),
-      `## Usage\n\n\`\`\`js\nimport ${this.name} from "${namespacedName}"\n\`\`\``)
+      `## Usage\n\n\`\`\`js\nimport ${this.name} from "${kebabName}"\n\`\`\``)
   })
 
 

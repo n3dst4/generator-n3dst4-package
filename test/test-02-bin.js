@@ -3,7 +3,7 @@ var assert = require('yeoman-assert')
 var path = require("path")
 var runGenerator = require("./run-generator")
 
-var namespacedName = runGenerator.namespacedName
+var kebabName = runGenerator.kebabName
 
 describe("bin prompt", function () {
   describe("with default name", function () {
@@ -34,7 +34,7 @@ describe("bin prompt", function () {
     it("should put installation instructions in README", function () {
       var readmePath = path.join(this.dir, "README.markdown")
       assert.fileContent(readmePath,
-        `## Installation\n\n\`\`\`sh\nnpm install ${namespacedName} --global\n\`\`\``)
+        `## Installation\n\n\`\`\`sh\nnpm install ${kebabName} --global\n\`\`\``)
     })
     it("should put usage instructions in README", function () {
       assert.fileContent(path.join(this.dir, "README.markdown"),
