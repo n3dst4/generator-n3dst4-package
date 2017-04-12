@@ -10,10 +10,10 @@ describe("react-redux generator", function () {
     assert.jsonFileContent(path.join(this.dir, "package.json"), {
       "dependencies": {
         "immutable": "^3.8.1",
+        "prop-types": "^15.5.6",
         "radium": "^0.17.1",
-        "react": "^15.1.0",
-        "react-addons-pure-render-mixin": "^15.1.0",
-        "react-dom": "^15.1.0",
+        "react": "^15.5.3",
+        "react-dom": "^15.5.3",
         "react-immutable-proptypes": "^1.7.1",
         "react-redux": "^4.4.5",
         "react-router": "^2.4.1",
@@ -23,7 +23,11 @@ describe("react-redux generator", function () {
         "redux-storage-decorator-debounce": "^1.0.1",
         "redux-storage-engine-localstorage": "^1.1.1",
         "redux-thunk": "^2.1.0",
-
+      }
+    })
+    assert.noJsonFileContent(path.join(this.dir, "package.json"), {
+      "dependencies": {
+        "react-addons-pure-render-mixin": "^15.1.10",
       }
     })
   })

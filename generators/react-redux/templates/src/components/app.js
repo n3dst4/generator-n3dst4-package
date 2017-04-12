@@ -1,22 +1,17 @@
-import React, { PropTypes } from "react"
+import React from "react"
 import Radium from "radium"
 import ImmutablePropTypes from "react-immutable-proptypes"
-import pureRenderMixin from "react-addons-pure-render-mixin"
+import PropTypes from "prop-types"
 
-export default Radium(React.createClass({
+class App extends React.PureComponent {
 
-  displayName: "App",
-
-  mixins: [pureRenderMixin],
-
-  propTypes: {
-      messages: ImmutablePropTypes.listOf(PropTypes.string).isRequired,
-      addMessage: PropTypes.func
-  },
-
-  getInitialState () {
-    return {text: ""}
-  },
+  constructor () {
+    super()
+    this.state = {text: ""}
+    ["onInputChange", "onButtonClick"].forEach(method => {
+      this[method] = this[method].bind(this)
+    })
+  }
 
   onInputChange (event) {
     this.setState({text: event.target.value})
@@ -28,7 +23,7 @@ export default Radium(React.createClass({
   },
 
   render () {
-    return <div>
+    return (<div>
       <ul>
         {this.props.messages.map(m => <li>{m}</li>)}
       </ul>
@@ -36,6 +31,18 @@ export default Radium(React.createClass({
         <input value={this.state.text} onChange={this.onInputChange} />
         <button onClick={this.onButtonClick}>Add</button>
       </p>
-    </div>
+    </div>)
   }
 }))
+
+App.propTypes = {
+  messages: ImmutablePropTypes.listOf(PropTypes.string).isRequired,
+  addMessage: PropTypes.func
+}
+
+App.defaultProps = {
+  styles: {},
+  username: "",
+}
+
+export default Radium(App)
