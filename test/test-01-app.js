@@ -182,7 +182,12 @@ describe("base app generator", function () {
         },
         babel: {
           plugins: ["transform-object-rest-spread"],
-          presets: ["es2015", "react"]
+          presets: ["es2015", "react"],
+          "env": {
+            "testing": {
+              "plugins": ["rewire"]
+            }
+          }
         }
       })
     })

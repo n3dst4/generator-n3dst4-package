@@ -23,11 +23,13 @@ module.exports = generators.Base.extend({
     pkg.devDependencies["mocha"] = "^2.4.5"
     pkg.devDependencies["sinon"] = "^2.1.0"
     pkg.devDependencies["sinon-chai"] = "^2.9.0"
+    pkg.devDependencies["cross-env"] = "^3.2.4"
     if (this.config.get("babel")) {
       pkg.devDependencies["babel-register"] = "^6.7.2"
+      pkg.devDependencies["babel-plugin-rewire"] = "^1.0.0"
     }
     pkg.scripts = pkg.scripts || {}
-    pkg.scripts.test = "mocha"
+    pkg.scripts.test = "cross-env NODE_ENV=testing mocha"
     pkg.scripts["watch-test"] = "npm test -- --watch"
     this.fs.writeJSON(this.destinationPath("package.json"), pkg)
   },

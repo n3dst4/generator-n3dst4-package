@@ -29,6 +29,7 @@ describe("mocha prompt", function () {
         "mocha": "^2.4.5",
         "sinon": "^2.1.0",
         "sinon-chai": "^2.9.0",
+        "cross-env": "^3.2.4",
       }
     })
   })
@@ -36,7 +37,7 @@ describe("mocha prompt", function () {
   it("should add test and watch command", function () {
     assert.jsonFileContent(path.join(this.dir, "package.json"), {
       scripts: {
-        test: "mocha",
+        test: "cross-env NODE_ENV=testing mocha",
         "watch-test": "npm test -- --watch"
       }
     })
@@ -61,6 +62,14 @@ describe("mocha prompt", function () {
         path.join(this.dir, "test", `test-${this.name}.js`),
         new RegExp('import ' + camelName + ' from "\\.\\./src/' + this.name + '"')
       )
+    })
+
+    it("should add install rewiring doodads", function () {
+      assert.jsonFileContent(path.join(this.dir, "package.json"), {
+        devDependencies: {
+          "babel-plugin-rewire": "^1.0.0",
+        }
+      })
     })
   })
 })

@@ -30,8 +30,8 @@ describe("karma prompt", function () {
   it("should change the test command", function () {
     assert.jsonFileContent(path.join(this.dir, "package.json"), {
       scripts: {
-        test: "karma start --single-run",
-        "watch-test": "karma start"
+        test: "cross-env NODE_ENV=testing karma start --single-run",
+        "watch-test": "cross-env NODE_ENV=testing karma start"
       }
     })
   })
