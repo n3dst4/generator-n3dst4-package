@@ -31,11 +31,9 @@ describe("base app generator", function () {
         "extends": "@n3dst4/eslint-config-n3dst4"
       },
       "devDependencies": {
-        "@n3dst4/eslint-config-n3dst4": "^2.1.0",
-        "babel-eslint": "^6.0.4",
-        "eslint": "^2.12.0",
-        "eslint-plugin-babel": "^3.0.0",
-        "eslint-plugin-react": "^5.1.1"
+        "@n3dst4/eslint-config-n3dst4": "^3.0.1",
+        "eslint": "^3.19.0",
+        "eslint-plugin-react": "^6.10.3"
       }
     })
   })
