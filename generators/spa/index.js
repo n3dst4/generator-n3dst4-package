@@ -26,10 +26,9 @@ module.exports = Generator.extend({
     this.config.set("babel", true)
     // compose with subgenerators if need be
     if (this.answers.reactRedux) {
-      this.composeWith(`n3dst4-package:react-redux`,
-        {},
-        { local: require.resolve(`../react-redux`)}
-      )
+      this.composeWith(
+        require.resolve("../react-redux"),
+        {})
     }
   },
 

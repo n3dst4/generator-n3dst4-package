@@ -182,7 +182,7 @@ module.exports = Generator.extend({
     ;["bin", "mocha", "karma", "spa", "reactComponent"].forEach(name => {
       if (this.answers[name]) {
         this.composeWith(
-          require.resolve(`n3dst4-package:${name}`),
+          require.resolve(`../${name}`),
           this.options)
       }
     })
