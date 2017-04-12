@@ -25,8 +25,10 @@ describe("mocha prompt", function () {
   it("should add chai and mocha devDependencies", function () {
     assert.jsonFileContent(path.join(this.dir, "package.json"), {
       devDependencies: {
-        chai: "^3.5.0",
-        mocha: "^2.4.5"
+        "chai": "^3.5.0",
+        "mocha": "^2.4.5",
+        "sinon": "^2.1.0",
+        "sinon-chai": "^2.9.0",
       }
     })
   })

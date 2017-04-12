@@ -1,8 +1,10 @@
 /*global describe, it*/
 
 var chai = require("chai")
+var sinonChai = require("sinon-chai")
 var <%= camelName %> = require("../src/<%= name %>")
 
+chai.use(sinonChai)
 var expect = chai.expect
 
 describe("<%= name %>", function () {

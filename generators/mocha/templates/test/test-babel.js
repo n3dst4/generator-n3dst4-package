@@ -1,8 +1,10 @@
 /*global describe, it*/
 
 import chai from "chai"
+import sinonChai from "sinon-chai"
 import <%= camelName %> from "../src/<%= name %>"
 
+chai.use(sinonChai)
 const expect = chai.expect
 
 describe("<%= name %>", function () {

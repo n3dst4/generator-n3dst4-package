@@ -4,9 +4,10 @@ import chai from "chai"
 import <%= pascalCase %> from "../src/<%= camelCase %>"
 import { shallow } from "enzyme"
 import chaiEnzyme from "chai-enzyme"
+import sinonChai from "sinon-chai"
 
 chai.use(chaiEnzyme())
-
+chai.use(sinonChai)
 const expect = chai.expect
 
 describe("<%= camelCase %>", function () {

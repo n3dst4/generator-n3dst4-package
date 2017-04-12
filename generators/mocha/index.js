@@ -19,8 +19,10 @@ module.exports = generators.Base.extend({
 
     var pkg = this.fs.readJSON(this.destinationPath("package.json"))
     pkg.devDependencies = pkg.devDependencies || {}
-    pkg.devDependencies.chai = "^3.5.0"
-    pkg.devDependencies.mocha = "^2.4.5"
+    pkg.devDependencies["chai"] = "^3.5.0"
+    pkg.devDependencies["mocha"] = "^2.4.5"
+    pkg.devDependencies["sinon"] = "^2.1.0"
+    pkg.devDependencies["sinon-chai"] = "^2.9.0"
     if (this.config.get("babel")) {
       pkg.devDependencies["babel-register"] = "^6.7.2"
     }
