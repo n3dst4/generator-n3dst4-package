@@ -52,6 +52,17 @@ describe("base app generator", function () {
     assert.file(path.join(this.dir, ".travis.yml"))
   })
 
+  it("should put installation instructions in README", function () {
+    assert.fileContent(path.join(this.dir, "README.markdown"),
+      `## Installation\n\n\`\`\`sh\nnpm install ${namespacedName} --save\n\`\`\``)
+  })
+
+  it("should put usgae instructions in README", function () {
+    assert.fileContent(path.join(this.dir, "README.markdown"),
+      `## Usage\n\n\`\`\`js\nimport ${this.name} from "${namespacedName}"\n\`\`\``)
+  })
+
+
   it("should NOT create a .npmignore", function () {
     assert.noFile(path.join(this.dir, ".npmignore"))
   })
