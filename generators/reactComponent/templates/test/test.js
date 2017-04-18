@@ -1,7 +1,7 @@
 /*global describe, it*/
 import React from "react"
 import chai from "chai"
-import <%= pascalCase %> from "../src/<%= camelCase %>"
+import <%= pascalCase %> from "../src/<%= kebabCase %>"
 import { shallow } from "enzyme"
 import chaiEnzyme from "chai-enzyme"
 import sinonChai from "sinon-chai"

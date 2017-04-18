@@ -18,18 +18,17 @@ module.exports = Generator.extend({
     pkg.dependencies["prop-types"] = "^15.5.6"
     this.fs.writeJSON(this.destinationPath("package.json"), pkg)
 
+    var templateConfig = {
+      camelCase: this.config.get("camelName"),
+      pascalCase: pascalCase(this.config.get("shortName")),
+      kebabCase: this.config.get("shortName"),
+    }
+
     var templatePath = this.templatePath("src/main.js")
     var destinationPath = this.destinationPath(`src/${this.config.get("shortName")}.js`)
-    this.fs.copyTpl(templatePath, destinationPath,{
-      camelCase: this.config.get("camelName"),
-      pascalCase: pascalCase(this.config.get("shortName")),
-    })
-
+    this.fs.copyTpl(templatePath, destinationPath, templateConfig)
     templatePath = this.templatePath("test/test.js")
     destinationPath = this.destinationPath(`test/test-${this.config.get("shortName")}.js`)
-    this.fs.copyTpl(templatePath, destinationPath, {
-      camelCase: this.config.get("camelName"),
-      pascalCase: pascalCase(this.config.get("shortName")),
-    })
+    this.fs.copyTpl(templatePath, destinationPath, templateConfig)
   },
 })
