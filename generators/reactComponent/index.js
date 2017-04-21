@@ -15,6 +15,10 @@ module.exports = Generator.extend({
     pkg.devDependencies["react-dom"] = "^15.5.3"
     pkg.devDependencies["react-test-renderer"] = "^15.5.4"
     pkg.dependencies["prop-types"] = "^15.5.6"
+    pkg.peerDependencies = pkg.peerDependencies || {}
+    pkg.peerDependencies["react"] = ">=15.5.0"
+    pkg.peerDependencies["react-dom"] = ">=15.5.0"
+
     this.fs.writeJSON(this.destinationPath("package.json"), pkg)
 
     var templateConfig = {

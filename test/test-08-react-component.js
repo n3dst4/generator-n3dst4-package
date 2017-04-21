@@ -21,6 +21,10 @@ describe("react component prompt", function () {
         "react": "^15.5.3",
         "react-dom": "^15.5.3",
         "react-test-renderer": "^15.5.4",
+      },
+      "peerDependencies": {
+        "react": ">=15.5.0",
+        "react-dom": ">=15.5.0",
       }
     })
     assert.noJsonFileContent(path.join(this.dir, "package.json"), {
