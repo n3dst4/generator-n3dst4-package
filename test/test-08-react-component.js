@@ -17,11 +17,15 @@ describe("react component prompt", function () {
       },
       devDependencies: {
         "chai-enzyme": "^0.6.1",
-        "enzyme": "^2.8.0",
+        "enzyme": "^2.8.2",
         "react": "^15.5.3",
-        "react-addons-test-utils": "^15.5.1",
         "react-dom": "^15.5.3",
         "react-test-renderer": "^15.5.4",
+      }
+    })
+    assert.noJsonFileContent(path.join(this.dir, "package.json"), {
+      devDependencies: {
+        "react-addons-test-utils": "^15.5.1",
       }
     })
   })
