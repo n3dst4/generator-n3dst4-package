@@ -31,7 +31,7 @@ describe("base app generator", function () {
         "extends": "@n3dst4/eslint-config-n3dst4"
       },
       "devDependencies": {
-        "@n3dst4/eslint-config-n3dst4": "^3.0.1",
+        "@n3dst4/eslint-config-n3dst4": "^3.1.0",
         "eslint": "^3.19.0",
         "eslint-plugin-react": "^6.10.3"
       }
