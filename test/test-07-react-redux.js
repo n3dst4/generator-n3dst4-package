@@ -23,6 +23,11 @@ describe("react-redux generator", function () {
         "redux-storage-decorator-debounce": "^1.0.1",
         "redux-storage-engine-localstorage": "^1.1.1",
         "redux-thunk": "^2.1.0",
+      },
+      devDependencies: {
+        "enzyme": "^2.8.2",
+        "chai-enzyme": "^0.6.1",
+        "react-test-renderer": "^15.5.4",
       }
     })
     assert.noJsonFileContent(path.join(this.dir, "package.json"), {
@@ -52,5 +57,10 @@ describe("react-redux generator", function () {
       /process\.env.NODE_PATH\s=\s['"].\/node_modules/
     )
   })
+
+  it("should import enzyme into the test suite", function () {
+    const filePath = path.join(this.dir, "test", `test-${this.name}.js`)
+    assert.fileContent(filePath, "enzyme")
+  }) 
 
 })

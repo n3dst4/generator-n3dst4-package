@@ -52,8 +52,13 @@ describe("karma prompt", function () {
       "bundle.external('react/addons')",
       "bundle.external('react/lib/ReactContext')",
       "bundle.external('react/lib/ExecutionEnvironment')",
+      "bundle.external('react-addons-test-utils')",
     ].forEach(str => {
       assert.fileContent(path.join(this.dir, "karma.conf.js"), str)
     })
+  })
+
+  it("should set the karma log level to WARN", function () {
+    assert.fileContent(path.join(this.dir, "karma.conf.js"), "logLevel: config.LOG_WARN") 
   })
 })

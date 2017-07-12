@@ -39,6 +39,7 @@ module.exports = function(config) {
           bundle.external('react/addons');
           bundle.external('react/lib/ReactContext');
           bundle.external('react/lib/ExecutionEnvironment');
+          bundle.external('react-addons-test-utils');
         });
       }
     },

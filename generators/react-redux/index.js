@@ -18,6 +18,10 @@ module.exports = Generator.extend({
 
     var html = this.fs.read(this.destinationPath("pages/index.html"))
 
+    this.fs.copy( 
+      this.templatePath("test/test.js"),
+      this.destinationPath(`test/test-${this.config.get("shortName")}.js`))
+
     var done = this.async();
 
     jsdom.env(html, (error, window) => {
@@ -37,6 +41,11 @@ module.exports = Generator.extend({
 
     var pkg = this.fs.readJSON(this.destinationPath("package.json"))
     pkg.devDependencies = pkg.devDependencies || {}
+    pkg.devDependencies["react-test-renderer"] = "^15.5.4"
+    pkg.devDependencies["enzyme"] = "^2.8.2"
+    pkg.devDependencies["chai-enzyme"] = "^0.6.1"
+
+    pkg.dependencies = pkg.dependencies || {}
     pkg.dependencies["immutable"] = "^3.8.1"
     pkg.dependencies["prop-types"] = "^15.5.6"
     pkg.dependencies["radium"] = "^0.17.1"

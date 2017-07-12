@@ -8,24 +8,24 @@ class App extends React.PureComponent {
   constructor () {
     super()
     this.state = {text: ""}
-    ["onInputChange", "onButtonClick"].forEach(method => {
+    ;["onInputChange", "onButtonClick"].forEach(method => {
       this[method] = this[method].bind(this)
     })
   }
 
   onInputChange (event) {
     this.setState({text: event.target.value})
-  },
+  }
 
   onButtonClick (event) {
     this.props.addMessage(this.state.text)
     this.setState({text: ""})
-  },
+  }
 
   render () {
     return (<div>
       <ul>
-        {this.props.messages.map(m => <li>{m}</li>)}
+        {this.props.messages.map((m, i) => <li key={i}>{m}</li>)}
       </ul>
       <p>
         <input value={this.state.text} onChange={this.onInputChange} />
@@ -33,7 +33,7 @@ class App extends React.PureComponent {
       </p>
     </div>)
   }
-}))
+}
 
 App.propTypes = {
   messages: ImmutablePropTypes.listOf(PropTypes.string).isRequired,
