@@ -39,7 +39,7 @@
     "babel-preset-react": "^6.11.1",
     "babel-register": "^6.7.2",
     "browser-sync": "^2.12.3",
-    "eslint": "^2.8.0",
+    "eslint": "^6.5.1",
     "graceful-fs": "^4.1.11",
     "gulp": "^3.9.1",
     "gulp-csso": "^2.0.0",
